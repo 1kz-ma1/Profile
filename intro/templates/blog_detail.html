@@ -1,0 +1,169 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+
+<!--<head>の内容-->
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="{{ post.excerpt|default:post.title }}" />
+    <meta name="author" content="木下和磨" />
+    <title>{{ post.title }} - 木下和磨のブログ</title>
+    
+    <link href="{% static 'css/slide.css' %}" rel="stylesheet">
+    <link href="{% static 'css/inview.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+</head>
+
+<body id="blog-detail" style="background-color: #000000cd;">
+<div class="wrapper">
+    <!--ヘッダー-->
+{% block header %}
+    <!-- ナビゲーション（ハンバーガー対応） -->
+    <div id="menubar_hdr" class="display-none" aria-label="menu button" role="button">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <!-- オーバーレイ（ハンバーガー開時に表示） -->
+    <div id="overlay" class="overlay display-none" aria-hidden="true"></div>
+    <div id="menubar" class="display-none">
+        <nav class="nav-links">
+            <ul>
+                <li><a href="{% url 'intro:index' %}">トップページ</a></li>
+                <li><a href="{% url 'intro:about' %}">自己紹介</a></li>
+                <li><a href="{% url 'intro:portfolio' %}">作品紹介</a></li>
+                <li><a href="{% url 'intro:blog' %}">近況報告ブログ</a></li>
+                <li><a href="{% url 'intro:contact' %}">お問い合わせ</a></li>
+            </ul>
+        </nav>
+    </div>
+
+{% endblock %}
+
+    <!--ブログ詳細ヘッダー-->
+<header style="background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('{% static 'img/blog-header/adventure-compass-camera-map.jpg' %}') center/cover no-repeat; min-height: 300px; display: flex; align-items: center; justify-content: center; color: #fff; text-align: center; margin-bottom: 40px;">
+    <div style="padding: 40px 20px;">
+        <h1 style="font-size: 2.5rem; font-weight: bold; margin-bottom: 15px; text-shadow: 2px 2px 4px rgba(0,0,0,0.7);">{{ post.title }}</h1>
+        <div style="display: flex; justify-content: center; gap: 20px; font-size: 1.1rem; text-shadow: 1px 1px 2px rgba(0,0,0,0.7);">
+            <span>
+                <strong>{{ post.get_category_display }}</strong>
+            </span>
+            <span>|</span>
+            <time datetime="{{ post.post_date|date:'Y-m-d' }}">
+                {{ post.post_date|date:"Y年m月d日" }}
+            </time>
+        </div>
+    </div>
+</header>
+
+    <!--ブログ記事詳細-->
+<main>
+<article id="blog-detail-article" style="max-width: 900px; margin: 0 auto; padding: 0 20px 40px;">
+    
+    <!-- 戻るリンク -->
+    <div style="margin-bottom: 20px;">
+        <a href="{% url 'intro:blog' %}" style="color: #fff; text-decoration: none; display: inline-flex; align-items: center; gap: 5px;">
+            ← ブログ一覧に戻る
+        </a>
+    </div>
+    
+    <!-- 記事カード -->
+    <div style="background: rgba(255, 255, 255, 0.95); border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+        
+        <!-- コンテンツ -->
+        <div style="padding: 40px;">
+            
+            <!-- タイトル（ヘッダーで表示済み） -->
+            <h2 style="color: #333; font-size: 1.8rem; margin-bottom: 20px; line-height: 1.4; padding-bottom: 15px; border-bottom: 2px solid #667eea;">
+                記事内容
+            </h2>
+            
+            <!-- 抜粋 -->
+            {% if post.excerpt %}
+            <div style="background: #f5f5f5; padding: 20px; border-left: 4px solid #667eea; margin-bottom: 30px; border-radius: 4px;">
+                <p style="color: #555; font-size: 1.1rem; line-height: 1.8; margin: 0;">
+                    {{ post.excerpt }}
+                </p>
+            </div>
+            {% endif %}
+            
+            <!-- 記事画像 -->
+            {% if post.image %}
+            <div style="margin-bottom: 30px; border-radius: 8px; overflow: hidden;">
+                <img src="{{ post.image.url }}" alt="{{ post.title }}" 
+                     style="width: 100%; height: auto; display: block;">
+            </div>
+            {% endif %}
+            
+            <!-- 本文 -->
+            <div style="color: #333; font-size: 1rem; line-height: 1.9; white-space: pre-wrap; word-wrap: break-word;">
+                {{ post.content }}
+            </div>
+            
+            <!-- 更新日時 -->
+            {% if post.updated_at != post.created_at %}
+            <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ddd; color: #999; font-size: 0.9rem;">
+                最終更新: {{ post.updated_at|date:"Y年m月d日 H:i" }}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    
+    <!-- 戻るリンク（下部） -->
+    <div style="margin-top: 30px; text-align: center;">
+        <a href="{% url 'intro:blog' %}" 
+           style="display: inline-block; padding: 12px 30px; background: rgba(255,255,255,0.2); color: #fff; text-decoration: none; border-radius: 25px; transition: background 0.3s;">
+            ブログ一覧に戻る
+        </a>
+    </div>
+    
+</article>
+</main>
+
+</div>
+
+    <!-- フッター -->
+    <footer>
+    <div class="footer-content">
+        <p>© 2025 Kazuma Kinoshita. All Rights Reserved.</p>
+
+        <!-- Instagram SVGアイコン -->
+        <a href="https://www.instagram.com/_kz_ma_/?next=%2F">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="50" height="50" aria-hidden="true" focusable="false" role="img">
+        <defs>
+            <linearGradient id="igGradient" x1="0%" y1="100%" x2="100%" y2="0%">
+                <stop offset="0%"   stop-color="#F58529"/>
+                <stop offset="30%"  stop-color="#DD2A7B"/>
+                <stop offset="60%"  stop-color="#8134AF"/>
+                <stop offset="100%" stop-color="#515BD4"/>
+            </linearGradient>
+        </defs>
+        <rect x="64" y="64" width="384" height="384" rx="96" ry="96" fill="url(#igGradient)"/>
+        <circle cx="256" cy="256" r="92" fill="#fff"/>
+        <circle cx="256" cy="256" r="64" fill="url(#igGradient)"/>
+        <circle cx="360" cy="152" r="24" fill="#fff"/>
+        </svg>
+        </a>
+
+        <!-- GitHub SVGアイコン -->
+        <a href="https://github.com/1kz-ma1/profile" target="_blank" rel="noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="42" height="42" role="img" aria-hidden="true">
+            <path fill="currentColor" fill-rule="evenodd" d="M12 .5A11.5 11.5 0 0 0 .5 12c0 5.08 3.292 9.384 7.865 10.9.575.106.785-.246.785-.55 0-.27-.01-.985-.015-1.934-3.2.696-3.875-1.542-3.875-1.542-.523-1.328-1.277-1.681-1.277-1.681-1.043-.713.079-.699.079-.699 1.152.081 1.76 1.184 1.76 1.184 1.025 1.759 2.69 1.25 3.345.954.104-.758.401-1.25.73-1.538-2.555-.29-5.242-1.278-5.242-5.687 0-1.257.45-2.285 1.188-3.09-.12-.29-.515-1.46.113-3.04 0 0 .967-.31 3.17 1.18.92-.256 1.907-.383 2.887-.388.98.005 1.967.132 2.888.388 2.202-1.49 3.167-1.18 3.167-1.18.63 1.58.235 2.75.115 3.04.739.805 1.186 1.833 1.186 3.09 0 4.42-2.694 5.393-5.257 5.677.413.356.78 1.062.78 2.14 0 1.545-.014 2.788-.014 3.168 0 .306.207.662.793.548A11.502 11.502 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5Z"/>
+        </svg>
+        </a>
+
+    </div>
+    </footer>
+
+<!-- jQuery の読み込み -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- inview プラグイン（CDN） -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/protonet-jquery.inview/1.1.2/jquery.inview.min.js"></script>
+
+<!-- ローカルの inview 設定とメインスクリプト（assets 配下） -->
+<script src="{% static 'js/jquery.inview_set.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

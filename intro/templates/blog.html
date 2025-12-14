@@ -1,0 +1,223 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+
+<!--<head>の内容-->
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="就活用自己紹介サイト" />
+    <meta name="author" content="木下和磨" />
+    {% block title %}<title>木下和磨のブログ</title>{% endblock %}
+    
+    <link href="{% static 'css/slide.css' %}" rel="stylesheet">
+    <link href="{% static 'css/inview.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <style>
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0,0,0,0.4) !important;
+        }
+    </style>
+</head>
+
+<body id="blog" style="background-color: #000000cd;">
+<div class="wrapper">
+    <!--ヘッダー-->
+{% block header %}
+    <!-- ナビゲーション（ハンバーガー対応） -->
+    <div id="menubar_hdr" class="display-none" aria-label="menu button" role="button">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <!-- オーバーレイ（ハンバーガー開時に表示） -->
+    <div id="overlay" class="overlay display-none" aria-hidden="true"></div>
+    <div id="menubar" class="display-none">
+        <nav class="nav-links">
+            <ul>
+                <li><a href="{% url 'intro:index' %}">トップページ</a></li>
+                <li><a href="{% url 'intro:about' %}">自己紹介</a></li>
+                <li><a href="{% url 'intro:portfolio' %}">作品紹介</a></li>
+                <li><a href="{% url 'intro:blog' %}">近況報告ブログ</a></li>
+                <li><a href="{% url 'intro:contact' %}">お問い合わせ</a></li>
+            </ul>
+        </nav>
+    </div>
+
+{% endblock %}
+
+    <!--ブログ一覧ヘッダー-->
+<header style="background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('{% static 'img/blog-header.jpg' %}') center/cover no-repeat; min-height: 300px; display: flex; align-items: center; justify-content: center; color: #fff; text-align: center; margin-bottom: 40px;">
+    <div style="padding: 40px 20px;">
+        <h1 style="font-size: 3rem; font-weight: bold; margin-bottom: 15px; text-shadow: 2px 2px 4px rgba(0,0,0,0.7);">近況報告ブログ</h1>
+        <p style="font-size: 1.2rem; text-shadow: 1px 1px 2px rgba(0,0,0,0.7);">これまでの経験や最新情報を綴っています</p>
+    </div>
+</header>
+
+    <!--ブログ記事-->
+<main>
+<section id="blog-section" style="padding: 40px 20px; max-width: 1200px; margin: 0 auto;">
+
+    <!-- フィルター・ソートバー -->
+    <div style="background-color: rgba(255, 255, 255, 0.1); padding: 20px; border-radius: 10px; margin-bottom: 30px;">
+        <form method="get" style="display: flex; gap: 15px; flex-wrap: wrap; align-items: center;">
+            <!-- カテゴリフィルター -->
+            <div style="flex: 1; min-width: 200px;">
+                <label for="category" style="color: #fff; display: block; margin-bottom: 5px;">カテゴリ</label>
+                <select name="category" id="category" onchange="this.form.submit()" 
+                        style="width: 100%; padding: 8px; border-radius: 5px; border: none; background: #fff;">
+                    <option value="">すべて</option>
+                    {% for cat_value, cat_label in categories %}
+                    <option value="{{ cat_value }}" {% if current_category == cat_value %}selected{% endif %}>
+                        {{ cat_label }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <!-- ソート -->
+            <div style="flex: 1; min-width: 200px;">
+                <label for="sort" style="color: #fff; display: block; margin-bottom: 5px;">並び替え</label>
+                <select name="sort" id="sort" onchange="this.form.submit()"
+                        style="width: 100%; padding: 8px; border-radius: 5px; border: none; background: #fff;">
+                    <option value="-post_date" {% if current_sort == '-post_date' or not current_sort %}selected{% endif %}>新しい順</option>
+                    <option value="oldest" {% if current_sort == 'oldest' %}selected{% endif %}>古い順</option>
+                    <option value="title" {% if current_sort == 'title' %}selected{% endif %}>タイトル順</option>
+                </select>
+            </div>
+            
+            <input type="hidden" name="page" value="1">
+        </form>
+    </div>
+    
+    <!-- ブログカード -->
+    <div class="blog-posts" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px; margin-bottom: 40px;">
+    {% if page_obj %}
+        {% for post in page_obj %}
+        <a href="{% url 'intro:blog_detail' post.pk %}" style="text-decoration: none; display: block;">
+        <article class="blog-card" style="background: rgba(255, 255, 255, 0.95); border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.3); transition: transform 0.3s; cursor: pointer;">
+            {% if post.image %}
+            <div style="width: 100%; height: 200px; overflow: hidden; background: #ddd;">
+                <img src="{{ post.image.url }}" alt="{{ post.title }}" 
+                     style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            {% else %}
+            <div style="width: 100%; height: 200px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center;">
+                <span style="color: #fff; font-size: 1.2rem; font-weight: bold;">{{ post.get_category_display }}</span>
+            </div>
+            {% endif %}
+            
+            <div style="padding: 20px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <span style="background: #667eea; color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.85rem;">
+                        {{ post.get_category_display }}
+                    </span>
+                    <time datetime="{{ post.post_date|date:'Y-m-d' }}" style="color: #666; font-size: 0.9rem;">
+                        {{ post.post_date|date:"Y/m/d" }}
+                    </time>
+                </div>
+                
+                <h3 style="color: #333; font-size: 1.3rem; margin-bottom: 10px; line-height: 1.4;">
+                    {{ post.title }}
+                </h3>
+                
+                {% if post.excerpt %}
+                <p style="color: #666; font-size: 0.95rem; line-height: 1.6; margin-bottom: 10px;">
+                    {{ post.excerpt }}
+                </p>
+                {% else %}
+                <p style="color: #666; font-size: 0.95rem; line-height: 1.6; margin-bottom: 10px;">
+                    {{ post.content|truncatewords:20 }}
+                </p>
+                {% endif %}
+            </div>
+        </article>
+        </a>
+        {% endfor %}
+    {% else %}
+        <p style="color: #aaa; text-align: center; padding: 40px 0; grid-column: 1 / -1;">
+            まだブログ記事がありません。
+        </p>
+    {% endif %}
+    </div>
+    
+    <!-- ページネーション -->
+    {% if page_obj.has_other_pages %}
+    <div class="pagination" style="display: flex; justify-content: center; gap: 10px; margin-top: 40px;">
+        {% if page_obj.has_previous %}
+        <a href="?page=1{% if current_category %}&category={{ current_category }}{% endif %}{% if current_sort %}&sort={{ current_sort }}{% endif %}" 
+           style="padding: 10px 15px; background: rgba(255,255,255,0.2); color: #fff; text-decoration: none; border-radius: 5px;">
+            最初
+        </a>
+        <a href="?page={{ page_obj.previous_page_number }}{% if current_category %}&category={{ current_category }}{% endif %}{% if current_sort %}&sort={{ current_sort }}{% endif %}"
+           style="padding: 10px 15px; background: rgba(255,255,255,0.2); color: #fff; text-decoration: none; border-radius: 5px;">
+            前へ
+        </a>
+        {% endif %}
+        
+        <span style="padding: 10px 15px; background: rgba(255,255,255,0.3); color: #fff; border-radius: 5px;">
+            {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+        </span>
+        
+        {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}{% if current_category %}&category={{ current_category }}{% endif %}{% if current_sort %}&sort={{ current_sort }}{% endif %}"
+           style="padding: 10px 15px; background: rgba(255,255,255,0.2); color: #fff; text-decoration: none; border-radius: 5px;">
+            次へ
+        </a>
+        <a href="?page={{ page_obj.paginator.num_pages }}{% if current_category %}&category={{ current_category }}{% endif %}{% if current_sort %}&sort={{ current_sort }}{% endif %}"
+           style="padding: 10px 15px; background: rgba(255,255,255,0.2); color: #fff; text-decoration: none; border-radius: 5px;">
+            最後
+        </a>
+        {% endif %}
+    </div>
+    {% endif %}
+</section>
+</main>
+
+</div>
+
+    <!-- フッター -->
+    <footer>
+    <div class="footer-content">
+        <p>© 2025 Kazuma Kinoshita. All Rights Reserved.</p>
+
+        <!-- Instagram SVGアイコン -->
+        <a href="https://www.instagram.com/_kz_ma_/?next=%2F">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="50" height="50" aria-hidden="true" focusable="false" role="img">
+        <defs>
+            <linearGradient id="igGradient" x1="0%" y1="100%" x2="100%" y2="0%">
+                <stop offset="0%"   stop-color="#F58529"/>
+                <stop offset="30%"  stop-color="#DD2A7B"/>
+                <stop offset="60%"  stop-color="#8134AF"/>
+                <stop offset="100%" stop-color="#515BD4"/>
+            </linearGradient>
+        </defs>
+        <rect x="64" y="64" width="384" height="384" rx="96" ry="96" fill="url(#igGradient)"/>
+        <circle cx="256" cy="256" r="92" fill="#fff"/>
+        <circle cx="256" cy="256" r="64" fill="url(#igGradient)"/>
+        <circle cx="360" cy="152" r="24" fill="#fff"/>
+        </svg>
+        </a>
+
+        <!-- GitHub SVGアイコン -->
+        <a href="https://github.com/1kz-ma1/profile" target="_blank" rel="noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="42" height="42" role="img" aria-hidden="true">
+            <path fill="currentColor" fill-rule="evenodd" d="M12 .5A11.5 11.5 0 0 0 .5 12c0 5.08 3.292 9.384 7.865 10.9.575.106.785-.246.785-.55 0-.27-.01-.985-.015-1.934-3.2.696-3.875-1.542-3.875-1.542-.523-1.328-1.277-1.681-1.277-1.681-1.043-.713.079-.699.079-.699 1.152.081 1.76 1.184 1.76 1.184 1.025 1.759 2.69 1.25 3.345.954.104-.758.401-1.25.73-1.538-2.555-.29-5.242-1.278-5.242-5.687 0-1.257.45-2.285 1.188-3.09-.12-.29-.515-1.46.113-3.04 0 0 .967-.31 3.17 1.18.92-.256 1.907-.383 2.887-.388.98.005 1.967.132 2.888.388 2.202-1.49 3.167-1.18 3.167-1.18.63 1.58.235 2.75.115 3.04.739.805 1.186 1.833 1.186 3.09 0 4.42-2.694 5.393-5.257 5.677.413.356.78 1.062.78 2.14 0 1.545-.014 2.788-.014 3.168 0 .306.207.662.793.548A11.502 11.502 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5Z"/>
+        </svg>
+        </a>
+
+    </footer>
+
+<!-- jQuery の読み込み -->
+{% verbatim %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- inview プラグイン（CDN） -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/protonet-jquery.inview/1.1.2/jquery.inview.min.js"></script>
+
+<!-- ローカルの inview 設定とメインスクリプト（assets 配下） -->
+<script src="{% static 'js/jquery.inview_set.js' %} "></script>
+<script src="{% static 'js/main.js' %}"></script>
+{% endverbatim %}
+</body>

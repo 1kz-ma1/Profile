@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+
+<!--<head>の内容-->
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="就活用自己紹介サイト" />
+    <meta name="author" content="木下和磨" />
+        {% block title %}<title>ご回答ありがとうございました</title>{% endblock %}
+    
+        <link href="{% static 'css/slide.css' %}" rel="stylesheet">
+        <link href="{% static 'css/inview.css' %}" rel="stylesheet">
+        <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    
+</head>
+
+<body id="page-top">
+    <!--ヘッダー-->
+{% block header %}
+    <header class="thank thank-img" style="background-image: url('{% static 'img/thanks.jpg' %}')">
+        <br><br><br><br><br><br><br><br>
+        <h1 class="thank-text" style="font-size: clamp(1.3rem, 1.8vw, 2.2rem);">ご回答ありがとうございました。</h1>
+        <br><br><br>
+        <h1 class="header-sub thank-text" style="font-size: clamp(0.8rem, 1.8vw, 2rem);">貴重なご意見をいただき、心より感謝申し上げます。
+        <br>今後の課題として参考にし、改善に努めてまいりますので、
+        <br>今後ともよろしくお願いいたします。</h1>
+        <br><br><br><br><br><br><br><br>
+        <ul class="nav-links"><a href="{% url 'intro:index' %}">トップページへ</a></ul>
+    </header>
+{% endblock %}
+
+<!-- jQuery の読み込み -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- inview プラグイン（CDN） -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/protonet-jquery.inview/1.1.2/jquery.inview.min.js"></script>
+
+<!-- ローカルの inview 設定とメインスクリプト -->
+<script src="{% static 'js/jquery.inview_set.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

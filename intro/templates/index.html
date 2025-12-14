@@ -1,0 +1,165 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+
+<!--<head>の内容-->
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="就活用自己紹介サイト" />
+    <meta name="author" content="木下和磨" />
+    {% block title %}<title>木下和磨のトップページ</title>{% endblock %}
+
+    <link href="{% static 'css/slide.css' %}" rel="stylesheet">
+    <link href="{% static 'css/inview.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+</head>
+
+
+
+<body id="index" style="background-color: #000000e2;">
+<div class="wrapper">
+    <!--ヘッダー-->
+{% block header %}
+    <!-- ナビゲーション（ハンバーガー対応） -->
+    <div id="menubar_hdr" class="display-none" aria-label="menu button" role="button">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <!-- オーバーレイ（ハンバーガー開時に表示） -->
+    <div id="overlay" class="overlay display-none" aria-hidden="true"></div>
+    <div id="menubar" class="display-none">
+        <nav class="nav-links">
+            <ul>
+                <li><a href="{% url "intro:index" %}">トップページ</a></li>
+                <li><a href="{% url "intro:about" %}">自己紹介</a></li>
+                <li><a href="{% url "intro:portfolio" %}">作品紹介</a></li>
+                <li><a href="{% url "intro:blog" %}">近況報告ブログ</a></li>
+                <li><a href="{% url "intro:contact" %}">お問い合わせ</a></li>
+            </ul>
+        </nav>
+    </div>
+
+{% endblock %}
+
+    <!--見出し-->
+<main>
+<div id="mainimg" aria-live="polite" class="slide-font">
+
+    <div class="slide slide0">
+    <h1>Welcome to My portfolio</h1>
+    <p>～木下和磨の自己紹介サイトへようこそ～</p>
+    <p></p>
+    </div>
+
+    <div class="slide slide1">
+    <h1>ご訪問いただきありがとうございます。</h1>
+    <p>当サイトでは経歴やスキル、<br>サンプル作品も含めてご紹介しております。<br>
+        ぜひご覧ください！</p>
+    </div>
+
+    <div class="slide slide2">
+    <h1>細部にこだわり、成長を絶やさない。</h1>
+    <p>小さな改善が、大きな成果を生む。<br>現状に満足せず、常に改善を続けます。</p>
+    </div>
+
+    <div class="slide slide3">
+    <h1>理想を描き、現実にする。</h1>
+    <p>どんな作品も、輝ける。<br>独創的なアイデアと、それを形にする技術力をお見せします。</p>
+    </div>
+
+    <div class="slide slide4">
+    <h1>常に前を向く。</h1>
+    <p>どんな困難も、経験値にする。<br>自分の成長に繋がる経験を大切にします。</p>
+    </div>
+
+    <div class="slide slide5">
+    <h1>限界を超える覚悟。</h1>
+    <p>壁を越えた先に、可能性がある。<br>挑戦し続けることで未来を切り拓きます。</p>
+    </div>
+</div>
+</main>
+
+
+{% block contents %}
+    <!--最新情報-->
+<section id="news" class="latest-info" style="background-image: url('{% static 'img/about-header.jpg' %}')">
+    <div id="sort-controls" style="text-align:center; margin:10px;">
+    <div class="latest-info-header">
+        <h2>～更新情報～</h2>
+    <button id="sort-toggle" class="news-button">日付：新着順</button>
+    </div>
+    </div>
+    <ul class="news-list">
+    <li>
+        <span class="news-category">「自己紹介ページ完成」</span>
+        <p class="news-title">＜2025年10月21日＞自己紹介ページが完成しました。</p>
+    </li>
+    <li>
+        <span class="news-category">「トップページ完成」</span>
+        <p class="news-title">＜2025年10月20日＞トップページが完成しました。</p>
+    </li>
+    <li>
+        <span class="news-category">「作業開始」</span>
+        <p class="news-title">＜2025年10月19日＞作業を開始しました。</p>
+    </li>
+    </ul>
+<!-- ページネーション -->
+    <div id="pagination">
+        <button id="prev">←</button>
+        <span id="page-numbers"></span>
+        <button id="next">→</button>
+    </div>
+
+</section>
+
+
+<!-- フッター -->
+<footer class="site-footer">
+
+    <div class="footer-content">
+        <p>© 2025 Kazuma Kinoshita. All Rights Reserved.</p>
+
+        <!-- Instagram SVGアイコン -->
+        <a href="https://www.instagram.com/_kz_ma_/?next=%2F">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="50" height="50" aria-hidden="true" focusable="false" role="img">
+        <defs>
+            <linearGradient id="igGradient" x1="0%" y1="100%" x2="100%" y2="0%">
+                <stop offset="0%"   stop-color="#F58529"/>
+                <stop offset="30%"  stop-color="#DD2A7B"/>
+                <stop offset="60%"  stop-color="#8134AF"/>
+                <stop offset="100%" stop-color="#515BD4"/>
+            </linearGradient>
+        </defs>
+        <rect x="64" y="64" width="384" height="384" rx="96" ry="96" fill="url(#igGradient)"/>
+        <circle cx="256" cy="256" r="92" fill="#fff"/>
+        <circle cx="256" cy="256" r="64" fill="url(#igGradient)"/>
+        <circle cx="360" cy="152" r="24" fill="#fff"/>
+        </svg>
+        </a>
+
+        <!-- GitHub SVGアイコン -->
+        <a href="https://github.com/1kz-ma1/profile" target="_blank" rel="noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="42" height="42" role="img" aria-hidden="true">
+            <path fill="currentColor" fill-rule="evenodd" d="M12 .5A11.5 11.5 0 0 0 .5 12c0 5.08 3.292 9.384 7.865 10.9.575.106.785-.246.785-.55 0-.27-.01-.985-.015-1.934-3.2.696-3.875-1.542-3.875-1.542-.523-1.328-1.277-1.681-1.277-1.681-1.043-.713.079-.699.079-.699 1.152.081 1.76 1.184 1.76 1.184 1.025 1.759 2.69 1.25 3.345.954.104-.758.401-1.25.73-1.538-2.555-.29-5.242-1.278-5.242-5.687 0-1.257.45-2.285 1.188-3.09-.12-.29-.515-1.46.113-3.04 0 0 .967-.31 3.17 1.18.92-.256 1.907-.383 2.887-.388.98.005 1.967.132 2.888.388 2.202-1.49 3.167-1.18 3.167-1.18.63 1.58.235 2.75.115 3.04.739.805 1.186 1.833 1.186 3.09 0 4.42-2.694 5.393-5.257 5.677.413.356.78 1.062.78 2.14 0 1.545-.014 2.788-.014 3.168 0 .306.207.662.793.548A11.502 11.502 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5Z"/>
+        </svg>
+        </a>
+
+    </footer>
+
+<!-- jQuery の読み込み -->
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- inview プラグイン（CDN） -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/protonet-jquery.inview/1.1.2/jquery.inview.min.js"></script>
+
+<!-- ローカルの inview 設定とメインスクリプト（assets 配下） -->
+<script src="{% static 'js/jquery.inview_set.js' %} "></script>
+<script src="{% static 'js/main.js' %}"></script>
+</div>
+</body>
+
+{% endblock %}
