@@ -1,0 +1,14 @@
+cd c:\web_work\Scripts\workpro
+
+# 1. 変更確認
+git status
+
+# 2. ステージ
+git add intro/templates/about.html
+git add intro/static/css/style.css
+
+# 3. コミット
+git commit -m "Update about page and styling"
+
+# 4. プッシュ
+git push origin main

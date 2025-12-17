@@ -1,13 +1,20 @@
 # intro/views.py
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.cache import cache_page
 from django.core.paginator import Paginator
 from django.core.mail import send_mail
 from django.conf import settings
 from .models import BlogPost
+from .cache_utils import cache_if_anonymous
 
-def index(request): return render(request, "index.html")
-def about(request): return render(request, "about.html")
+@cache_page(60 * 60)  # 1時間キャッシュ
+def index(request): 
+    return render(request, "index.html")
+
+@cache_page(60 * 60)  # 1時間キャッシュ
+def about(request): 
+    return render(request, "about.html")
 
 def blog(request):
     # フィルター処理

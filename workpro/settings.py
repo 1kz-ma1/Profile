@@ -26,9 +26,27 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-h0ut7kjqdb93)qwxl%x=o
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
-if not DEBUG:
-    ALLOWED_HOSTS.append('.pythonanywhere.com')
+# デフォルト許可ホストにPythonAnywhereドメインとローカルを含める
+default_allowed = ['localhost', '127.0.0.1', '1kzma1.pythonanywhere.com', '.pythonanywhere.com']
+env_allowed = os.environ.get('ALLOWED_HOSTS')
+if env_allowed:
+    ALLOWED_HOSTS = [h.strip() for h in env_allowed.split(',') if h.strip()]
+    # 念のためPythonAnywhereドメインを追加
+    for h in default_allowed:
+        if h not in ALLOWED_HOSTS:
+            ALLOWED_HOSTS.append(h)
+else:
+    ALLOWED_HOSTS = default_allowed
+
+# Cloudflare設定（本番環境のみ）
+CLOUDFLARE_ENABLED = os.environ.get('CLOUDFLARE_ENABLED', 'False') == 'True'
+if CLOUDFLARE_ENABLED and not DEBUG:
+    # Cloudflareからのリクエストを信頼できるプロキシとして設定
+    SECURE_PROXY_SSL_HEADER = ('HTTP_CF_VISITOR', '{"scheme":"https"}')
+    SECURE_SSL_REDIRECT = True
+    SECURE_HSTS_SECONDS = 31536000  # 1年
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
 
 
 # Application definition
