@@ -26,17 +26,24 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-h0ut7kjqdb93)qwxl%x=o
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
-# デフォルト許可ホストにPythonAnywhereドメインとローカルを含める
-default_allowed = ['localhost', '127.0.0.1', '1kzma1.pythonanywhere.com', '.pythonanywhere.com']
+# デフォルト許可ホストにRailway・ローカル・Vercelを含める
+default_allowed = ['localhost', '127.0.0.1', '.railway.app', '.vercel.app']
 env_allowed = os.environ.get('ALLOWED_HOSTS')
 if env_allowed:
     ALLOWED_HOSTS = [h.strip() for h in env_allowed.split(',') if h.strip()]
-    # 念のためPythonAnywhereドメインを追加
+    # 念のためデフォルトドメインを追加
     for h in default_allowed:
         if h not in ALLOWED_HOSTS:
             ALLOWED_HOSTS.append(h)
 else:
     ALLOWED_HOSTS = default_allowed
+
+# Railway/VercelのデプロイURL（例: my-project.railway.app or my-project.vercel.app）が環境変数で渡される場合は追加
+railway_url = os.environ.get('RAILWAY_PUBLIC_DOMAIN')
+if railway_url:
+    host = railway_url.strip()
+    if host and host not in ALLOWED_HOSTS:
+        ALLOWED_HOSTS.append(host)
 
 # Cloudflare設定（本番環境のみ）
 CLOUDFLARE_ENABLED = os.environ.get('CLOUDFLARE_ENABLED', 'False') == 'True'
@@ -91,6 +98,10 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'workpro.wsgi.application'
+
+# VercelのPythonランタイムは `api/wsgi.py` の `app` を直接参照できるため、
+# 必須ではありませんが、Django設定としても合わせる場合は以下を使用します。
+# WSGI_APPLICATION = 'api.wsgi.app'
 
 
 # Database
@@ -150,9 +161,24 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 # WhiteNoise configuration
 STORAGES = {
     "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        # Manifest だと `collectstatic` 実行が必須になるため、Vercel簡易運用では非Manifestを採用
+        "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
     },
 }
+
+# CSRFの許可オリジン（RailwayとVercelドメインを許可）
+CSRF_TRUSTED_ORIGINS = [
+    'https://*.railway.app',
+    'https://*.vercel.app',
+]
+
+# CORS設定（別途django-cors-headersをインストール場合）
+CORS_ALLOWED_ORIGINS = [
+    'https://*.railway.app',
+    'https://*.vercel.app',
+    'http://localhost:3000',
+    'http://127.0.0.1:3000',
+]
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'

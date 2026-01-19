@@ -31,4 +31,21 @@ ENV/
 Thumbs.db
 
 # Environment variables
-.env
+.env.env.local
+.env.railway
+
+# Node.js (Frontend)
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/.env.local
+
+# Next.js
+.next/
+out/
+
+# Vercel
+.vercel/
+
+# Railway
+.railwayignore
