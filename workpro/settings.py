@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-h0ut7kjqdb93)qwxl%x=o@5t7##@=b4ohlirxj4ph173%8rh4l')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', 'True') == 'True'
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
 # デフォルト許可ホストにRailway・ローカル・Vercelを含める
 default_allowed = ['localhost', '127.0.0.1', '.railway.app', '.vercel.app']
