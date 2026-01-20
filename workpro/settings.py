@@ -172,7 +172,7 @@ STORAGES = {
 # CSRFの許可オリジン（RailwayとVercelドメインを許可）
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://web-production-91779.up.railway.app",
+    "https://web-production-519fa.up.railway.app",
     "https://your-portfolio.vercel.app",
     "http://localhost:3000",   # ローカルでフロントを動かすときだけ必要
 ]
