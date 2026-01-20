@@ -49,7 +49,7 @@ if railway_url:
 CLOUDFLARE_ENABLED = os.environ.get('CLOUDFLARE_ENABLED', 'False') == 'True'
 if CLOUDFLARE_ENABLED and not DEBUG:
     # Cloudflareからのリクエストを信頼できるプロキシとして設定
-    SECURE_PROXY_SSL_HEADER = ('HTTP_CF_VISITOR', '{"scheme":"https"}')
+    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
     SECURE_SSL_REDIRECT = True
     SECURE_HSTS_SECONDS = 31536000  # 1年
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
