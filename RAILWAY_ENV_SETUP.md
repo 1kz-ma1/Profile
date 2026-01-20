@@ -19,7 +19,7 @@ django-insecure-abc123xyz...
 - Railway.app にアクセス → Project 選択
 - Settings → Variables
 - 「Add Variable」をクリック
-- **Key**: `SECRET_KEY`
+- **Key**: `xrw@pbg35nm6*ir4s^0&1s2e^*cp6w3er45imb%8fn54acxn!b`
 - **Value**: 上記で生成した値をペースト
 - 保存 → Deployment が自動トリガー
 
@@ -38,7 +38,7 @@ django-insecure-abc123xyz...
 
 Railway デプロイ後、自動的に以下の形式でドメイン割り当てられます:
 ```
-プロジェクト名.up.railway.app
+https://web-production-91779.up.railway.app/
 ```
 
 または Railway dashboard で確認:

@@ -152,11 +152,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    BASE_DIR / 'intro' / 'static',
+    os.path.join(BASE_DIR, 'intro', 'static'),
 ]
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # WhiteNoise configuration
 STORAGES = {
@@ -167,10 +167,13 @@ STORAGES = {
 }
 
 # CSRFの許可オリジン（RailwayとVercelドメインを許可）
+
 CSRF_TRUSTED_ORIGINS = [
-    'https://*.railway.app',
-    'https://*.vercel.app',
+    "https://web-production-91779.up.railway.app",
+    "https://your-portfolio.vercel.app",
+    "http://localhost:3000",   # ローカルでフロントを動かすときだけ必要
 ]
+
 
 # CORS設定（別途django-cors-headersをインストール場合）
 CORS_ALLOWED_ORIGINS = [
@@ -180,8 +183,8 @@ CORS_ALLOWED_ORIGINS = [
     'http://127.0.0.1:3000',
 ]
 
-MEDIA_URL = 'media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 # Default primary key field type
