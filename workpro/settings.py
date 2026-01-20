@@ -25,6 +25,9 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-h0ut7kjqdb93)qwxl%x=o
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+
 
 # デフォルト許可ホストにRailway・ローカル・Vercelを含める
 default_allowed = ['localhost', '127.0.0.1', '.railway.app', '.vercel.app']
