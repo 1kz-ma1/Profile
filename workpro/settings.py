@@ -29,17 +29,9 @@ CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 
 
-# デフォルト許可ホストにRailway・ローカル・Vercelを含める
-default_allowed = ['localhost', '127.0.0.1', '.railway.app', '.vercel.app']
-env_allowed = os.environ.get('ALLOWED_HOSTS')
-if env_allowed:
-    ALLOWED_HOSTS = [h.strip() for h in env_allowed.split(',') if h.strip()]
-    # 念のためデフォルトドメインを追加
-    for h in default_allowed:
-        if h not in ALLOWED_HOSTS:
-            ALLOWED_HOSTS.append(h)
-else:
-    ALLOWED_HOSTS = default_allowed
+# ALLOWED_HOSTS: 環境変数で設定（本番は具体的なドメイン、開発はワイルドカード対応）
+env_allowed = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1,.railway.app,.vercel.app')
+ALLOWED_HOSTS = [h.strip() for h in env_allowed.split(',') if h.strip()]
 
 # Railway/VercelのデプロイURL（例: my-project.railway.app or my-project.vercel.app）が環境変数で渡される場合は追加
 railway_url = os.environ.get('RAILWAY_PUBLIC_DOMAIN')
@@ -169,21 +161,19 @@ STORAGES = {
     },
 }
 
-# CSRFの許可オリジン（RailwayとVercelドメインを許可）
-
+# CSRFの許可オリジン（末尾スラッシュなし・ワイルドカードなし・本番用ドメイン指定）
 CSRF_TRUSTED_ORIGINS = [
     "https://web-production-519fa.up.railway.app",
-    "https://your-portfolio.vercel.app",
-    "http://localhost:3000",   # ローカルでフロントを動かすときだけ必要
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
 ]
 
 
-# CORS設定（別途django-cors-headersをインストール場合）
+# CORS設定（本番は具体的なドメイン）
 CORS_ALLOWED_ORIGINS = [
-    'https://*.railway.app',
-    'https://*.vercel.app',
-    'http://localhost:3000',
-    'http://127.0.0.1:3000',
+    "https://web-production-519fa.up.railway.app",
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
 ]
 
 MEDIA_URL = '/media/'
