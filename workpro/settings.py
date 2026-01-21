@@ -102,14 +102,30 @@ WSGI_APPLICATION = 'workpro.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-import dj_database_url
 
-DATABASES = {
-    'default': dj_database_url.config(
-        default='sqlite:///' + str(BASE_DIR / 'db.sqlite3'),
-        conn_max_age=600
-    )
-}
+import dj_database_url
+import os
+
+DEBUG = os.getenv("DEBUG", "False") == "True"
+
+if DEBUG:
+    # 開発環境：SQLiteでもOK（お好みで）
+    DATABASES = {
+        "default": dj_database_url.config(
+            default='sqlite:///' + str(BASE_DIR / 'db.sqlite3'),
+            conn_max_age=0
+        )
+    }
+else:
+    # 本番：DATABASE_URL が必須。ssl_require=True を明示
+    DATABASES = {
+        "default": dj_database_url.config(
+            env="postgresql://postgres:CEuHEXTTACPgBtmtkqoTwDmptKMAeqln@postgres.railway.internal:5432/railway",
+            conn_max_age=600,
+            ssl_require=True
+        )
+    }
+
 
 
 # Password validation
