@@ -1,2 +1,2 @@
 web: DJANGO_SETTINGS_MODULE=workpro.settings gunicorn workpro.wsgi --bind 0.0.0.0:$PORT --workers 2 --timeout 60
-release: python manage.py migrate && python manage.py collectstatic --noinput
+release: python manage.py migrate && (python manage.py createsuperuser --noinput --username=$DJANGO_SUPERUSER_USERNAME --email=$DJANGO_SUPERUSER_EMAIL 2>/dev/null || true) && python manage.py shell -c "from django.contrib.auth.models import User; import os; u = User.objects.filter(username=os.getenv('DJANGO_SUPERUSER_USERNAME')).first(); u.set_password(os.getenv('DJANGO_SUPERUSER_PASSWORD')) if u else None; u.save() if u else None; print('✅ Superuser password set' if u else '✅ Superuser creation skipped')" && python manage.py collectstatic --noinput
