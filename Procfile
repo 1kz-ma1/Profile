@@ -1,2 +1,2 @@
 web: DJANGO_SETTINGS_MODULE=workpro.settings gunicorn workpro.wsgi --bind 0.0.0.0:$PORT --workers 2 --timeout 90
-release: DJANGO_SETTINGS_MODULE=workpro.settings python manage.py migrate && DJANGO_SETTINGS_MODULE=workpro.settings python manage.py ensure_superuser && DJANGO_SETTINGS_MODULE=workpro.settings python manage.py collectstatic --noinput
+release: DJANGO_SETTINGS_MODULE=workpro.settings python manage.py migrate && DJANGO_SETTINGS_MODULE=workpro.settings python manage.py collectstatic --noinput
