@@ -102,14 +102,7 @@ WSGI_APPLICATION = 'workpro.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-
-import dj_database_url
-import os
-
-DEBUG = os.getenv("DEBUG", "False") == "True"
-
 if DEBUG:
-    # 開発環境：SQLiteでOK（フォールバックあり）
     DATABASES = {
         "default": dj_database_url.config(
             default="sqlite:///" + str(BASE_DIR / "db.sqlite3"),
@@ -117,21 +110,16 @@ if DEBUG:
         )
     }
 else:
-    # 本番：DATABASE_URL が必須。Railway internal の場合は ssl_require=False
-    DATABASE_URL = os.getenv("postgresql://postgres:CEuHEXTTACPgBtmtkqoTwDmptKMAeqln@postgres.railway.internal:5432/railway")
+    DATABASE_URL = os.getenv("DATABASE_URL")
     if not DATABASE_URL:
-        raise RuntimeError(
-            "DATABASE_URL is not set. Set your private Railway Postgres URL in Variables."
-        )
-
+        raise RuntimeError("DATABASE_URL is not set.")
     DATABASES = {
         "default": dj_database_url.parse(
             DATABASE_URL,
             conn_max_age=600,
-            ssl_require=False,  # internal接続推奨設定。Publicエンドポイント経由なら True に変更
+            ssl_require=False,
         )
     }
-
 
 
 # Password validation
