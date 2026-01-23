@@ -22,7 +22,7 @@ class Migration(migrations.Migration):
     dependencies = [
         # 直前の intro のマイグレーションに合わせて修正してください
         # 例：("intro", "0001_initial")
-        ("intro", "0001_initial"),
+        ("intro", "0002_alter_blogpost_options_blogpost_category_and_more"),
     ]
 
     operations = [
