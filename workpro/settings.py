@@ -76,6 +76,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# WhiteNoise: serve media files from MEDIA_ROOT (temporary solution)
+WHITENOISE_AUTOREFRESH = True
+WHITENOISE_USE_FINDERS = True
+
 ROOT_URLCONF = 'workpro.urls'
 
 TEMPLATES = [
