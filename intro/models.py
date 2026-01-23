@@ -32,3 +32,12 @@ class BlogPost(models.Model):
     
     def get_category_display_name(self):
         return dict(self.CATEGORY_CHOICES).get(self.category, 'その他')
+    
+    def get_image_url(self):
+        """Get image URL safely, handling missing images"""
+        if self.image:
+            try:
+                return self.image.url
+            except (AttributeError, ValueError):
+                return None
+        return None
