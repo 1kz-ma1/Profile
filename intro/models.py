@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.core.files.storage import default_storage
 
 class BlogPost(models.Model):
     CATEGORY_CHOICES = [
@@ -15,7 +16,7 @@ class BlogPost(models.Model):
     content = models.TextField(verbose_name="内容")
     excerpt = models.CharField(max_length=300, blank=True, verbose_name="抜粋")
     category = models.CharField(max_length=20, choices=CATEGORY_CHOICES, default='other', verbose_name="カテゴリ")
-    image = models.ImageField(upload_to='blog_images/', blank=True, default='', verbose_name="画像")
+    image = models.FileField(upload_to='blog_images/', blank=True, default='', verbose_name="画像")
     post_date = models.DateTimeField(default=timezone.now, verbose_name="投稿日時")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="作成日時")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="更新日時")
