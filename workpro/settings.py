@@ -169,6 +169,25 @@ LOGGING = {
 DEBUG_PROPAGATE_EXCEPTIONS = True
 
 
+# Media files (User uploads)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+# Storage backends (Django 4.2+)
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+        "OPTIONS": {
+            "location": MEDIA_ROOT,
+            "base_url": MEDIA_URL,
+        },
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
@@ -178,14 +197,6 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'intro', 'static'),
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
-# WhiteNoise configuration
-STORAGES = {
-    "staticfiles": {
-        # Manifest だと `collectstatic` 実行が必須になるため、Vercel簡易運用では非Manifestを採用
-        "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
-    },
-}
 
 # CSRFの許可オリジン（末尾スラッシュなし・ワイルドカードなし・本番用ドメイン指定）
 CSRF_TRUSTED_ORIGINS = [
