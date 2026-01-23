@@ -9,6 +9,6 @@ urlpatterns = [
     path('', include('intro.urls')), 
 ]
 
-
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# Serve media files in both development and production (Railway ephemeral filesystem)
+# For permanent storage, migrate to S3/Cloudinary in the future
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
