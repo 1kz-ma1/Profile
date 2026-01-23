@@ -154,6 +154,20 @@ USE_I18N = True
 
 USE_TZ = True
 
+# Logging for error diagnosis
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {"console": {"class": "logging.StreamHandler"}},
+    "loggers": {
+        "django.request": {"handlers": ["console"], "level": "ERROR", "propagate": False},
+        "django.db.backends": {"handlers": ["console"], "level": "ERROR", "propagate": False},
+        "django.core.files": {"handlers": ["console"], "level": "ERROR", "propagate": False},
+    },
+}
+
+DEBUG_PROPAGATE_EXCEPTIONS = True
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
