@@ -194,9 +194,9 @@ STORAGES = {
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'intro', 'static'),
+    BASE_DIR / 'intro' / 'static',
 ]
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # CSRFの許可オリジン（末尾スラッシュなし・ワイルドカードなし・本番用ドメイン指定）
 CSRF_TRUSTED_ORIGINS = [
