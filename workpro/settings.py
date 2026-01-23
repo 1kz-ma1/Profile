@@ -26,8 +26,8 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-h0ut7kjqdb93)qwxl%x=o
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
-CSRF_COOKIE_SECURE = True
-SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = False
+SESSION_COOKIE_SECURE = False
 
 
 # ALLOWED_HOSTS: 環境変数で設定（本番は具体的なドメイン、開発はワイルドカード対応）
@@ -175,6 +175,7 @@ STORAGES = {
 # CSRFの許可オリジン（末尾スラッシュなし・ワイルドカードなし・本番用ドメイン指定）
 CSRF_TRUSTED_ORIGINS = [
     "https://web-production-519fa.up.railway.app",
+    "http://web-production-519fa.up.railway.app",
     "http://localhost:3000",
     "http://127.0.0.1:3000",
 ]
