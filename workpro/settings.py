@@ -180,11 +180,11 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # Storage backends (Django 4.2+)
 STORAGES = {
     "default": {
-        "BACKEND": "django.core.files.storage.FileSystemStorage",
+        "BACKEND": "workpro.storage.CloudinaryStorage" if os.getenv('CLOUDINARY_URL') else "django.core.files.storage.FileSystemStorage",
         "OPTIONS": {
-            "location": MEDIA_ROOT,
-            "base_url": MEDIA_URL,
-        },
+            "location": MEDIA_ROOT if not os.getenv('CLOUDINARY_URL') else None,
+            "base_url": MEDIA_URL if not os.getenv('CLOUDINARY_URL') else None,
+        } if not os.getenv('CLOUDINARY_URL') else {},
     },
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
