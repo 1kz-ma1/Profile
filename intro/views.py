@@ -34,8 +34,8 @@ def blog(request):
     else:  # newest (default)
         posts = posts.order_by('-post_date')
     
-    # ページネーション（1ページに4件）
-    paginator = Paginator(posts, 4)
+    # ページネーション（1ページに9件）
+    paginator = Paginator(posts, 9)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     
