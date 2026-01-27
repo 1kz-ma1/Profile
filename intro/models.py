@@ -18,7 +18,7 @@ class BlogPost(models.Model):
     content = models.TextField(verbose_name="内容")
     excerpt = models.CharField(max_length=300, blank=True, verbose_name="抜粋")
     category = models.CharField(max_length=20, choices=CATEGORY_CHOICES, default='other', verbose_name="カテゴリ")
-    image = models.ImageField(upload_to='blog_images/', blank=True, default='', verbose_name="画像")
+    image = models.CharField(max_length=255, blank=True, default='', verbose_name="画像パス", help_text="staticfiles/img/ 内のファイル名を指定（例: blog-header.jpg）")
     post_date = models.DateTimeField(default=timezone.now, verbose_name="投稿日時")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="作成日時")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="更新日時")
@@ -36,10 +36,7 @@ class BlogPost(models.Model):
         return dict(self.CATEGORY_CHOICES).get(self.category, 'その他')
     
     def get_image_url(self):
-        """Get image URL safely, handling missing images"""
+        """Get image URL from static files - returns None if not set"""
         if self.image:
-            try:
-                return self.image.url
-            except (AttributeError, ValueError):
-                return None
+            return f"/static/img/{self.image}"
         return None

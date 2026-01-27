@@ -1,5 +1,7 @@
 from django.contrib import admin
+from django.conf import settings
 from .models import BlogPost
+import os
 
 @admin.register(BlogPost)
 class BlogPostAdmin(admin.ModelAdmin):
@@ -22,3 +24,21 @@ class BlogPostAdmin(admin.ModelAdmin):
             'classes': ('collapse',)
         }),
     )
+    
+    def formfield_for_dbfield(self, db_field, request, **kwargs):
+        """image フィールドをドロップダウンに変換"""
+        if db_field.name == 'image':
+            # staticfiles/img/ 配下の画像一覧を取得
+            img_dir = os.path.join(settings.BASE_DIR, 'staticfiles', 'img')
+            choices = [('', '---')]
+            
+            if os.path.exists(img_dir):
+                for filename in sorted(os.listdir(img_dir)):
+                    if filename.lower().endswith(('.jpg', '.jpeg', '.png', '.gif', '.webp')):
+                        choices.append((filename, filename))
+            
+            kwargs['widget'] = admin.widgets.AdminRadioSelect()
+            from django.forms import ChoiceField
+            return ChoiceField(choices=choices, required=False, **kwargs)
+        
+        return super().formfield_for_dbfield(db_field, request, **kwargs)
