@@ -1,4 +1,5 @@
 # intro/views.py
+import logging
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.cache import cache_page
@@ -8,6 +9,8 @@ from django.conf import settings
 from django.http import JsonResponse
 from .models import BlogPost
 from .cache_utils import cache_if_anonymous
+
+logger = logging.getLogger(__name__)
 
 @cache_page(60 * 60)  # 1時間キャッシュ
 def index(request): 
@@ -139,7 +142,11 @@ def contact(request):
             return redirect("intro:thanks")
         except Exception as e:
             # エラーログを記録（本番環境ではログファイルに記録）
-            print(f"メール送信エラー: {e}")
+            logger.error(f"メール送信エラー: {type(e).__name__}: {str(e)}")
+            logger.error(f"EMAIL_HOST_USER: {settings.EMAIL_HOST_USER}")
+            logger.error(f"EMAIL_HOST: {settings.EMAIL_HOST}")
+            logger.error(f"EMAIL_PORT: {settings.EMAIL_PORT}")
+            logger.error(f"EMAIL_USE_SSL: {settings.EMAIL_USE_SSL}")
             return render(request, "contact.html", {'error': 'メール送信に失敗しました。後ほどお試しください。'})
     
     return render(request, "contact.html")
