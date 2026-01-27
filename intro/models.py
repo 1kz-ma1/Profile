@@ -9,6 +9,8 @@ class BlogPost(models.Model):
         ('work', '就活'),
         ('hobby', '趣味'),
         ('travel', '旅行'),
+        ('values', '価値観'),
+        ('event', 'イベント'),
         ('other', 'その他'),
     ]
     
