@@ -102,12 +102,18 @@
             </div>
             
             <!-- 良いね情報 -->
-            <div style="margin-top: 30px; padding: 20px; background: #f0f4ff; border-radius: 8px; border-left: 4px solid #667eea; display: flex; align-items: center; gap: 15px;">
-                <span style="font-size: 1.5rem;">👍</span>
-                <div>
-                    <p style="margin: 0; color: #667eea; font-weight: bold; font-size: 1.1rem;">{{ post.likes_count }}</p>
-                    <p style="margin: 0; color: #666; font-size: 0.9rem;">人が良いと思いました</p>
+            <div style="margin-top: 30px; padding: 20px; background: #f0f4ff; border-radius: 8px; border-left: 4px solid #667eea; display: flex; align-items: center; gap: 15px; justify-content: space-between;">
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <span style="font-size: 1.5rem;">👍</span>
+                    <div>
+                        <p id="likes-count" style="margin: 0; color: #667eea; font-weight: bold; font-size: 1.1rem;">{{ post.likes_count }}</p>
+                        <p style="margin: 0; color: #666; font-size: 0.9rem;">人が良いと思いました</p>
+                    </div>
                 </div>
+                <button id="like-btn" style="padding: 10px 20px; background: #667eea; color: #fff; border: none; border-radius: 20px; cursor: pointer; font-weight: bold; transition: background 0.3s; font-size: 0.95rem;" 
+                        onclick="likeBlogPost({{ post.id }})">
+                    良いね!
+                </button>
             </div>
             
             <!-- 更新日時 -->
@@ -174,5 +180,60 @@
 <!-- ローカルの inview 設定とメインスクリプト（assets 配下） -->
 <script src="{% static 'js/jquery.inview_set.js' %}"></script>
 <script src="{% static 'js/main.js' %}"></script>
+
+<!-- 良いねボタンの処理 -->
+<script>
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+function likeBlogPost(postId) {
+    const csrftoken = getCookie('csrftoken');
+    const btn = document.getElementById('like-btn');
+    
+    fetch(`/blog/${postId}/like/`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken,
+        },
+        body: JSON.stringify({}),
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // 良いね数を更新
+            document.getElementById('likes-count').textContent = data.likes_count;
+            
+            // ボタンの状態を更新
+            if (data.liked) {
+                btn.style.background = '#667eea';
+                btn.textContent = '良いね取り消す';
+            } else {
+                btn.style.background = '#ccc';
+                btn.textContent = '良いね!';
+            }
+        }
+    })
+    .catch(error => console.error('Error:', error));
+}
+
+// ページ読み込み時にボタンの初期状態を設定（セッション確認用）
+document.addEventListener('DOMContentLoaded', function() {
+    // セッションからの情報は取得できないので、フロントエンドのみで管理
+    // 必要に応じて後で改善可能
+});
+</script>
 </body>
 </html>

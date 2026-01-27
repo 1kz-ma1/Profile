@@ -5,6 +5,7 @@ from django.views.decorators.cache import cache_page
 from django.core.paginator import Paginator
 from django.core.mail import send_mail
 from django.conf import settings
+from django.http import JsonResponse
 from .models import BlogPost
 from .cache_utils import cache_if_anonymous
 
@@ -54,6 +55,37 @@ def blog(request):
 def blog_detail(request, pk):
     post = get_object_or_404(BlogPost, pk=pk, is_published=True)
     return render(request, "blog_detail.html", {'post': post})
+
+@csrf_protect
+def like_post(request, pk):
+    """ブログ記事に良いねをつける"""
+    if request.method != 'POST':
+        return JsonResponse({'error': 'Method not allowed'}, status=405)
+    
+    post = get_object_or_404(BlogPost, pk=pk, is_published=True)
+    
+    # セッションで管理：この記事に良いねしたかどうかチェック
+    liked_posts = request.session.get('liked_posts', [])
+    
+    if pk in liked_posts:
+        # 既に良いねしている場合は良いねを取り消す
+        liked_posts.remove(pk)
+        post.likes_count = max(0, post.likes_count - 1)
+        liked = False
+    else:
+        # 良いねを追加
+        liked_posts.append(pk)
+        post.likes_count += 1
+        liked = True
+    
+    post.save()
+    request.session['liked_posts'] = liked_posts
+    
+    return JsonResponse({
+        'success': True,
+        'likes_count': post.likes_count,
+        'liked': liked,
+    })
 
 def portfolio(request): return render(request, "portfolio.html")
 def thanks(request): return render(request, "thanks.html")
