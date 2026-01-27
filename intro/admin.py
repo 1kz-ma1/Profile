@@ -37,8 +37,12 @@ class BlogPostAdmin(admin.ModelAdmin):
                     if filename.lower().endswith(('.jpg', '.jpeg', '.png', '.gif', '.webp')):
                         choices.append((filename, filename))
             
-            kwargs['widget'] = admin.widgets.AdminRadioSelect()
-            from django.forms import ChoiceField
-            return ChoiceField(choices=choices, required=False, **kwargs)
+            from django.forms import ChoiceField, Select
+            return ChoiceField(
+                choices=choices,
+                required=False,
+                widget=Select(attrs={'style': 'width: 100%; max-width: 500px;'}),
+                **kwargs
+            )
         
         return super().formfield_for_dbfield(db_field, request, **kwargs)
