@@ -124,14 +124,20 @@
                 </h3>
                 
                 {% if post.excerpt %}
-                <p style="color: #666; font-size: 0.95rem; line-height: 1.6; margin-bottom: 10px;">
+                <p style="color: #666; font-size: 0.95rem; line-height: 1.6; margin-bottom: 15px;">
                     {{ post.excerpt|truncate_lines:3 }}
                 </p>
                 {% else %}
-                <p style="color: #666; font-size: 0.95rem; line-height: 1.6; margin-bottom: 10px;">
+                <p style="color: #666; font-size: 0.95rem; line-height: 1.6; margin-bottom: 15px;">
                     {{ post.content|truncate_lines:3 }}
                 </p>
                 {% endif %}
+                
+                <!-- 良いね表示 -->
+                <div style="display: flex; align-items: center; gap: 8px; color: #667eea; font-size: 0.9rem; font-weight: bold;">
+                    <span>👍</span>
+                    <span>{{ post.likes_count }}</span>
+                </div>
             </div>
         </article>
         </a>

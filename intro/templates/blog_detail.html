@@ -98,7 +98,16 @@
             
             <!-- 本文 -->
             <div style="color: #333; font-size: 1rem; line-height: 1.9; white-space: pre-wrap; word-wrap: break-word;">
-                {{ post.content }}
+                {{ post.content|urlize }}
+            </div>
+            
+            <!-- 良いね情報 -->
+            <div style="margin-top: 30px; padding: 20px; background: #f0f4ff; border-radius: 8px; border-left: 4px solid #667eea; display: flex; align-items: center; gap: 15px;">
+                <span style="font-size: 1.5rem;">👍</span>
+                <div>
+                    <p style="margin: 0; color: #667eea; font-weight: bold; font-size: 1.1rem;">{{ post.likes_count }}</p>
+                    <p style="margin: 0; color: #666; font-size: 0.9rem;">人が良いと思いました</p>
+                </div>
             </div>
             
             <!-- 更新日時 -->

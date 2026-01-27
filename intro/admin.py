@@ -5,7 +5,7 @@ import os
 
 @admin.register(BlogPost)
 class BlogPostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'category', 'post_date', 'is_published')
+    list_display = ('title', 'category', 'likes_count', 'post_date', 'is_published')
     list_filter = ('is_published', 'category', 'post_date')
     search_fields = ('title', 'content', 'excerpt')
     ordering = ('-post_date',)
@@ -18,6 +18,9 @@ class BlogPostAdmin(admin.ModelAdmin):
         }),
         ('内容', {
             'fields': ('excerpt', 'content', 'image')
+        }),
+        ('エンゲージメント', {
+            'fields': ('likes_count',)
         }),
         ('メタ情報', {
             'fields': ('created_at', 'updated_at'),

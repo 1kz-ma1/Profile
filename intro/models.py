@@ -19,6 +19,7 @@ class BlogPost(models.Model):
     excerpt = models.CharField(max_length=300, blank=True, verbose_name="抜粋")
     category = models.CharField(max_length=20, choices=CATEGORY_CHOICES, default='other', verbose_name="カテゴリ")
     image = models.CharField(max_length=255, blank=True, default='', verbose_name="画像パス", help_text="staticfiles/img/ 内のファイル名を指定（例: blog-header.jpg）")
+    likes_count = models.IntegerField(default=0, verbose_name="良いね数")
     post_date = models.DateTimeField(default=timezone.now, verbose_name="投稿日時")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="作成日時")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="更新日時")
