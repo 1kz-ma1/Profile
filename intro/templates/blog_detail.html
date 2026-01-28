@@ -98,7 +98,7 @@
             
             <!-- 本文 -->
             <div style="color: #333; font-size: 1rem; line-height: 1.9; white-space: pre-wrap; word-wrap: break-word;">
-                {{ post.content|urlize }}
+                {{ post.content|safe|urlize }}
             </div>
             
             <!-- 良いね情報 -->
