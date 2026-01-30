@@ -19,25 +19,7 @@
 <div class="wrapper">
     <!--ヘッダー-->
 {% block header %}
-    <!-- ナビゲーション（ハンバーガー対応） -->
-    <div id="menubar_hdr" class="display-none" aria-label="menu button" role="button">
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
-    <!-- オーバーレイ（ハンバーガー開時に表示） -->
-    <div id="overlay" class="overlay display-none" aria-hidden="true"></div>
-    <div id="menubar" class="display-none">
-        <nav class="nav-links">
-            <ul>
-                <li><a href="{% url 'intro:index' %}">トップページ</a></li>
-                <li><a href="{% url 'intro:about' %}">自己紹介</a></li>
-                <li><a href="{% url 'intro:portfolio' %}">作品紹介</a></li>
-                <li><a href="{% url 'intro:blog' %}">近況報告ブログ</a></li>
-                <li><a href="{% url 'intro:contact' %}">お問い合わせ</a></li>
-            </ul>
-        </nav>
-    </div>
+
 
 {% endblock %}
 
