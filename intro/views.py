@@ -7,7 +7,7 @@ from django.core.paginator import Paginator
 from django.core.mail import send_mail
 from django.conf import settings
 from django.http import JsonResponse
-from .models import BlogPost
+from .models import BlogPost, Category, SubCategory
 from .cache_utils import cache_if_anonymous
 
 logger = logging.getLogger(__name__)
@@ -24,9 +24,19 @@ def blog(request):
     # フィルター処理
     posts = BlogPost.objects.filter(is_published=True)
     
-    # カテゴリフィルター
+    # メインカテゴリフィルター
+    main_category_slug = request.GET.get('main_category')
+    if main_category_slug:
+        posts = posts.filter(main_category__slug=main_category_slug)
+    
+    # サブカテゴリフィルター
+    sub_category_slug = request.GET.get('sub_category')
+    if sub_category_slug:
+        posts = posts.filter(sub_category__slug=sub_category_slug)
+    
+    # 旧カテゴリフィルター（後方互換性）
     category = request.GET.get('category')
-    if category:
+    if category and not main_category_slug:
         posts = posts.filter(category=category)
     
     # ソート処理
@@ -43,12 +53,16 @@ def blog(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     
-    # カテゴリ選択肢を取得
-    categories = BlogPost.CATEGORY_CHOICES
+    # カテゴリ情報を取得
+    categories = Category.objects.all().prefetch_related('subcategories')
+    old_categories = BlogPost.CATEGORY_CHOICES
     
     context = {
         'page_obj': page_obj,
         'categories': categories,
+        'old_categories': old_categories,
+        'current_main_category': main_category_slug,
+        'current_sub_category': sub_category_slug,
         'current_category': category,
         'current_sort': sort,
     }
