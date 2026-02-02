@@ -285,24 +285,18 @@ footer, .footer {
     position: fixed;
     top: 20px;
     right: 20px;
-    width: 44px;
-    height: 44px;
+    width: 40px;
+    height: 40px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 7px;
+    gap: 6px;
     cursor: pointer;
     z-index: 5001;
-    background: rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(10px);
-    border-radius: 8px;
-    padding: 10px;
-    transition: background 0.3s ease;
-}
-
-#menubar_hdr:hover {
-    background: rgba(0, 0, 0, 0.5);
+    background: transparent;
+    padding: 0;
+    transition: all 0.3s ease;
 }
 
 
@@ -316,10 +310,10 @@ footer, .footer {
 
 #menubar_hdr span {
     display: block;
-    width: 24px;
+    width: 28px;
     height: 2px;
     background: #fff;
-    border-radius: 2px;
+    border-radius: 1px;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     margin: 0;
     transform-origin: center;
@@ -327,14 +321,14 @@ footer, .footer {
 
 /* open 状態 */
 #menubar_hdr.ham span:nth-of-type(1) {
-    transform: translateY(9px) rotate(45deg);
+    transform: translateY(8px) rotate(45deg);
 }
 #menubar_hdr.ham span:nth-of-type(2) {
     opacity: 0;
     transform: scale(0);
 }
 #menubar_hdr.ham span:nth-of-type(3) {
-    transform: translateY(-9px) rotate(-45deg);
+    transform: translateY(-8px) rotate(-45deg);
 }
 
 /* 表示切替ユーティリティ */
@@ -351,21 +345,27 @@ footer, .footer {
         position: fixed;
         top: 0;
         right: -100%;
-        width: min(320px, 85vw);
-        max-width: 320px;
-        background: rgba(26, 26, 26, 0.98);
-        backdrop-filter: blur(20px);
+        width: 100vw;
+        max-width: none;
+        background: #1a1a1a;
         color: #fff;
         height: 100vh;
         height: 100dvh;
-        padding: 80px 24px 24px;
+        padding: 100px 40px 40px;
         transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         z-index: 5000;
         overflow-y: auto;
         overflow-x: hidden;
         box-sizing: border-box;
-        box-shadow: -5px 0 20px rgba(0, 0, 0, 0.3);
     }
+    
+    /* スマホでは幅を少し狭く */
+    @media (max-width: 480px) {
+        #menubar {
+            padding: 80px 24px 24px;
+        }
+    }
+    
     /* open 時 */
     #menubar.display-block {
         right: 0;
@@ -392,8 +392,7 @@ footer, .footer {
 .overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(2px);
+    background: rgba(0, 0, 0, 0.95);
     opacity: 0;
     transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 4999;
@@ -405,21 +404,47 @@ footer, .footer {
 }
 
 /* メニュー内リンクの色調整 */
+.nav-links {
+    max-width: 800px;
+}
+
+.nav-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-links li {
+    margin-bottom: 8px;
+}
+
 .nav-links a {
     color: #fff;
     background-color: transparent;
-    padding: 16px 20px;
+    padding: 20px 0;
     display: block;
-    border-radius: 8px;
     transition: all 0.2s ease;
-    font-size: 1.05rem;
+    font-size: 1.3rem;
+    font-weight: 500;
+    position: relative;
+    padding-left: 30px;
 }
+
+.nav-links a::before {
+    content: '>';
+    position: absolute;
+    left: 0;
+    opacity: 0;
+    transition: all 0.2s ease;
+}
+
 .nav-links a:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    transform: translateX(4px);
+    padding-left: 30px;
+    color: #ddd;
 }
-.nav-links li {
-    margin-bottom: 4px;
+
+.nav-links a:hover::before {
+    opacity: 1;
 }
 
 .latest-info {
