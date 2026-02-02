@@ -65,9 +65,21 @@ $(function() {
         if ($(this).hasClass('ham')) {
             $menubar.addClass('display-block');
             $('#overlay').removeClass('display-none').addClass('display-block');
+            // ボディのスクロールをロック
+            $('body').css({
+                'overflow': 'hidden',
+                'position': 'fixed',
+                'width': '100%'
+            });
         } else {
             $menubar.removeClass('display-block');
             $('#overlay').removeClass('display-block').addClass('display-none');
+            // ボディのスクロールロックを解除
+            $('body').css({
+                'overflow': '',
+                'position': '',
+                'width': ''
+            });
         }
     });
 
@@ -76,6 +88,12 @@ $(function() {
         $menubar.removeClass('display-block');
         $menubarHdr.removeClass('ham');
         $('#overlay').removeClass('display-block').addClass('display-none');
+        // スクロールロック解除
+        $('body').css({
+            'overflow': '',
+            'position': '',
+            'width': ''
+        });
     });
 
     // 通常のページリンク（ナビゲーション内）をクリックした時、メニューを閉じる
@@ -84,6 +102,12 @@ $(function() {
         $menubar.removeClass('display-block').addClass('display-none');
         $menubarHdr.removeClass('ham');
         $('#overlay').removeClass('display-block').addClass('display-none');
+        // スクロールロック解除
+        $('body').css({
+            'overflow': '',
+            'position': '',
+            'width': ''
+        });
         // デフォルト動作を継続させてページ遷移を許可
         return true;
     });
@@ -130,6 +154,12 @@ $(function() {
         $('#menubar').removeClass('display-block');
         $('#menubar_hdr').removeClass('ham');
         $(this).removeClass('display-block').addClass('display-none');
+        // スクロールロック解除
+        $('body').css({
+            'overflow': '',
+            'position': '',
+            'width': ''
+        });
     });
 
     // リサイズ時に overlay が残らないようにする
@@ -137,6 +167,12 @@ $(function() {
         if (window.innerWidth >= 900) {
             $('#overlay').removeClass('display-block').addClass('display-none');
             $('#menubar_hdr').removeClass('ham');
+            // スクロールロック解除
+            $('body').css({
+                'overflow': '',
+                'position': '',
+                'width': ''
+            });
         }
     }, 100));
 });
