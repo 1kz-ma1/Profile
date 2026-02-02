@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.conf import settings
-from .models import BlogPost, Category, SubCategory
+from .models import BlogPost, Category, SubCategory, Section
 import os
 
 @admin.register(Category)
@@ -18,10 +18,51 @@ class SubCategoryAdmin(admin.ModelAdmin):
     ordering = ('category', 'order', 'name')
     prepopulated_fields = {'slug': ('name',)}
 
+@admin.register(Section)
+class SectionAdmin(admin.ModelAdmin):
+    list_display = ('icon_name', 'name', 'order', 'get_post_count', 'is_active', 'updated_at')
+    list_editable = ('order', 'is_active')
+    list_filter = ('is_active', 'created_at')
+    search_fields = ('name', 'description')
+    ordering = ('order', 'name')
+    readonly_fields = ('created_at', 'updated_at', 'get_post_count')
+    
+    fieldsets = (
+        ('基本情報', {
+            'fields': ('name', 'icon', 'order', 'is_active')
+        }),
+        ('詳細', {
+            'fields': ('description',)
+        }),
+        ('統計情報', {
+            'fields': ('get_post_count', 'created_at', 'updated_at'),
+            'classes': ('collapse',)
+        }),
+    )
+    
+    def icon_name(self, obj):
+        """アイコン付きの名前を表示"""
+        return str(obj)
+    icon_name.short_description = 'セクション'
+    
+    actions = ['activate_sections', 'deactivate_sections']
+    
+    def activate_sections(self, request, queryset):
+        """選択したセクションを有効化"""
+        count = queryset.update(is_active=True)
+        self.message_user(request, f'{count}個のセクションを有効化しました。')
+    activate_sections.short_description = '選択したセクションを有効化'
+    
+    def deactivate_sections(self, request, queryset):
+        """選択したセクションを無効化"""
+        count = queryset.update(is_active=False)
+        self.message_user(request, f'{count}個のセクションを無効化しました。')
+    deactivate_sections.short_description = '選択したセクションを無効化'
+
 @admin.register(BlogPost)
 class BlogPostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'get_category_info', 'likes_count', 'post_date', 'is_published')
-    list_filter = ('is_published', 'main_category', 'sub_category', 'post_date')
+    list_display = ('title', 'get_category_info', 'get_section_info', 'likes_count', 'post_date', 'is_published')
+    list_filter = ('is_published', 'section', 'main_category', 'sub_category', 'post_date')
     search_fields = ('title', 'content', 'excerpt')
     ordering = ('-post_date',)
     date_hierarchy = 'post_date'
@@ -36,6 +77,17 @@ class BlogPostAdmin(admin.ModelAdmin):
         return obj.get_category_display() if obj.category else "未設定"
     get_category_info.short_description = "カテゴリ"
     
+    def get_section_info(self, obj):
+        """セクション情報を表示"""
+        if obj.section:
+            return str(obj.section)
+        if obj.chapter_title:
+            return f"（旧）{obj.chapter_title}"
+        if obj.chapter_number:
+            return f"（旧）第{obj.chapter_number}章"
+        return "未設定"
+    get_section_info.short_description = "セクション"
+    
     fieldsets = (
         ('基本情報', {
             'fields': ('title', 'post_date', 'is_published')
@@ -44,8 +96,12 @@ class BlogPostAdmin(admin.ModelAdmin):
             'fields': ('main_category', 'sub_category', 'category'),
             'description': '新しいカテゴリシステム（main_category/sub_category）を使用してください。旧categoryフィールドは後方互換性のために残されています。'
         }),
-        ('ビュー切り替え用設定', {
-            'fields': ('chapter_title', 'chapter_number', 'chapter_order', 'field_tags', 'related_posts'),
+        ('セクション設定', {
+            'fields': ('section', 'chapter_order'),
+            'description': 'セクションを選択してください。章構成ビューでのグループ分けに使用されます。'
+        }),
+        ('ビュー切り替え用設定（旧）', {
+            'fields': ('chapter_title', 'chapter_number', 'field_tags', 'related_posts'),
             'classes': ('collapse',),
             'description': '章構成ビューと相関図ビューで使用する設定です。セクション名を自由に入力できます（例: 資格、技術、プロジェクトなど）。'
         }),

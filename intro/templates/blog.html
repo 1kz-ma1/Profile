@@ -486,6 +486,7 @@ const blogPosts = [
         chapterTitle: "{{ post.get_chapter_title|escapejs }}",
         chapter: {{ post.chapter_number|default:'null' }},
         chapterOrder: {{ post.chapter_order|default:'null' }},
+        sectionOrder: {% if post.section %}{{ post.section.order }}{% else %}999{% endif %},
         fieldTags: "{{ post.field_tags|escapejs }}".split(',').map(t => t.trim()).filter(t => t),
         relatedIds: [{% for rel in post.related_posts.all %}{{ rel.pk }}{% if not forloop.last %},{% endif %}{% endfor %}],
         likesCount: {{ post.likes_count }},
@@ -588,21 +589,29 @@ function renderChaptersView() {
     blogPosts.forEach(post => {
         const chapterKey = post.chapterTitle || '未分類';
         if (!chapters[chapterKey]) {
-            chapters[chapterKey] = [];
+            chapters[chapterKey] = {
+                posts: [],
+                order: post.sectionOrder || 999
+            };
         }
-        chapters[chapterKey].push(post);
+        chapters[chapterKey].posts.push(post);
     });
     
-    // セクション名順にソート（未分類は最後）
+    // セクション表示順にソート（未分類は最後）
     const sortedChapters = Object.keys(chapters).sort((a, b) => {
         if (a === '未分類') return 1;
         if (b === '未分類') return -1;
+        // セクション表示順でソート
+        const orderA = chapters[a].order;
+        const orderB = chapters[b].order;
+        if (orderA !== orderB) return orderA - orderB;
+        // 表示順が同じ場合は名前順
         return a.localeCompare(b, 'ja');
     });
     
     let html = '';
     sortedChapters.forEach(chapterTitle => {
-        const posts = chapters[chapterTitle];
+        const posts = chapters[chapterTitle].posts;
         
         html += `
             <div class="chapter-section">

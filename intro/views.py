@@ -7,7 +7,7 @@ from django.core.paginator import Paginator
 from django.core.mail import send_mail
 from django.conf import settings
 from django.http import JsonResponse
-from .models import BlogPost, Category, SubCategory
+from .models import BlogPost, Category, SubCategory, Section
 from .cache_utils import cache_if_anonymous
 
 logger = logging.getLogger(__name__)
@@ -42,10 +42,11 @@ def blog(request):
     # ビュー切り替え用のデータを取得
     view_mode = request.GET.get('view', 'grid')
     
-    # ソート処理（章構成ビューの場合は章順）
+    # ソート処理（章構成ビューの場合はセクション順）
     sort = request.GET.get('sort', '-post_date')
     if view_mode == 'chapters':
-        posts = posts.order_by('chapter_number', 'chapter_order', 'post_date')
+        # セクションの表示順、セクション内順序、投稿日順
+        posts = posts.order_by('section__order', 'chapter_order', 'chapter_number', 'post_date')
     elif sort == 'oldest':
         posts = posts.order_by('post_date')
     elif sort == 'title':
@@ -62,14 +63,16 @@ def blog(request):
         # 章構成・マップビューはページネーションなし
         page_obj = posts
     
-    # カテゴリ情報を取得
+    # カテゴリ・セクション情報を取得
     categories = Category.objects.all().prefetch_related('subcategories')
+    sections = Section.objects.filter(is_active=True).order_by('order', 'name')
     old_categories = BlogPost.CATEGORY_CHOICES
     
     context = {
         'page_obj': page_obj,
         'all_posts': posts,  # 章構成・マップビュー用
         'categories': categories,
+        'sections': sections,  # アクティブなセクション一覧
         'old_categories': old_categories,
         'current_main_category': main_category_slug,
         'current_sub_category': sub_category_slug,

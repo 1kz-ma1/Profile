@@ -34,6 +34,30 @@ class SubCategory(models.Model):
     def __str__(self):
         return f"{self.category.name} - {self.name}"
 
+class Section(models.Model):
+    """章構成ビュー用のセクション"""
+    name = models.CharField(max_length=100, unique=True, verbose_name="セクション名", help_text="例: 資格、技術、プロジェクト、第1章など")
+    order = models.IntegerField(default=0, verbose_name="表示順", help_text="数値が小さいほど上に表示されます")
+    description = models.TextField(blank=True, verbose_name="説明", help_text="このセクションの説明（任意）")
+    icon = models.CharField(max_length=10, blank=True, verbose_name="アイコン", help_text="絵文字など（例: 📖, 💻, 🚀）")
+    is_active = models.BooleanField(default=True, verbose_name="有効", help_text="無効にすると章構成ビューに表示されません")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="作成日時")
+    updated_at = models.DateTimeField(auto_now=True, verbose_name="更新日時")
+    
+    class Meta:
+        verbose_name = "セクション"
+        verbose_name_plural = "セクション"
+        ordering = ['order', 'name']
+    
+    def __str__(self):
+        icon = f"{self.icon} " if self.icon else ""
+        return f"{icon}{self.name}"
+    
+    def get_post_count(self):
+        """このセクションの記事数を取得"""
+        return self.posts.filter(is_published=True).count()
+    get_post_count.short_description = "記事数"
+
 class BlogPost(models.Model):
     # 後方互換性のための旧カテゴリ選択肢（既存データ用）
     CATEGORY_CHOICES = [
@@ -58,9 +82,10 @@ class BlogPost(models.Model):
     sub_category = models.ForeignKey(SubCategory, on_delete=models.SET_NULL, null=True, blank=True, related_name='posts', verbose_name="サブカテゴリ")
     
     # ビュー切り替え用フィールド
-    chapter_title = models.CharField(max_length=100, blank=True, verbose_name="セクション名", help_text="章構成ビューでのグループ名（例: 資格、技術、第1章など）。未入力時は章番号から自動生成")
-    chapter_number = models.IntegerField(null=True, blank=True, verbose_name="章番号（旧）", help_text="セクション名が未設定の場合の表示順（例: 1=第1章）。セクション名を優先推奨")
-    chapter_order = models.IntegerField(null=True, blank=True, verbose_name="セクション内順序", help_text="同じセクション内での表示順序")
+    section = models.ForeignKey(Section, on_delete=models.SET_NULL, null=True, blank=True, related_name='posts', verbose_name="セクション", help_text="章構成ビューでのグループ（推奨）")
+    chapter_title = models.CharField(max_length=100, blank=True, verbose_name="セクション名（旧）", help_text="非推奨：代わりにセクション選択を使用してください")
+    chapter_number = models.IntegerField(null=True, blank=True, verbose_name="章番号（旧）", help_text="非推奨：代わりにセクション選択を使用してください")
+    chapter_order = models.IntegerField(null=True, blank=True, verbose_name="セクション内順序", help_text="同じセクション内での表示順序（数値が小さいほど上）")
     field_tags = models.CharField(max_length=200, blank=True, verbose_name="分野タグ", help_text="カンマ区切りで複数指定可能（例: Python,Django,Web開発）")
     related_posts = models.ManyToManyField('self', blank=True, symmetrical=True, verbose_name="関連記事", help_text="相関図ビューで関連を表示する記事")
     
@@ -101,8 +126,11 @@ class BlogPost(models.Model):
         return []
     
     def get_chapter_title(self):
-        """セクションタイトルを取得（カスタム名を優先）"""
-        # カスタムセクション名が設定されていればそれを使用
+        """セクションタイトルを取得（Sectionモデルを優先）"""
+        # Sectionモデルが設定されていればそれを使用（最優先）
+        if self.section:
+            return str(self.section)
+        # 旧カスタムセクション名が設定されていればそれを使用
         if self.chapter_title:
             return self.chapter_title
         # 章番号が設定されていれば「第○章」形式
@@ -113,7 +141,10 @@ class BlogPost(models.Model):
     
     def get_chapter_sort_key(self):
         """セクションのソートキーを取得"""
-        # カスタムタイトルがある場合はそれを使用
+        # Sectionモデルがある場合はその表示順を使用
+        if self.section:
+            return f"{self.section.order:05d}_{self.section.name}"
+        # 旧カスタムタイトルがある場合はそれを使用
         if self.chapter_title:
             return self.chapter_title
         # 章番号がある場合は数値でソート
