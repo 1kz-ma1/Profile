@@ -67,6 +67,7 @@ Write-Host "次のステップ:" -ForegroundColor Yellow
 Write-Host "1. 開発サーバーを起動: $pythonCmd manage.py runserver" -ForegroundColor White
 Write-Host "2. ブラウザでアクセス: http://localhost:8000/blog/" -ForegroundColor White
 Write-Host "3. 管理画面で記事を編集: http://localhost:8000/admin/" -ForegroundColor White
+Write-Host "   - セクション名（例: 資格、技術、プロジェクトなど）を自由に入力できます" -ForegroundColor Cyan
 Write-Host ""
 Write-Host "詳細は BLOG_VIEW_SWITCHER_GUIDE.md を参照してください" -ForegroundColor Gray
 Write-Host ""

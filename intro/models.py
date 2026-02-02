@@ -58,8 +58,9 @@ class BlogPost(models.Model):
     sub_category = models.ForeignKey(SubCategory, on_delete=models.SET_NULL, null=True, blank=True, related_name='posts', verbose_name="サブカテゴリ")
     
     # ビュー切り替え用フィールド
-    chapter_number = models.IntegerField(null=True, blank=True, verbose_name="章番号", help_text="章構成ビューでの表示順（例: 1=第1章）")
-    chapter_order = models.IntegerField(null=True, blank=True, verbose_name="章内順序", help_text="同じ章内での表示順序")
+    chapter_title = models.CharField(max_length=100, blank=True, verbose_name="セクション名", help_text="章構成ビューでのグループ名（例: 資格、技術、第1章など）。未入力時は章番号から自動生成")
+    chapter_number = models.IntegerField(null=True, blank=True, verbose_name="章番号（旧）", help_text="セクション名が未設定の場合の表示順（例: 1=第1章）。セクション名を優先推奨")
+    chapter_order = models.IntegerField(null=True, blank=True, verbose_name="セクション内順序", help_text="同じセクション内での表示順序")
     field_tags = models.CharField(max_length=200, blank=True, verbose_name="分野タグ", help_text="カンマ区切りで複数指定可能（例: Python,Django,Web開発）")
     related_posts = models.ManyToManyField('self', blank=True, symmetrical=True, verbose_name="関連記事", help_text="相関図ビューで関連を表示する記事")
     
@@ -100,7 +101,23 @@ class BlogPost(models.Model):
         return []
     
     def get_chapter_title(self):
-        """章タイトルを取得"""
+        """セクションタイトルを取得（カスタム名を優先）"""
+        # カスタムセクション名が設定されていればそれを使用
+        if self.chapter_title:
+            return self.chapter_title
+        # 章番号が設定されていれば「第○章」形式
         if self.chapter_number:
             return f"第{self.chapter_number}章"
+        # どちらも未設定の場合
         return "未分類"
+    
+    def get_chapter_sort_key(self):
+        """セクションのソートキーを取得"""
+        # カスタムタイトルがある場合はそれを使用
+        if self.chapter_title:
+            return self.chapter_title
+        # 章番号がある場合は数値でソート
+        if self.chapter_number:
+            return f"chapter_{self.chapter_number:05d}"
+        # 未分類は最後
+        return "zzz_未分類"

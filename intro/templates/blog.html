@@ -483,6 +483,7 @@ const blogPosts = [
         url: "{% url 'intro:blog_detail' post.pk %}",
         category: "{{ post.get_category_display_name|escapejs }}",
         date: "{{ post.post_date|date:'Y/m/d' }}",
+        chapterTitle: "{{ post.get_chapter_title|escapejs }}",
         chapter: {{ post.chapter_number|default:'null' }},
         chapterOrder: {{ post.chapter_order|default:'null' }},
         fieldTags: "{{ post.field_tags|escapejs }}".split(',').map(t => t.trim()).filter(t => t),
@@ -582,23 +583,26 @@ function switchView(view, updateHistory = true) {
 function renderChaptersView() {
     const container = document.getElementById('chapters-view');
     
-    // 章番号でグループ化
+    // セクション名でグループ化（chapterTitleを使用）
     const chapters = {};
     blogPosts.forEach(post => {
-        const chapter = post.chapter || 0;
-        if (!chapters[chapter]) {
-            chapters[chapter] = [];
+        const chapterKey = post.chapterTitle || '未分類';
+        if (!chapters[chapterKey]) {
+            chapters[chapterKey] = [];
         }
-        chapters[chapter].push(post);
+        chapters[chapterKey].push(post);
     });
     
-    // 章順にソート
-    const sortedChapters = Object.keys(chapters).sort((a, b) => parseInt(a) - parseInt(b));
+    // セクション名順にソート（未分類は最後）
+    const sortedChapters = Object.keys(chapters).sort((a, b) => {
+        if (a === '未分類') return 1;
+        if (b === '未分類') return -1;
+        return a.localeCompare(b, 'ja');
+    });
     
     let html = '';
-    sortedChapters.forEach(chapterNum => {
-        const posts = chapters[chapterNum];
-        const chapterTitle = chapterNum == 0 ? '未分類' : `第${chapterNum}章`;
+    sortedChapters.forEach(chapterTitle => {
+        const posts = chapters[chapterTitle];
         
         html += `
             <div class="chapter-section">
@@ -609,7 +613,7 @@ function renderChaptersView() {
                 <div class="chapter-posts">
         `;
         
-        // 章内順序でソート
+        // セクション内順序でソート
         posts.sort((a, b) => (a.chapterOrder || 999) - (b.chapterOrder || 999));
         
         posts.forEach((post, index) => {

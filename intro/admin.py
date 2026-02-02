@@ -45,9 +45,9 @@ class BlogPostAdmin(admin.ModelAdmin):
             'description': '新しいカテゴリシステム（main_category/sub_category）を使用してください。旧categoryフィールドは後方互換性のために残されています。'
         }),
         ('ビュー切り替え用設定', {
-            'fields': ('chapter_number', 'chapter_order', 'field_tags', 'related_posts'),
+            'fields': ('chapter_title', 'chapter_number', 'chapter_order', 'field_tags', 'related_posts'),
             'classes': ('collapse',),
-            'description': '章構成ビューと相関図ビューで使用する設定です。'
+            'description': '章構成ビューと相関図ビューで使用する設定です。セクション名を自由に入力できます（例: 資格、技術、プロジェクトなど）。'
         }),
         ('内容', {
             'fields': ('excerpt', 'content', 'image')
