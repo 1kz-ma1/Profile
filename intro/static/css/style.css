@@ -344,15 +344,16 @@ footer, .footer {
     #menubar {
         position: fixed;
         top: 0;
-        right: -100%;
-        width: 100vw;
-        max-width: none;
+        left: 0;
+        right: 0;
+        width: 100%;
         background: #1a1a1a;
         color: #fff;
         height: 100vh;
         height: 100dvh;
         padding: 100px 40px 40px;
-        transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        transform: translateX(100%);
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         z-index: 5000;
         overflow-y: auto;
         overflow-x: hidden;
@@ -368,7 +369,7 @@ footer, .footer {
     
     /* open 時 */
     #menubar.display-block {
-        right: 0;
+        transform: translateX(0);
     }
     #menubar.display-none { display: none; }
     /* ハンバーガーを表示 */
