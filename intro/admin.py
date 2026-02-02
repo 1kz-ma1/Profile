@@ -44,6 +44,11 @@ class BlogPostAdmin(admin.ModelAdmin):
             'fields': ('main_category', 'sub_category', 'category'),
             'description': '新しいカテゴリシステム（main_category/sub_category）を使用してください。旧categoryフィールドは後方互換性のために残されています。'
         }),
+        ('ビュー切り替え用設定', {
+            'fields': ('chapter_number', 'chapter_order', 'field_tags', 'related_posts'),
+            'classes': ('collapse',),
+            'description': '章構成ビューと相関図ビューで使用する設定です。'
+        }),
         ('内容', {
             'fields': ('excerpt', 'content', 'image')
         }),
@@ -55,6 +60,8 @@ class BlogPostAdmin(admin.ModelAdmin):
             'classes': ('collapse',)
         }),
     )
+    
+    filter_horizontal = ('related_posts',)
     
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         """サブカテゴリをメインカテゴリでフィルタリング"""

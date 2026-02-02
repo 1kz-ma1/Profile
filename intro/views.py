@@ -22,7 +22,7 @@ def about(request):
 
 def blog(request):
     # フィルター処理
-    posts = BlogPost.objects.filter(is_published=True)
+    posts = BlogPost.objects.filter(is_published=True).prefetch_related('related_posts')
     
     # メインカテゴリフィルター
     main_category_slug = request.GET.get('main_category')
@@ -39,19 +39,28 @@ def blog(request):
     if category and not main_category_slug:
         posts = posts.filter(category=category)
     
-    # ソート処理
+    # ビュー切り替え用のデータを取得
+    view_mode = request.GET.get('view', 'grid')
+    
+    # ソート処理（章構成ビューの場合は章順）
     sort = request.GET.get('sort', '-post_date')
-    if sort == 'oldest':
+    if view_mode == 'chapters':
+        posts = posts.order_by('chapter_number', 'chapter_order', 'post_date')
+    elif sort == 'oldest':
         posts = posts.order_by('post_date')
     elif sort == 'title':
         posts = posts.order_by('title')
     else:  # newest (default)
         posts = posts.order_by('-post_date')
     
-    # ページネーション（1ページに9件）
-    paginator = Paginator(posts, 9)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
+    # ページネーション（1ページに9件）- グリッドビューのみ
+    if view_mode == 'grid':
+        paginator = Paginator(posts, 9)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+    else:
+        # 章構成・マップビューはページネーションなし
+        page_obj = posts
     
     # カテゴリ情報を取得
     categories = Category.objects.all().prefetch_related('subcategories')
@@ -59,12 +68,14 @@ def blog(request):
     
     context = {
         'page_obj': page_obj,
+        'all_posts': posts,  # 章構成・マップビュー用
         'categories': categories,
         'old_categories': old_categories,
         'current_main_category': main_category_slug,
         'current_sub_category': sub_category_slug,
         'current_category': category,
         'current_sort': sort,
+        'view_mode': view_mode,
     }
     
     return render(request, "blog.html", context)

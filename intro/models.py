@@ -56,6 +56,13 @@ class BlogPost(models.Model):
     # 新カテゴリシステム
     main_category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True, related_name='posts', verbose_name="メインカテゴリ")
     sub_category = models.ForeignKey(SubCategory, on_delete=models.SET_NULL, null=True, blank=True, related_name='posts', verbose_name="サブカテゴリ")
+    
+    # ビュー切り替え用フィールド
+    chapter_number = models.IntegerField(null=True, blank=True, verbose_name="章番号", help_text="章構成ビューでの表示順（例: 1=第1章）")
+    chapter_order = models.IntegerField(null=True, blank=True, verbose_name="章内順序", help_text="同じ章内での表示順序")
+    field_tags = models.CharField(max_length=200, blank=True, verbose_name="分野タグ", help_text="カンマ区切りで複数指定可能（例: Python,Django,Web開発）")
+    related_posts = models.ManyToManyField('self', blank=True, symmetrical=True, verbose_name="関連記事", help_text="相関図ビューで関連を表示する記事")
+    
     image = models.CharField(max_length=255, blank=True, default='', verbose_name="画像パス", help_text="staticfiles/img/ 内のファイル名を指定（例: blog-header.jpg）")
     likes_count = models.IntegerField(default=0, verbose_name="良いね数")
     post_date = models.DateTimeField(default=timezone.now, verbose_name="投稿日時")
@@ -85,3 +92,15 @@ class BlogPost(models.Model):
         if self.image:
             return f"/static/img/{self.image}"
         return None
+    
+    def get_field_tags_list(self):
+        """分野タグをリストで取得"""
+        if self.field_tags:
+            return [tag.strip() for tag in self.field_tags.split(',') if tag.strip()]
+        return []
+    
+    def get_chapter_title(self):
+        """章タイトルを取得"""
+        if self.chapter_number:
+            return f"第{self.chapter_number}章"
+        return "未分類"
