@@ -87,6 +87,29 @@
             font-size: 4rem;
             position: relative;
             overflow: hidden;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .portfolio-thumbnail.has-image {
+            background: none;
+        }
+        
+        .portfolio-thumbnail.has-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.4) 100%);
+        }
+        
+        .portfolio-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
         }
         
         .portfolio-thumbnail::before {
@@ -169,7 +192,7 @@
             }
             
             .portfolio-thumbnail {
-                height: 180px;
+                height: 200px;
                 font-size: 3rem;
             }
         }
@@ -185,8 +208,8 @@
     <div class="portfolio-grid">
         <!-- DX AIモデル -->
         <article class="portfolio-card">
-            <div class="portfolio-thumbnail">
-                <span aria-hidden="true">🤖</span>
+            <div class="portfolio-thumbnail has-image">
+                <img src="{% static 'img/100年後の東京.jpg' %}" alt="100年後の東京 - DX AI Model">
             </div>
             <div class="portfolio-content">
                 <h3 class="portfolio-title">DX AI Model</h3>
