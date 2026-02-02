@@ -384,7 +384,18 @@ footer, .footer {
 @media (min-width: 900px) {
     /* デスクトップではハンバーガー非表示、ナビを中央表示 */
     #menubar_hdr { display: none !important; }
-    #menubar { display: block !important; position: static; background: transparent; height: auto; padding-top: 0; }
+    #menubar { 
+        display: block !important; 
+        position: static; 
+        background: transparent; 
+        height: auto; 
+        padding-top: 0;
+        transform: none !important;
+        width: auto !important;
+        left: auto !important;
+        right: auto !important;
+        overflow: visible !important;
+    }
     #menubar.display-none { display: block !important; }
     #menubar.display-block { display: block !important; }
 }
