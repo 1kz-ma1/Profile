@@ -23,19 +23,20 @@
 {% block header %}
 <header class="about-hero-header" style="background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)), url('{% static 'img/きれいな銀河.jpg' %}') center/cover no-repeat; padding: 80px 20px 60px; position: relative; min-height: 500px; display: flex; align-items: center; justify-content: center;">
     
-    <!-- プロフィール画像（左上） -->
-    <div class="profile-img" role="img" aria-label="木下和磨のプロフィール写真" style="position: absolute; left: 30px; top: 30px; width: 100px; height: 100px; background-image: url('{% static 'img/profile.jpg' %}'); background-size: cover; background-position: center; border-radius: 50%; border: 3px solid rgba(255, 255, 255, 0.4); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6); z-index: 10;"></div>
-    
     <div style="max-width: 1200px; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;">
         
         <!-- 左側：メイン情報 -->
-        <div style="text-align: left; padding: 30px; background: rgba(0, 0, 0, 0.4); border-radius: 20px; backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1);">
+        <div style="text-align: left; padding: 30px; background: rgba(0, 0, 0, 0.4); border-radius: 20px; backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); position: relative;">
+            
+            <!-- プロフィール画像（カード右上） -->
+            <div class="profile-img" role="img" aria-label="木下和磨のプロフィール写真" style="position: absolute; right: 20px; top: 20px; width: 80px; height: 80px; background-image: url('{% static 'img/profile.jpg' %}'); background-size: cover; background-position: center; border-radius: 50%; border: 3px solid rgba(100, 255, 218, 0.6); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6); z-index: 10;"></div>
+            
             <p style="font-size: clamp(0.9rem, 1.2vw, 1.1rem); color: #64ffda; font-weight: 600; letter-spacing: 0.1em; margin-bottom: 15px;">■ PROFILE</p>
             <h1 style="font-size: clamp(2.2rem, 3.5vw, 3.8rem); margin-bottom: 15px; font-weight: 700; color: #ffffff; line-height: 1.2;">木下 和磨</h1>
             <p style="font-size: clamp(1rem, 1.5vw, 1.3rem); color: #ccd6f6; margin-bottom: 25px; font-weight: 400; line-height: 1.6;">～技術と戦略で未来をデザインする～</p>
             
             <div style="margin: 25px 0; padding: 20px; background: rgba(100, 255, 218, 0.05); border-left: 3px solid #64ffda; border-radius: 8px;">
-                <p style="font-size: clamp(0.95rem, 1.3vw, 1.2rem); color: #e8e8e8; margin: 8px 0; line-height: 1.8;">🎓 東京都立川情報ITクリエイター専門学校</p>
+                <p style="font-size: clamp(0.95rem, 1.3vw, 1.2rem); color: #e8e8e8; margin: 8px 0; line-height: 1.8;">🎓 <a href="https://www.o-hara.ac.jp/senmon/school/tachikawa_it/" target="_blank" rel="noopener noreferrer" style="color: #64ffda; text-decoration: none; border-bottom: 1px solid transparent; transition: border-bottom 0.3s ease;" onmouseover="this.style.borderBottom='1px solid #64ffda';" onmouseout="this.style.borderBottom='1px solid transparent';">東京都立川情報ITクリエイター専門学校</a></p>
                 <p style="font-size: clamp(0.95rem, 1.3vw, 1.2rem); color: #a8b2d1; margin: 8px 0;">📅 2027年卒業予定（現在2年生）</p>
             </div>
             
@@ -115,7 +116,305 @@
     <!--メインコンテンツ-->
 
 {% block contents %}
-<div class="about-main-contents">
+<div style="background: #0a0e27; padding: 60px 20px;">
+    <div style="max-width: 1200px; margin: 0 auto;">
+        
+        <!-- はじめに＋ビジョン統合セクション -->
+        <section style="margin-bottom: 80px;">
+            <div style="text-align: center; margin-bottom: 40px;">
+                <h2 style="font-size: clamp(1.8rem, 2.8vw, 2.5rem); color: #64ffda; font-weight: 600; margin-bottom: 15px;">About Me</h2>
+                <p style="color: #8892b0; font-size: clamp(0.95rem, 1.2vw, 1.1rem);">技術と戦略で課題を解決する</p>
+            </div>
+            
+            <div style="background: rgba(17, 34, 64, 0.4); padding: 40px; border-radius: 20px; border: 1px solid rgba(100, 255, 218, 0.2); backdrop-filter: blur(10px);">
+                <p style="color: #ccd6f6; font-size: clamp(1rem, 1.3vw, 1.2rem); line-height: 2; margin-bottom: 25px; text-align: center;">
+                    改めて、木下和磨のポートフォリオサイトをご覧いただきありがとうございます。<br>
+                    ひとつひとつの作品に込めた理想を現実にすることを大切にし、<br>
+                    学び続ける姿勢と妥協を許さない精神で取り組んでいます。
+                </p>
+                
+                <div style="border-top: 2px solid rgba(100, 255, 218, 0.2); padding-top: 25px; margin-top: 25px;">
+                    <p style="color: #64ffda; font-size: clamp(0.95rem, 1.2vw, 1.1rem); font-weight: 600; margin-bottom: 15px; text-align: center;">🎯 目指す姿</p>
+                    <p style="color: #a8b2d1; font-size: clamp(0.95rem, 1.2vw, 1.1rem); line-height: 1.9; text-align: center;">
+                        DX × AI を用いて、仕組みそのものを見直し、課題を根本から解決できるエンジニアを目指しています。<br>
+                        開発だけでなく、現場の声や業務の全体像を理解し、改善の方向性を形にしていける立場にも挑戦したいと考えています。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 実績ハイライト -->
+        <section style="margin-bottom: 80px;">
+            <div style="text-align: center; margin-bottom: 40px;">
+                <h2 style="font-size: clamp(1.8rem, 2.8vw, 2.5rem); color: #64ffda; font-weight: 600; margin-bottom: 15px;">Achievements</h2>
+                <p style="color: #8892b0; font-size: clamp(0.95rem, 1.2vw, 1.1rem);">主な実績とハイライト</p>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                <!-- Paiza Sランク -->
+                <div style="background: linear-gradient(135deg, rgba(100, 255, 218, 0.1), rgba(100, 255, 218, 0.05)); padding: 30px; border-radius: 15px; border: 2px solid #64ffda; text-align: center;">
+                    <div style="font-size: 3rem; margin-bottom: 15px;">🏅</div>
+                    <h3 style="color: #64ffda; font-size: clamp(1.3rem, 1.8vw, 1.6rem); margin-bottom: 12px; font-weight: 600;">Paiza Sランク</h3>
+                    <p style="color: #ccd6f6; font-size: clamp(0.9rem, 1.1vw, 1rem); line-height: 1.7;">スキルチェックで最高難度のSランクを取得</p>
+                </div>
+                
+                <!-- 全国3位 -->
+                <div style="background: linear-gradient(135deg, rgba(100, 255, 218, 0.1), rgba(100, 255, 218, 0.05)); padding: 30px; border-radius: 15px; border: 2px solid #64ffda; text-align: center;">
+                    <div style="font-size: 3rem; margin-bottom: 15px;">🥉</div>
+                    <h3 style="color: #64ffda; font-size: clamp(1.3rem, 1.8vw, 1.6rem); margin-bottom: 12px; font-weight: 600;">全国3位</h3>
+                    <p style="color: #ccd6f6; font-size: clamp(0.9rem, 1.1vw, 1rem); line-height: 1.7;">大原学園の情報コース全体で3位の成績を達成</p>
+                </div>
+                
+                <!-- Microsoft ハッカソン -->
+                <div style="background: linear-gradient(135deg, rgba(100, 255, 218, 0.1), rgba(100, 255, 218, 0.05)); padding: 30px; border-radius: 15px; border: 2px solid #64ffda; text-align: center;">
+                    <div style="font-size: 3rem; margin-bottom: 15px;">💡</div>
+                    <h3 style="color: #64ffda; font-size: clamp(1.3rem, 1.8vw, 1.6rem); margin-bottom: 12px; font-weight: 600;">Microsoft参加</h3>
+                    <p style="color: #ccd6f6; font-size: clamp(0.9rem, 1.1vw, 1rem); line-height: 1.7;">ハッカソン in Microsoft社に参加（2024年8月）</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 主要プロジェクト -->
+        <section style="margin-bottom: 80px;">
+            <div style="text-align: center; margin-bottom: 40px;">
+                <h2 style="font-size: clamp(1.8rem, 2.8vw, 2.5rem); color: #64ffda; font-weight: 600; margin-bottom: 15px;">Key Projects</h2>
+                <p style="color: #8892b0; font-size: clamp(0.95rem, 1.2vw, 1.1rem);">代表的な制作物</p>
+            </div>
+            
+            <div style="display: grid; gap: 30px;">
+                <!-- DX×AIモデル（100年後の東京） -->
+                <div style="background: rgba(17, 34, 64, 0.4); padding: 35px; border-radius: 15px; border: 1px solid rgba(100, 255, 218, 0.3); backdrop-filter: blur(10px); display: grid; grid-template-columns: auto 1fr; gap: 25px; align-items: start;">
+                    <div style="font-size: 2.5rem;">🌆</div>
+                    <div>
+                        <h3 style="color: #64ffda; font-size: clamp(1.2rem, 1.6vw, 1.5rem); margin-bottom: 12px; font-weight: 600;">DX×AIモデル - 100年後の東京</h3>
+                        <p style="color: #8892b0; font-size: clamp(0.85rem, 1.1vw, 0.95rem); margin-bottom: 15px;">2025年10月 ～ 2026年</p>
+                        <p style="color: #ccd6f6; font-size: clamp(0.95rem, 1.2vw, 1.05rem); line-height: 1.8; margin-bottom: 15px;">
+                            PythonとDjango、AI技術を組み合わせた自動生成型RPGを開発。<br>
+                            非同期処理（Celery）や画像生成API統合を実装し、リアルタイムでコンテンツを生成。
+                        </p>
+                        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                            <span style="padding: 6px 14px; background: rgba(100, 255, 218, 0.15); border-radius: 15px; color: #64ffda; font-size: 0.85rem;">Python</span>
+                            <span style="padding: 6px 14px; background: rgba(100, 255, 218, 0.15); border-radius: 15px; color: #64ffda; font-size: 0.85rem;">Django</span>
+                            <span style="padding: 6px 14px; background: rgba(100, 255, 218, 0.15); border-radius: 15px; color: #64ffda; font-size: 0.85rem;">Celery</span>
+                            <span style="padding: 6px 14px; background: rgba(100, 255, 218, 0.15); border-radius: 15px; color: #64ffda; font-size: 0.85rem;">AI/ML</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- ブログWebサイト -->
+                <div style="background: rgba(17, 34, 64, 0.4); padding: 35px; border-radius: 15px; border: 1px solid rgba(100, 255, 218, 0.3); backdrop-filter: blur(10px); display: grid; grid-template-columns: auto 1fr; gap: 25px; align-items: start;">
+                    <div style="font-size: 2.5rem;">📝</div>
+                    <div>
+                        <h3 style="color: #64ffda; font-size: clamp(1.2rem, 1.6vw, 1.5rem); margin-bottom: 12px; font-weight: 600;">ポートフォリオ＆ブログサイト</h3>
+                        <p style="color: #8892b0; font-size: clamp(0.85rem, 1.1vw, 0.95rem); margin-bottom: 15px;">2025年10月</p>
+                        <p style="color: #ccd6f6; font-size: clamp(0.95rem, 1.2vw, 1.05rem); line-height: 1.8; margin-bottom: 15px;">
+                            Django フレームワークを使用したブログ機能付きポートフォリオサイト。<br>
+                            認証、CRUD操作、管理画面、レスポンシブデザインを実装。
+                        </p>
+                        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                            <span style="padding: 6px 14px; background: rgba(100, 255, 218, 0.15); border-radius: 15px; color: #64ffda; font-size: 0.85rem;">Django</span>
+                            <span style="padding: 6px 14px; background: rgba(100, 255, 218, 0.15); border-radius: 15px; color: #64ffda; font-size: 0.85rem;">PostgreSQL</span>
+                            <span style="padding: 6px 14px; background: rgba(100, 255, 218, 0.15); border-radius: 15px; color: #64ffda; font-size: 0.85rem;">HTML/CSS/JS</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- ショッピングサイトモデル -->
+                <div style="background: rgba(17, 34, 64, 0.4); padding: 35px; border-radius: 15px; border: 1px solid rgba(100, 255, 218, 0.3); backdrop-filter: blur(10px); display: grid; grid-template-columns: auto 1fr; gap: 25px; align-items: start;">
+                    <div style="font-size: 2.5rem;">🛒</div>
+                    <div>
+                        <h3 style="color: #64ffda; font-size: clamp(1.2rem, 1.6vw, 1.5rem); margin-bottom: 12px; font-weight: 600;">ショッピングサイトモデル</h3>
+                        <p style="color: #8892b0; font-size: clamp(0.85rem, 1.1vw, 0.95rem); margin-bottom: 15px;">2025年9月</p>
+                        <p style="color: #ccd6f6; font-size: clamp(0.95rem, 1.2vw, 1.05rem); line-height: 1.8; margin-bottom: 15px;">
+                            PythonとSQLiteを使用したECサイトのプロトタイプ。<br>
+                            商品管理、カート機能、データベース設計・最適化を実装。
+                        </p>
+                        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                            <span style="padding: 6px 14px; background: rgba(100, 255, 218, 0.15); border-radius: 15px; color: #64ffda; font-size: 0.85rem;">Python</span>
+                            <span style="padding: 6px 14px; background: rgba(100, 255, 218, 0.15); border-radius: 15px; color: #64ffda; font-size: 0.85rem;">SQLite</span>
+                            <span style="padding: 6px 14px; background: rgba(100, 255, 218, 0.15); border-radius: 15px; color: #64ffda; font-size: 0.85rem;">DB設計</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- コマンド型RPG2 -->
+                <div style="background: rgba(17, 34, 64, 0.4); padding: 35px; border-radius: 15px; border: 1px solid rgba(100, 255, 218, 0.3); backdrop-filter: blur(10px); display: grid; grid-template-columns: auto 1fr; gap: 25px; align-items: start;">
+                    <div style="font-size: 2.5rem;">⚔️</div>
+                    <div>
+                        <h3 style="color: #64ffda; font-size: clamp(1.2rem, 1.6vw, 1.5rem); margin-bottom: 12px; font-weight: 600;">コマンド型RPG 2</h3>
+                        <p style="color: #8892b0; font-size: clamp(0.85rem, 1.1vw, 0.95rem); margin-bottom: 15px;">2025年7月</p>
+                        <p style="color: #ccd6f6; font-size: clamp(0.95rem, 1.2vw, 1.05rem); line-height: 1.8; margin-bottom: 15px;">
+                            Pythonで開発したターン制RPG。前作から大幅に機能拡張し、<br>
+                            戦闘システム、キャラクター成長、アイテム管理を実装。
+                        </p>
+                        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                            <span style="padding: 6px 14px; background: rgba(100, 255, 218, 0.15); border-radius: 15px; color: #64ffda; font-size: 0.85rem;">Python</span>
+                            <span style="padding: 6px 14px; background: rgba(100, 255, 218, 0.15); border-radius: 15px; color: #64ffda; font-size: 0.85rem;">ゲーム開発</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- キャリアタイムライン -->
+        <section style="margin-bottom: 80px;">
+            <div style="text-align: center; margin-bottom: 40px;">
+                <h2 style="font-size: clamp(1.8rem, 2.8vw, 2.5rem); color: #64ffda; font-weight: 600; margin-bottom: 15px;">Timeline</h2>
+                <p style="color: #8892b0; font-size: clamp(0.95rem, 1.2vw, 1.1rem);">学歴・経歴</p>
+            </div>
+            
+            <div style="position: relative; padding-left: 40px;">
+                <!-- タイムライン縦線 -->
+                <div style="position: absolute; left: 15px; top: 0; bottom: 0; width: 3px; background: linear-gradient(180deg, #64ffda 0%, rgba(100, 255, 218, 0.3) 100%);"></div>
+                
+                <!-- 2022年 - 高校入学 -->
+                <div style="position: relative; margin-bottom: 40px;">
+                    <div style="position: absolute; left: -33px; top: 5px; width: 16px; height: 16px; background: #64ffda; border-radius: 50%; border: 3px solid #0a0e27;"></div>
+                    <div style="background: rgba(17, 34, 64, 0.4); padding: 25px; border-radius: 12px; border: 1px solid rgba(100, 255, 218, 0.2);">
+                        <p style="color: #64ffda; font-size: clamp(0.9rem, 1.1vw, 1rem); font-weight: 600; margin-bottom: 8px;">2022年4月</p>
+                        <h4 style="color: #ccd6f6; font-size: clamp(1.1rem, 1.4vw, 1.3rem); margin-bottom: 8px;">都立日野高校 普通科 入学</h4>
+                    </div>
+                </div>
+                
+                <!-- 2024年 - RPG制作 -->
+                <div style="position: relative; margin-bottom: 40px;">
+                    <div style="position: absolute; left: -33px; top: 5px; width: 16px; height: 16px; background: #64ffda; border-radius: 50%; border: 3px solid #0a0e27;"></div>
+                    <div style="background: rgba(17, 34, 64, 0.4); padding: 25px; border-radius: 12px; border: 1px solid rgba(100, 255, 218, 0.2);">
+                        <p style="color: #64ffda; font-size: clamp(0.9rem, 1.1vw, 1rem); font-weight: 600; margin-bottom: 8px;">2024年8月</p>
+                        <h4 style="color: #ccd6f6; font-size: clamp(1.1rem, 1.4vw, 1.3rem); margin-bottom: 8px;">初のPythonプロジェクト</h4>
+                        <p style="color: #8892b0; font-size: clamp(0.9rem, 1.1vw, 1rem);">「コマンド型RPG」制作 / Microsoft社ハッカソン参加</p>
+                    </div>
+                </div>
+                
+                <!-- 2025年3月 - ITパスポート -->
+                <div style="position: relative; margin-bottom: 40px;">
+                    <div style="position: absolute; left: -33px; top: 5px; width: 16px; height: 16px; background: #64ffda; border-radius: 50%; border: 3px solid #0a0e27;"></div>
+                    <div style="background: rgba(17, 34, 64, 0.4); padding: 25px; border-radius: 12px; border: 1px solid rgba(100, 255, 218, 0.2);">
+                        <p style="color: #64ffda; font-size: clamp(0.9rem, 1.1vw, 1rem); font-weight: 600; margin-bottom: 8px;">2025年3月</p>
+                        <h4 style="color: #ccd6f6; font-size: clamp(1.1rem, 1.4vw, 1.3rem); margin-bottom: 8px;">ITパスポート取得 / 高校卒業</h4>
+                    </div>
+                </div>
+                
+                <!-- 2025年4月 - 専門学校入学 -->
+                <div style="position: relative; margin-bottom: 40px;">
+                    <div style="position: absolute; left: -33px; top: 5px; width: 16px; height: 16px; background: #64ffda; border-radius: 50%; border: 3px solid #0a0e27;"></div>
+                    <div style="background: rgba(17, 34, 64, 0.4); padding: 25px; border-radius: 12px; border: 1px solid rgba(100, 255, 218, 0.2);">
+                        <p style="color: #64ffda; font-size: clamp(0.9rem, 1.1vw, 1rem); font-weight: 600; margin-bottom: 8px;">2025年4月</p>
+                        <h4 style="color: #ccd6f6; font-size: clamp(1.1rem, 1.4vw, 1.3rem); margin-bottom: 8px;">東京都立川情報ITクリエイター専門学校 入学</h4>
+                    </div>
+                </div>
+                
+                <!-- 2025年10月～ - Django開発 -->
+                <div style="position: relative; margin-bottom: 40px;">
+                    <div style="position: absolute; left: -33px; top: 5px; width: 16px; height: 16px; background: #64ffda; border-radius: 50%; border: 3px solid #0a0e27;"></div>
+                    <div style="background: rgba(17, 34, 64, 0.4); padding: 25px; border-radius: 12px; border: 1px solid rgba(100, 255, 218, 0.2);">
+                        <p style="color: #64ffda; font-size: clamp(0.9rem, 1.1vw, 1rem); font-weight: 600; margin-bottom: 8px;">2025年10月 ～</p>
+                        <h4 style="color: #ccd6f6; font-size: clamp(1.1rem, 1.4vw, 1.3rem); margin-bottom: 8px;">Webアプリ開発・AI統合</h4>
+                        <p style="color: #8892b0; font-size: clamp(0.9rem, 1.1vw, 1rem);">ブログサイト制作 / DX×AIモデル開発開始</p>
+                    </div>
+                </div>
+                
+                <!-- 2025年11月 - 基本情報技術者 -->
+                <div style="position: relative; margin-bottom: 40px;">
+                    <div style="position: absolute; left: -33px; top: 5px; width: 16px; height: 16px; background: #64ffda; border-radius: 50%; border: 3px solid #0a0e27;"></div>
+                    <div style="background: rgba(17, 34, 64, 0.4); padding: 25px; border-radius: 12px; border: 1px solid rgba(100, 255, 218, 0.2);">
+                        <p style="color: #64ffda; font-size: clamp(0.9rem, 1.1vw, 1rem); font-weight: 600; margin-bottom: 8px;">2025年11月</p>
+                        <h4 style="color: #ccd6f6; font-size: clamp(1.1rem, 1.4vw, 1.3rem); margin-bottom: 8px;">基本情報技術者試験 合格</h4>
+                        <p style="color: #8892b0; font-size: clamp(0.9rem, 1.1vw, 1rem);">Paiza Sランク取得 / 大原学園全国3位達成</p>
+                    </div>
+                </div>
+                
+                <!-- 現在 -->
+                <div style="position: relative;">
+                    <div style="position: absolute; left: -33px; top: 5px; width: 16px; height: 16px; background: #64ffda; border-radius: 50%; border: 3px solid #0a0e27; animation: pulse 2s infinite;"></div>
+                    <div style="background: linear-gradient(135deg, rgba(100, 255, 218, 0.15), rgba(100, 255, 218, 0.05)); padding: 25px; border-radius: 12px; border: 2px solid #64ffda;">
+                        <p style="color: #64ffda; font-size: clamp(0.9rem, 1.1vw, 1rem); font-weight: 600; margin-bottom: 8px;">2026年 現在</p>
+                        <h4 style="color: #ccd6f6; font-size: clamp(1.1rem, 1.4vw, 1.3rem); margin-bottom: 8px;">専門学校2年生</h4>
+                        <p style="color: #8892b0; font-size: clamp(0.9rem, 1.1vw, 1rem);">就職活動中 / さらなる技術習得に励む</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- スキル詳細（簡略版） -->
+        <section style="margin-bottom: 60px;">
+            <div style="text-align: center; margin-bottom: 40px;">
+                <h2 style="font-size: clamp(1.8rem, 2.8vw, 2.5rem); color: #64ffda; font-weight: 600; margin-bottom: 15px;">Technical Skills</h2>
+                <p style="color: #8892b0; font-size: clamp(0.95rem, 1.2vw, 1.1rem);">技術スタック詳細</p>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px;">
+                <!-- Python/Django -->
+                <div style="background: rgba(17, 34, 64, 0.4); padding: 25px; border-radius: 12px; border: 1px solid rgba(100, 255, 218, 0.2);">
+                    <h4 style="color: #64ffda; font-size: clamp(1.1rem, 1.3vw, 1.2rem); margin-bottom: 15px; font-weight: 600;">🐍 Python / Django</h4>
+                    <ul style="color: #a8b2d1; font-size: clamp(0.9rem, 1.1vw, 1rem); line-height: 1.9; padding-left: 20px;">
+                        <li>Webアプリ開発・API構築</li>
+                        <li>非同期処理（Celery）</li>
+                        <li>認証・CRUD・管理画面実装</li>
+                    </ul>
+                </div>
+                
+                <!-- インフラ/運用 -->
+                <div style="background: rgba(17, 34, 64, 0.4); padding: 25px; border-radius: 12px; border: 1px solid rgba(100, 255, 218, 0.2);">
+                    <h4 style="color: #64ffda; font-size: clamp(1.1rem, 1.3vw, 1.2rem); margin-bottom: 15px; font-weight: 600;">☁️ インフラ / 運用</h4>
+                    <ul style="color: #a8b2d1; font-size: clamp(0.9rem, 1.1vw, 1rem); line-height: 1.9; padding-left: 20px;">
+                        <li>Docker（Django + Daphne + Celery + Redis）</li>
+                        <li>Railwayへのデプロイ</li>
+                        <li>静的/メディアファイル運用</li>
+                    </ul>
+                </div>
+                
+                <!-- データベース -->
+                <div style="background: rgba(17, 34, 64, 0.4); padding: 25px; border-radius: 12px; border: 1px solid rgba(100, 255, 218, 0.2);">
+                    <h4 style="color: #64ffda; font-size: clamp(1.1rem, 1.3vw, 1.2rem); margin-bottom: 15px; font-weight: 600;">🗄️ データベース</h4>
+                    <ul style="color: #a8b2d1; font-size: clamp(0.9rem, 1.1vw, 1rem); line-height: 1.9; padding-left: 20px;">
+                        <li>PostgreSQL / SQLite</li>
+                        <li>データベース設計</li>
+                        <li>クエリ最適化</li>
+                    </ul>
+                </div>
+                
+                <!-- フロントエンド -->
+                <div style="background: rgba(17, 34, 64, 0.4); padding: 25px; border-radius: 12px; border: 1px solid rgba(100, 255, 218, 0.2);">
+                    <h4 style="color: #64ffda; font-size: clamp(1.1rem, 1.3vw, 1.2rem); margin-bottom: 15px; font-weight: 600;">🎨 フロントエンド</h4>
+                    <ul style="color: #a8b2d1; font-size: clamp(0.9rem, 1.1vw, 1rem); line-height: 1.9; padding-left: 20px;">
+                        <li>HTML / CSS / JavaScript</li>
+                        <li>レスポンシブデザイン</li>
+                        <li>UI/UX改善</li>
+                    </ul>
+                </div>
+                
+                <!-- AI活用 -->
+                <div style="background: rgba(17, 34, 64, 0.4); padding: 25px; border-radius: 12px; border: 1px solid rgba(100, 255, 218, 0.2);">
+                    <h4 style="color: #64ffda; font-size: clamp(1.1rem, 1.3vw, 1.2rem); margin-bottom: 15px; font-weight: 600;">🤖 AI 活用</h4>
+                    <ul style="color: #a8b2d1; font-size: clamp(0.9rem, 1.1vw, 1rem); line-height: 1.9; padding-left: 20px;">
+                        <li>プロンプト設計</li>
+                        <li>NLP・画像生成統合</li>
+                        <li>API連携</li>
+                    </ul>
+                </div>
+                
+                <!-- その他 -->
+                <div style="background: rgba(17, 34, 64, 0.4); padding: 25px; border-radius: 12px; border: 1px solid rgba(100, 255, 218, 0.2);">
+                    <h4 style="color: #64ffda; font-size: clamp(1.1rem, 1.3vw, 1.2rem); margin-bottom: 15px; font-weight: 600;">⚙️ その他</h4>
+                    <ul style="color: #a8b2d1; font-size: clamp(0.9rem, 1.1vw, 1rem); line-height: 1.9; padding-left: 20px;">
+                        <li>Java / C#</li>
+                        <li>Git / GitHub</li>
+                        <li>アルゴリズム設計</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</div>
+
+<style>
+@keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(100, 255, 218, 0.7); }
+    50% { box-shadow: 0 0 0 10px rgba(100, 255, 218, 0); }
+}
+</style>
 
     <div class="about-main-content-bg fade-section" style="margin-top: 0%; background: url('{% static 'img/about-contents1.jpg' %}') no-repeat center/cover;">
         <h2>～はじめに～</h2>
