@@ -312,25 +312,48 @@ footer, .footer {
 
 #menubar_hdr span {
     display: block;
-    width: 28px;
-    height: 4px;
+    width: 32px;
+    height: 3px;
     background: #fff;
     border-radius: 2px;
-    transition: transform 0.28s cubic-bezier(0.2,0.8,0.2,1), opacity 0.2s;
+    transition: all 0.3s cubic-bezier(0.2,0.8,0.2,1);
     margin: 0;
     box-shadow: 0 0 6px rgba(255,255,255,0.85), 0 0 10px rgba(255,255,255,0.55);
-    transform-origin: center;
+    transform-origin: right center;
+    position: absolute;
+    right: 0;
 }
 
-/* open 状態 */
+/* 通常状態の位置 */
+#menubar_hdr span:nth-of-type(1) {
+    top: 8px;
+}
+#menubar_hdr span:nth-of-type(2) {
+    top: 18px;
+    width: 16px; /* 真ん中は半分の幅 */
+}
+#menubar_hdr span:nth-of-type(3) {
+    top: 28px;
+}
+
+/* ホバー時：真ん中の線が伸びる */
+#menubar_hdr:hover span:nth-of-type(2) {
+    width: 32px;
+}
+
+/* open 状態（×印） */
 #menubar_hdr.ham span:nth-of-type(1) {
-    transform: translateY(10px) rotate(45deg);
+    top: 18px;
+    transform: rotate(45deg);
+    width: 32px;
 }
 #menubar_hdr.ham span:nth-of-type(2) {
     opacity: 0;
+    width: 0;
 }
 #menubar_hdr.ham span:nth-of-type(3) {
-    transform: translateY(-10px) rotate(-45deg);
+    top: 18px;
+    transform: rotate(-45deg);
 }
 
 /* 表示切替ユーティリティ */
