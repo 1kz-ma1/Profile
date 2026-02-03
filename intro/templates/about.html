@@ -182,74 +182,126 @@
             </div>
             
             <div style="display: grid; gap: 30px;">
+                <!-- 自己紹介サイト – Django & Railway -->
+                <div style="background: rgba(17, 34, 64, 0.4); padding: 35px; border-radius: 15px; border: 1px solid rgba(100, 255, 218, 0.3); backdrop-filter: blur(10px); display: grid; grid-template-columns: auto 1fr; gap: 25px; align-items: start;">
+                    <div style="font-size: 2.5rem;">🌐</div>
+                    <div>
+                        <h3 style="color: #64ffda; font-size: clamp(1.2rem, 1.6vw, 1.5rem); margin-bottom: 12px; font-weight: 600;">自己紹介サイト – Django & Railway</h3>
+                        <p style="color: #8892b0; font-size: clamp(0.85rem, 1.1vw, 0.95rem); margin-bottom: 15px;">2025年12月 〜 2026年1月</p>
+                        <p style="color: #ccd6f6; font-size: clamp(0.95rem, 1.2vw, 1.05rem); line-height: 1.8; margin-bottom: 15px;">
+                            Django で作成したフルスタック型の自己紹介サイト。ブログ機能、作品一覧、管理画面、PostgreSQL 連携を実装。<br>
+                            Railway デプロイ時に発生した<strong style="color: #64ffda;">静的ファイル配信エラー</strong>や<strong style="color: #64ffda;">管理画面ログイン不可（CSRF・環境変数周り）</strong>の問題を自力で調査し解決。<br>
+                            画像アップロードは Cloudinary を利用して外部ストレージ化。
+                        </p>
+                        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                            <span style="padding: 6px 14px; background: rgba(100, 255, 218, 0.15); border-radius: 15px; color: #64ffda; font-size: 0.85rem;">Python</span>
+                            <span style="padding: 6px 14px; background: rgba(100, 255, 218, 0.15); border-radius: 15px; color: #64ffda; font-size: 0.85rem;">Django</span>
+                            <span style="padding: 6px 14px; background: rgba(100, 255, 218, 0.15); border-radius: 15px; color: #64ffda; font-size: 0.85rem;">Railway</span>
+                            <span style="padding: 6px 14px; background: rgba(100, 255, 218, 0.15); border-radius: 15px; color: #64ffda; font-size: 0.85rem;">Cloudinary</span>
+                            <span style="padding: 6px 14px; background: rgba(100, 255, 218, 0.15); border-radius: 15px; color: #64ffda; font-size: 0.85rem;">PostgreSQL</span>
+                            <span style="padding: 6px 14px; background: rgba(100, 255, 218, 0.15); border-radius: 15px; color: #64ffda; font-size: 0.85rem;">Web</span>
+                        </div>
+                    </div>
+                </div>
+                
                 <!-- DX×AIが変える、10年後の日本 -->
                 <div style="background: rgba(17, 34, 64, 0.4); padding: 35px; border-radius: 15px; border: 1px solid rgba(100, 255, 218, 0.3); backdrop-filter: blur(10px); display: grid; grid-template-columns: auto 1fr; gap: 25px; align-items: start;">
-                    <div style="font-size: 2.5rem;">🌆</div>
+                    <div style="font-size: 2.5rem;">🏙️</div>
                     <div>
-                        <h3 style="color: #64ffda; font-size: clamp(1.2rem, 1.6vw, 1.5rem); margin-bottom: 12px; font-weight: 600;">DX×AIが変える、10年後の日本</h3>
-                        <p style="color: #8892b0; font-size: clamp(0.85rem, 1.1vw, 0.95rem); margin-bottom: 15px;">2025年10月 ～ 2026年</p>
+                        <h3 style="color: #64ffda; font-size: clamp(1.2rem, 1.6vw, 1.5rem); margin-bottom: 8px; font-weight: 600;">DX×AIが変える、10年後の日本</h3>
+                        <p style="color: #8892b0; font-size: clamp(0.8rem, 1vw, 0.9rem); margin-bottom: 10px; font-style: italic;">分野横断型 DX×AI 体験モデル</p>
+                        <p style="color: #8892b0; font-size: clamp(0.85rem, 1.1vw, 0.95rem); margin-bottom: 12px;">
+                            🔗 公開URL： <a href="https://1kz-ma1.github.io/DX_AI_model/" target="_blank" style="color: #64ffda; text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.3s;" onmouseover="this.style.borderColor='#64ffda'" onmouseout="this.style.borderColor='transparent'">https://1kz-ma1.github.io/DX_AI_model/</a>
+                        </p>
                         <p style="color: #ccd6f6; font-size: clamp(0.95rem, 1.2vw, 1.05rem); line-height: 1.8; margin-bottom: 15px;">
-                            PythonとDjango、AI技術を組み合わせた自動生成型RPGを開発。<br>
-                            非同期処理（Celery）や画像生成API統合を実装し、リアルタイムでコンテンツを生成。
+                            医療DXモデルを発展させ、<strong style="color: #64ffda;">行政・教育・医療など複数分野を横断的に分析・可視化</strong>できる "DX×AI体験モデル" として再構築。<br>
+                            キャラクターを選択すると、その人物視点で<strong>現在のアナログ手続き → 電子化 → AI導入後の再設計プロセス</strong>を疑似体験できる、ゲーム性の高いインタラクティブアプリ。<br>
+                            各分野の課題構造を<strong>「手続きの流れ」「入力項目数」「推定時間」</strong>の観点でリアルタイム可視化。<br>
+                            日本のDXの本質的課題を、<strong style="color: #64ffda;">物語性 × データ可視化</strong>で直感的に理解できるモデル。
                         </p>
                         <div style="display: flex; flex-wrap: wrap; gap: 8px;">
                             <span style="padding: 6px 14px; background: rgba(100, 255, 218, 0.15); border-radius: 15px; color: #64ffda; font-size: 0.85rem;">Python</span>
                             <span style="padding: 6px 14px; background: rgba(100, 255, 218, 0.15); border-radius: 15px; color: #64ffda; font-size: 0.85rem;">Django</span>
+                            <span style="padding: 6px 14px; background: rgba(100, 255, 218, 0.15); border-radius: 15px; color: #64ffda; font-size: 0.85rem;">JavaScript</span>
+                            <span style="padding: 6px 14px; background: rgba(100, 255, 218, 0.15); border-radius: 15px; color: #64ffda; font-size: 0.85rem;">DX</span>
+                            <span style="padding: 6px 14px; background: rgba(100, 255, 218, 0.15); border-radius: 15px; color: #64ffda; font-size: 0.85rem;">AIモデル</span>
+                            <span style="padding: 6px 14px; background: rgba(100, 255, 218, 0.15); border-radius: 15px; color: #64ffda; font-size: 0.85rem;">行政DX</span>
+                            <span style="padding: 6px 14px; background: rgba(100, 255, 218, 0.15); border-radius: 15px; color: #64ffda; font-size: 0.85rem;">医療DX</span>
+                            <span style="padding: 6px 14px; background: rgba(100, 255, 218, 0.15); border-radius: 15px; color: #64ffda; font-size: 0.85rem;">可視化</span>
+                            <span style="padding: 6px 14px; background: rgba(100, 255, 218, 0.15); border-radius: 15px; color: #64ffda; font-size: 0.85rem;">体験型アプリ</span>
+                            <span style="padding: 6px 14px; background: rgba(100, 255, 218, 0.15); border-radius: 15px; color: #64ffda; font-size: 0.85rem;">UI/UX</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自動生成型RPG（AI生成RPG） -->
+                <div style="background: rgba(17, 34, 64, 0.4); padding: 35px; border-radius: 15px; border: 1px solid rgba(100, 255, 218, 0.3); backdrop-filter: blur(10px); display: grid; grid-template-columns: auto 1fr; gap: 25px; align-items: start;">
+                    <div style="font-size: 2.5rem;">🎮</div>
+                    <div>
+                        <h3 style="color: #64ffda; font-size: clamp(1.2rem, 1.6vw, 1.5rem); margin-bottom: 8px; font-weight: 600;">自動生成型RPG（AI生成RPG）</h3>
+                        <p style="color: #8892b0; font-size: clamp(0.85rem, 1.1vw, 0.95rem); margin-bottom: 12px;">
+                            🔗 GitHub： <a href="https://github.com/1kz-ma1/RPG_AI" target="_blank" style="color: #64ffda; text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.3s;" onmouseover="this.style.borderColor='#64ffda'" onmouseout="this.style.borderColor='transparent'">https://github.com/1kz-ma1/RPG_AI</a>
+                        </p>
+                        <p style="color: #ccd6f6; font-size: clamp(0.95rem, 1.2vw, 1.05rem); line-height: 1.8; margin-bottom: 15px;">
+                            Python × Django で構築した AI自動生成RPG。<br>
+                            プレイヤーの行動に応じて<strong style="color: #64ffda;">シナリオ・敵キャラ・イベント画像をリアルタイム生成</strong>。<br>
+                            生成処理は <strong>Celery + Redis（Docker）による非同期化</strong>でバックグラウンド処理し、ストレスの少ないプレイ体験を実現。<br>
+                            ゲーム進行データ（スコア・撃破数・現在のシーンなど）は SQLite に保存。相棒キャラ選択、選択肢生成、画像キャッシュ機能などを実装。
+                        </p>
+                        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                            <span style="padding: 6px 14px; background: rgba(100, 255, 218, 0.15); border-radius: 15px; color: #64ffda; font-size: 0.85rem;">Python</span>
+                            <span style="padding: 6px 14px; background: rgba(100, 255, 218, 0.15); border-radius: 15px; color: #64ffda; font-size: 0.85rem;">Django</span>
+                            <span style="padding: 6px 14px; background: rgba(100, 255, 218, 0.15); border-radius: 15px; color: #64ffda; font-size: 0.85rem;">Docker</span>
                             <span style="padding: 6px 14px; background: rgba(100, 255, 218, 0.15); border-radius: 15px; color: #64ffda; font-size: 0.85rem;">Celery</span>
-                            <span style="padding: 6px 14px; background: rgba(100, 255, 218, 0.15); border-radius: 15px; color: #64ffda; font-size: 0.85rem;">AI/ML</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- ブログWebサイト -->
-                <div style="background: rgba(17, 34, 64, 0.4); padding: 35px; border-radius: 15px; border: 1px solid rgba(100, 255, 218, 0.3); backdrop-filter: blur(10px); display: grid; grid-template-columns: auto 1fr; gap: 25px; align-items: start;">
-                    <div style="font-size: 2.5rem;">📝</div>
-                    <div>
-                        <h3 style="color: #64ffda; font-size: clamp(1.2rem, 1.6vw, 1.5rem); margin-bottom: 12px; font-weight: 600;">ポートフォリオ＆ブログサイト</h3>
-                        <p style="color: #8892b0; font-size: clamp(0.85rem, 1.1vw, 0.95rem); margin-bottom: 15px;">2025年10月</p>
-                        <p style="color: #ccd6f6; font-size: clamp(0.95rem, 1.2vw, 1.05rem); line-height: 1.8; margin-bottom: 15px;">
-                            Django フレームワークを使用したブログ機能付きポートフォリオサイト。<br>
-                            認証、CRUD操作、管理画面、レスポンシブデザインを実装。
-                        </p>
-                        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
-                            <span style="padding: 6px 14px; background: rgba(100, 255, 218, 0.15); border-radius: 15px; color: #64ffda; font-size: 0.85rem;">Django</span>
-                            <span style="padding: 6px 14px; background: rgba(100, 255, 218, 0.15); border-radius: 15px; color: #64ffda; font-size: 0.85rem;">PostgreSQL</span>
-                            <span style="padding: 6px 14px; background: rgba(100, 255, 218, 0.15); border-radius: 15px; color: #64ffda; font-size: 0.85rem;">HTML/CSS/JS</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- ショッピングサイトモデル -->
-                <div style="background: rgba(17, 34, 64, 0.4); padding: 35px; border-radius: 15px; border: 1px solid rgba(100, 255, 218, 0.3); backdrop-filter: blur(10px); display: grid; grid-template-columns: auto 1fr; gap: 25px; align-items: start;">
-                    <div style="font-size: 2.5rem;">🛒</div>
-                    <div>
-                        <h3 style="color: #64ffda; font-size: clamp(1.2rem, 1.6vw, 1.5rem); margin-bottom: 12px; font-weight: 600;">ショッピングサイトモデル</h3>
-                        <p style="color: #8892b0; font-size: clamp(0.85rem, 1.1vw, 0.95rem); margin-bottom: 15px;">2025年9月</p>
-                        <p style="color: #ccd6f6; font-size: clamp(0.95rem, 1.2vw, 1.05rem); line-height: 1.8; margin-bottom: 15px;">
-                            PythonとSQLiteを使用したECサイトのプロトタイプ。<br>
-                            商品管理、カート機能、データベース設計・最適化を実装。
-                        </p>
-                        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
-                            <span style="padding: 6px 14px; background: rgba(100, 255, 218, 0.15); border-radius: 15px; color: #64ffda; font-size: 0.85rem;">Python</span>
+                            <span style="padding: 6px 14px; background: rgba(100, 255, 218, 0.15); border-radius: 15px; color: #64ffda; font-size: 0.85rem;">Redis</span>
                             <span style="padding: 6px 14px; background: rgba(100, 255, 218, 0.15); border-radius: 15px; color: #64ffda; font-size: 0.85rem;">SQLite</span>
-                            <span style="padding: 6px 14px; background: rgba(100, 255, 218, 0.15); border-radius: 15px; color: #64ffda; font-size: 0.85rem;">DB設計</span>
+                            <span style="padding: 6px 14px; background: rgba(100, 255, 218, 0.15); border-radius: 15px; color: #64ffda; font-size: 0.85rem;">AI生成</span>
+                            <span style="padding: 6px 14px; background: rgba(100, 255, 218, 0.15); border-radius: 15px; color: #64ffda; font-size: 0.85rem;">RPG</span>
+                            <span style="padding: 6px 14px; background: rgba(100, 255, 218, 0.15); border-radius: 15px; color: #64ffda; font-size: 0.85rem;">Web</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- コマンド型RPG2 -->
+                <!-- 課題制作 – 家計簿 / ショッピングサイト / ブログサイト -->
                 <div style="background: rgba(17, 34, 64, 0.4); padding: 35px; border-radius: 15px; border: 1px solid rgba(100, 255, 218, 0.3); backdrop-filter: blur(10px); display: grid; grid-template-columns: auto 1fr; gap: 25px; align-items: start;">
-                    <div style="font-size: 2.5rem;">⚔️</div>
+                    <div style="font-size: 2.5rem;">💼</div>
                     <div>
-                        <h3 style="color: #64ffda; font-size: clamp(1.2rem, 1.6vw, 1.5rem); margin-bottom: 12px; font-weight: 600;">コマンド型RPG 2</h3>
-                        <p style="color: #8892b0; font-size: clamp(0.85rem, 1.1vw, 0.95rem); margin-bottom: 15px;">2025年7月</p>
+                        <h3 style="color: #64ffda; font-size: clamp(1.2rem, 1.6vw, 1.5rem); margin-bottom: 12px; font-weight: 600;">課題制作 – 家計簿 / ショッピングサイト / ブログサイト</h3>
                         <p style="color: #ccd6f6; font-size: clamp(0.95rem, 1.2vw, 1.05rem); line-height: 1.8; margin-bottom: 15px;">
-                            Pythonで開発したターン制RPG。前作から大幅に機能拡張し、<br>
-                            戦闘システム、キャラクター成長、アイテム管理を実装。
+                            <strong style="color: #64ffda;">家計簿アプリ（Python + DB / コマンドライン）</strong><br>
+                            入金 / 出金 / 履歴参照などの基本機能を DB 設計から実装。<br><br>
+                            <strong style="color: #64ffda;">ショッピングサイト（Python + DB / コマンドライン）</strong><br>
+                            商品一覧 → 購入 → 請求書・明細生成までを一連で管理できる仕組みを構築。<br><br>
+                            <strong style="color: #64ffda;">ブログサイト（Django + DB）</strong><br>
+                            画像投稿、コメント、いいね機能を実装し、ミニSNSのようなブログアプリを制作。
                         </p>
                         <div style="display: flex; flex-wrap: wrap; gap: 8px;">
                             <span style="padding: 6px 14px; background: rgba(100, 255, 218, 0.15); border-radius: 15px; color: #64ffda; font-size: 0.85rem;">Python</span>
-                            <span style="padding: 6px 14px; background: rgba(100, 255, 218, 0.15); border-radius: 15px; color: #64ffda; font-size: 0.85rem;">ゲーム開発</span>
+                            <span style="padding: 6px 14px; background: rgba(100, 255, 218, 0.15); border-radius: 15px; color: #64ffda; font-size: 0.85rem;">Django</span>
+                            <span style="padding: 6px 14px; background: rgba(100, 255, 218, 0.15); border-radius: 15px; color: #64ffda; font-size: 0.85rem;">SQL</span>
+                            <span style="padding: 6px 14px; background: rgba(100, 255, 218, 0.15); border-radius: 15px; color: #64ffda; font-size: 0.85rem;">CLI</span>
+                            <span style="padding: 6px 14px; background: rgba(100, 255, 218, 0.15); border-radius: 15px; color: #64ffda; font-size: 0.85rem;">Web基礎</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 逆視点RPG（Unity） -->
+                <div style="background: rgba(17, 34, 64, 0.4); padding: 35px; border-radius: 15px; border: 1px solid rgba(100, 255, 218, 0.3); backdrop-filter: blur(10px); display: grid; grid-template-columns: auto 1fr; gap: 25px; align-items: start;">
+                    <div style="font-size: 2.5rem;">⚔️</div>
+                    <div>
+                        <h3 style="color: #64ffda; font-size: clamp(1.2rem, 1.6vw, 1.5rem); margin-bottom: 12px; font-weight: 600;">逆視点RPG（Unity）</h3>
+                        <p style="color: #ccd6f6; font-size: clamp(0.95rem, 1.2vw, 1.05rem); line-height: 1.8; margin-bottom: 15px;">
+                            悪魔視点で、襲ってくる冒険者を倒しながら進む逆視点RPG。<br>
+                            地面・キャラのアセット設定、当たり判定、移動スクリプト、アニメーションなど<br>
+                            <strong style="color: #64ffda;">Unity / C# / Git の学習目的で制作</strong>。<br>
+                            現在は他プロジェクトを優先して一時休止中。
+                        </p>
+                        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                            <span style="padding: 6px 14px; background: rgba(100, 255, 218, 0.15); border-radius: 15px; color: #64ffda; font-size: 0.85rem;">Unity</span>
+                            <span style="padding: 6px 14px; background: rgba(100, 255, 218, 0.15); border-radius: 15px; color: #64ffda; font-size: 0.85rem;">C#</span>
+                            <span style="padding: 6px 14px; background: rgba(100, 255, 218, 0.15); border-radius: 15px; color: #64ffda; font-size: 0.85rem;">3Dアクション</span>
+                            <span style="padding: 6px 14px; background: rgba(100, 255, 218, 0.15); border-radius: 15px; color: #64ffda; font-size: 0.85rem;">バージョン管理</span>
+                            <span style="padding: 6px 14px; background: rgba(100, 255, 218, 0.15); border-radius: 15px; color: #64ffda; font-size: 0.85rem;">Git</span>
                         </div>
                     </div>
                 </div>
