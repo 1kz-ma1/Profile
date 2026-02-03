@@ -556,41 +556,42 @@ form {
 }
 
 .about-header h1 {
-    font-size: clamp(0.8rem, 2.3vw, 2.8rem);
-    margin-left: 40%;
-    margin-top: clamp(2%, 3%, 4%);
-    display: inline-block;
+    font-size: clamp(1rem, 2.5vw, 3rem);
+    text-align: center;
+    margin: clamp(40px, 5%, 60px) auto 30px;
+    padding: 0 20px;
     font-weight: 500;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.08em;
+    color: #ffffff;
 }
 
 .about-header h2,
 .about-header p {
     text-align: center;
-    font-size: clamp(0.5rem, 1.2vw, 1.5rem);
-    background-color: rgba(38, 37, 37, 0.45);
-    margin-left: clamp(35%, 45%, 50%);
+    font-size: clamp(0.9rem, 1.3vw, 1.6rem);
+    background-color: rgba(38, 37, 37, 0.5);
+    margin: 8px auto;
+    padding: 8px 20px;
+    max-width: 800px;
     font-weight: 400;
     color: #e8e8e8;
 }
 
 .profile-img {
     position: absolute;
-    left: 0;
-    top: 0;
-    width: 50%;
-    height: 100%;
+    right: 30px;
+    top: 30px;
+    width: 100px;
+    height: 100px;
     background-image: url('/static/img/profile.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    opacity: 1;
-    -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%);
-    -webkit-mask-repeat: no-repeat;
-    -webkit-mask-size: 100% 100%;
-    mask-image: linear-gradient(to right, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%);
-    mask-repeat: no-repeat;
-    mask-size: 100% 100%;
+    border-radius: 50%;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    opacity: 0.85;
+    z-index: 10;
 }
 
 .about-header-bg {
