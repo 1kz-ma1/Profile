@@ -42,9 +42,9 @@
 {% endblock %}
 
     <!--お問い合わせヘッダー-->
-<header style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url('{% static 'img/contact.jpg' %}') center/cover no-repeat; min-height: 450px; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; color: #fff; text-align: center; position: relative; padding-bottom: 60px;">
+<header style="width: 100%; margin: 0; padding: 0; background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url('{% static 'img/contact.jpg' %}') center/cover no-repeat; min-height: 450px; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; color: #fff; text-align: center; position: relative; padding-bottom: 60px; box-sizing: border-box;">
     <div style="z-index: 2;">
-        <p style="font-size: 1.3rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.7); margin: 0; opacity: 0.9;">最後までご覧いただきありがとうございます！</p>
+        <p style="font-size: clamp(1.1rem, 2vw, 1.3rem); text-shadow: 2px 2px 4px rgba(0,0,0,0.7); margin: 0; opacity: 0.9; padding: 0 20px;">最後までご覧いただきありがとうございます！</p>
     </div>
 </header>
 
@@ -88,33 +88,46 @@
     </div>
 
     <div class="cont-slide" id="slide4">
-    <p>ナビゲーション(ページ移動ボタン)は使いやすかったですか？(3/5)</p>
+    <p>DX×AIモデル（100年後の東京）はいかがでしたか？(3/6)</p>
     <div class="rating">
-            <label><input type="radio" name="design" value="1">最悪 |</label>
-            <label><input type="radio" name="design" value="2">悪い |</label>
-            <label><input type="radio" name="design" value="3">普通 |</label>
-            <label><input type="radio" name="design" value="4">良い |</label>
-            <label><input type="radio" name="design" value="5">最高</label>
+            <label><input type="radio" name="dx_ai" value="1">最悪 |</label>
+            <label><input type="radio" name="dx_ai" value="2">悪い |</label>
+            <label><input type="radio" name="dx_ai" value="3">普通 |</label>
+            <label><input type="radio" name="dx_ai" value="4">良い |</label>
+            <label><input type="radio" name="dx_ai" value="5">最高</label>
     </div>
     <button type="button" onclick="contPrevSlide()">戻る</button>
     <button type="button" onclick="contNextSlide()">次へ</button>
     </div>
 
     <div class="cont-slide" id="slide5">
-    <p>情報は分かりやすかったですか？(4/5)</p>
+    <p>ナビゲーション（ページ移動ボタン）は使いやすかったですか？(4/6)</p>
     <div class="rating">
-            <label><input type="radio" name="design" value="1">最悪 |</label>
-            <label><input type="radio" name="design" value="2">悪い |</label>
-            <label><input type="radio" name="design" value="3">普通 |</label>
-            <label><input type="radio" name="design" value="4">良い |</label>
-            <label><input type="radio" name="design" value="5">最高</label>
+            <label><input type="radio" name="navigation" value="1">最悪 |</label>
+            <label><input type="radio" name="navigation" value="2">悪い |</label>
+            <label><input type="radio" name="navigation" value="3">普通 |</label>
+            <label><input type="radio" name="navigation" value="4">良い |</label>
+            <label><input type="radio" name="navigation" value="5">最高</label>
     </div>
     <button type="button" onclick="contPrevSlide()">戻る</button>
     <button type="button" onclick="contNextSlide()">次へ</button>
     </div>
 
     <div class="cont-slide" id="slide6">
-    <p>全体的な満足度を教えてください。(5/5)</p>
+    <p>情報は分かりやすかったですか？(5/6)</p>
+    <div class="rating">
+            <label><input type="radio" name="information" value="1">最悪 |</label>
+            <label><input type="radio" name="information" value="2">悪い |</label>
+            <label><input type="radio" name="information" value="3">普通 |</label>
+            <label><input type="radio" name="information" value="4">良い |</label>
+            <label><input type="radio" name="information" value="5">最高</label>
+    </div>
+    <button type="button" onclick="contPrevSlide()">戻る</button>
+    <button type="button" onclick="contNextSlide()">次へ</button>
+    </div>
+
+    <div class="cont-slide" id="slide7">
+    <p>全体的な満足度を教えてください。(6/6)</p>
     <div class="rating">
         <label><input type="radio" name="overall" value="1">大変不満</label>
         <label><input type="radio" name="overall" value="2">不満</label>
@@ -130,7 +143,7 @@
 
     
 
-    <div class="cont-slide free" id="slide7">
+    <div class="cont-slide free" id="slide8">
         <p>～ご意見・ご感想～</p>
             {% csrf_token %}
             <textarea name="message" placeholder="ご自由にお書きください" required></textarea>

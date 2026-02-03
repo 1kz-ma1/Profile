@@ -128,8 +128,10 @@ def contact(request):
         name = request.POST.get("name", "")
         design = request.POST.get("design", "")
         portfolio = request.POST.get("portfolio", "")
-        skills = request.POST.get("skills", "")
-        impression = request.POST.get("impression", "")
+        dx_ai = request.POST.get("dx_ai", "")
+        navigation = request.POST.get("navigation", "")
+        information = request.POST.get("information", "")
+        overall = request.POST.get("overall", "")
         message = request.POST.get("message", "")
         
         # メール本文を作成
@@ -145,11 +147,17 @@ def contact(request):
 【作品紹介の作品についての評価】
 {portfolio}点
 
-【技術スキル紹介の評価】
-{skills}点
+【DX×AIモデル（100年後の東京）の評価】
+{dx_ai}点
 
-【全体的な印象】
-{impression}点
+【ナビゲーションの使いやすさ】
+{navigation}点
+
+【情報の分かりやすさ】
+{information}点
+
+【全体的な満足度】
+{overall}点
 
 【ご意見・ご感想】
 {message}

@@ -549,6 +549,31 @@ form {
 }
 
 /* about.html用スタイル */
+.about-hero-header {
+    color: #e8e8e8;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.7);
+}
+
+/* レスポンシブ対応：スマホでは縦並び */
+@media (max-width: 899px) {
+    .about-hero-header > div {
+        grid-template-columns: 1fr !important;
+        gap: 30px !important;
+    }
+    
+    .about-hero-header {
+        padding: 60px 15px 40px !important;
+        min-height: auto !important;
+    }
+    
+    .profile-img {
+        width: 80px !important;
+        height: 80px !important;
+        left: 20px !important;
+        top: 20px !important;
+    }
+}
+
 .about-header {
     color: #e8e8e8;
     text-shadow: 0 1px 3px rgba(0,0,0,0.7);
@@ -575,23 +600,6 @@ form {
     max-width: 800px;
     font-weight: 400;
     color: #e8e8e8;
-}
-
-.profile-img {
-    position: absolute;
-    right: 30px;
-    top: 30px;
-    width: 100px;
-    height: 100px;
-    background-image: url('/static/img/profile.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    border-radius: 50%;
-    border: 3px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-    opacity: 0.85;
-    z-index: 10;
 }
 
 .header-hero-image {
