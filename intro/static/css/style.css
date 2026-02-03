@@ -402,14 +402,15 @@ footer, .footer {
         display: block;
         color: #fff;
         background-color: transparent;
-        padding: 14px 16px 14px 0;
+        padding: 16px 20px;
         text-decoration: none;
         text-align: left;
-        transition: background-color 0.2s ease;
+        transition: all 0.25s ease;
+        box-sizing: border-box;
     }
     .nav-links a:hover { 
-        background-color: rgba(255,255,255,0.1);
-        padding-left: 8px;
+        background-color: rgba(255,255,255,0.12);
+        padding-left: 28px;
     }
 
     #mainimg {
