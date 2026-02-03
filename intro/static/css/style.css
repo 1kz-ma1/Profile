@@ -576,16 +576,19 @@ form {
 
 .profile-img {
     position: absolute;
-    left: 0%;
-    bottom: 0%;
-    width: auto;
-    top: 0%;
+    left: 0;
+    top: 0;
+    width: 50%;
     height: 100%;
-    opacity: 1; /* 全体の透明度は維持 */
-    -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,1), rgb(0, 0, 0));
+    background-image: url('/static/img/profile.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 1;
+    -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%);
     -webkit-mask-repeat: no-repeat;
     -webkit-mask-size: 100% 100%;
-    mask-image: linear-gradient(to right, rgba(0,0,0,1), rgba(0, 0, 0, 0));
+    mask-image: linear-gradient(to right, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%);
     mask-repeat: no-repeat;
     mask-size: 100% 100%;
 }
