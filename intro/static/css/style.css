@@ -136,7 +136,6 @@ nav {
     justify-content: center;
     width: 100%;
     position: relative;
-    left: 50%;
     transform: translateX(-50%);
     gap: 0.5rem;
     background-color: #000000;
@@ -427,6 +426,12 @@ footer, .footer {
     #menubar { display: block !important; position: static; background: transparent; height: auto; padding-top: 0; }
     #menubar.display-none { display: block !important; }
     #menubar.display-block { display: block !important; }
+    
+    /* デスクトップ版ナビゲーションを中央配置 */
+    .nav-links {
+        left: 50%;
+        transform: translateX(-50%);
+    }
 }
 
 /* オーバーレイ */
