@@ -374,7 +374,7 @@ footer, .footer {
         right: 0;
         width: min(240px, 75vw);
         max-width: 240px;
-        background: #1a1a1a;
+        background: transparent;
         color: #fff;
         height: 100vh;
         height: 100dvh;
@@ -402,15 +402,17 @@ footer, .footer {
         display: block;
         color: #fff;
         background-color: transparent;
-        padding: 16px 20px;
+        padding: 18px 20px;
         text-decoration: none;
-        text-align: left;
+        text-align: center;
         transition: all 0.25s ease;
         box-sizing: border-box;
+        font-size: 1.1rem;
+        font-weight: 500;
     }
     .nav-links a:hover { 
-        background-color: rgba(255,255,255,0.12);
-        padding-left: 28px;
+        background-color: rgba(255,255,255,0.15);
+        transform: scale(1.02);
     }
 
     #mainimg {
