@@ -137,7 +137,7 @@ nav {
     width: 100%;
     position: relative;
     left: 30%;
-    transform: translateX(-30%);
+
     gap: 0.5rem;
     background-color: #000000;
     opacity: 0.6;
