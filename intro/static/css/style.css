@@ -136,8 +136,7 @@ nav {
     justify-content: center;
     width: 100%;
     position: relative;
-    left: 30%;
-
+    transform: translateX(-50%);
     gap: 0.5rem;
     background-color: #000000;
     opacity: 0.6;
