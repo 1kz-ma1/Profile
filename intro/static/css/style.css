@@ -544,8 +544,8 @@ form {
 
 /* about.html用スタイル */
 .about-header {
-    color: #fff;
-    text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
+    color: #e8e8e8;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.7);
     text-align: center;
 }
 
@@ -554,14 +554,18 @@ form {
     margin-left: 40%;
     margin-top: clamp(2%, 3%, 4%);
     display: inline-block;
+    font-weight: 500;
+    letter-spacing: 0.05em;
 }
 
 .about-header h2,
 .about-header p {
     text-align: center;
     font-size: clamp(0.5rem, 1.2vw, 1.5rem);
-    background-color: #26252557;
+    background-color: rgba(38, 37, 37, 0.45);
     margin-left: clamp(35%, 45%, 50%);
+    font-weight: 400;
+    color: #e8e8e8;
 }
 
 .profile-img {
@@ -861,9 +865,11 @@ textarea {
 .about-header p {
     text-align: center;
     font-size: clamp(0.5rem, 1.2vw, 1.5rem);
-    background-color: #26252557;
+    background-color: rgba(38, 37, 37, 0.45);
     margin-left: clamp(35%, 45%, 50%);
     margin-top: clamp(10px, 2.5vw, 20px);
+    font-weight: 400;
+    color: #e8e8e8;
 }
 
 /* aboutページ: デスクトップ時だけナビ高さ分の余白を付ける（モバイルのハンバーガー時は余白なし） */

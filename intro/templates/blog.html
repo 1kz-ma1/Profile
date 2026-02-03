@@ -110,16 +110,21 @@
         
         .chapter-post-number {
             flex-shrink: 0;
-            width: 40px;
-            height: 40px;
-            background: #667eea;
-            color: #fff;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
+            overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
-            font-size: 1.1rem;
+            border: 3px solid #667eea;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+        }
+        
+        .chapter-post-number img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
         
         .chapter-post-content {
@@ -162,15 +167,118 @@
         
         .mermaid-container {
             background: rgba(255, 255, 255, 0.95);
-            padding: 20px;
+            padding: 40px;
             border-radius: 12px;
-            overflow-x: auto;
-            min-height: 400px;
+            overflow: auto;
+            min-height: 500px;
+            position: relative;
         }
         
-        .mermaid {
+        .network-graph {
+            position: relative;
+            width: 100%;
+            min-height: 500px;
             display: flex;
+            flex-wrap: wrap;
             justify-content: center;
+            align-items: center;
+            gap: 60px;
+            padding: 20px;
+        }
+        
+        .network-node {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            z-index: 2;
+        }
+        
+        .network-node:hover {
+            transform: scale(1.15);
+            z-index: 10;
+        }
+        
+        .network-node-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid #667eea;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s ease;
+            background: #fff;
+        }
+        
+        .network-node:hover .network-node-circle {
+            border-color: #764ba2;
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+        
+        .network-node-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .network-node-circle .default-icon {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .network-node-label {
+            max-width: 120px;
+            text-align: center;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #333;
+            line-height: 1.3;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+        
+        .network-node-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            justify-content: center;
+            max-width: 140px;
+        }
+        
+        .network-node-tags .mini-tag {
+            font-size: 0.7rem;
+            padding: 2px 6px;
+            background: #667eea;
+            color: #fff;
+            border-radius: 8px;
+        }
+        
+        .network-connections {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .network-line {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(90deg, rgba(102, 126, 234, 0.3), rgba(118, 75, 162, 0.3));
+            transform-origin: left center;
         }
         
         /* ローディング表示 */
@@ -487,6 +595,7 @@ const blogPosts = [
         chapter: {{ post.chapter_number|default:'null' }},
         chapterOrder: {{ post.chapter_order|default:'null' }},
         sectionOrder: {% if post.section %}{{ post.section.order }}{% else %}999{% endif %},
+        thumbnail: {% if post.get_image_url %}"{{ post.get_image_url }}"{% else %}null{% endif %},
         fieldTags: "{{ post.field_tags|escapejs }}".split(',').map(t => t.trim()).filter(t => t),
         relatedIds: [{% for rel in post.related_posts.all %}{{ rel.pk }}{% if not forloop.last %},{% endif %}{% endfor %}],
         likesCount: {{ post.likes_count }},
@@ -627,9 +736,14 @@ function renderChaptersView() {
         
         posts.forEach((post, index) => {
             const tags = post.fieldTags.map(tag => `<span class="tag">${tag}</span>`).join('');
+            // サムネイル画像があれば表示、なければ番号を表示
+            const thumbnailHtml = post.thumbnail 
+                ? `<img src="${post.thumbnail}" alt="${post.title}" loading="lazy">`
+                : `<span style="font-size: 1.5rem;">📖</span>`;
+            
             html += `
                 <a href="${post.url}" class="chapter-post-item">
-                    <div class="chapter-post-number">${index + 1}</div>
+                    <div class="chapter-post-number">${thumbnailHtml}</div>
                     <div class="chapter-post-content">
                         <h3 class="chapter-post-title">${post.title}</h3>
                         <div class="chapter-post-meta">
@@ -655,52 +769,103 @@ function renderChaptersView() {
 function renderMapView() {
     const container = document.getElementById('map-view');
     
-    // Mermaid図の生成
-    let mermaidCode = 'graph TB\n';
+    // 関連記事がある記事のみ表示
+    const connectedPosts = blogPosts.filter(post => 
+        post.relatedIds && post.relatedIds.length > 0
+    );
     
-    // ノードの追加
-    blogPosts.forEach(post => {
-        const nodeId = `post${post.id}`;
-        const label = post.title.length > 20 ? post.title.substring(0, 20) + '...' : post.title;
-        mermaidCode += `    ${nodeId}["${label}"]\n`;
+    if (connectedPosts.length === 0) {
+        container.innerHTML = '<p class="loading">関連記事が設定されていません</p>';
+        return;
+    }
+    
+    // ノードのHTML生成
+    let nodesHtml = '';
+    connectedPosts.forEach(post => {
+        const tags = post.fieldTags.slice(0, 2).map(tag => 
+            `<span class="mini-tag">${tag}</span>`
+        ).join('');
         
-        // スタイル適用（カテゴリ別）
-        if (post.fieldTags.length > 0) {
-            mermaidCode += `    style ${nodeId} fill:#667eea,stroke:#333,stroke-width:2px,color:#fff\n`;
-        }
-    });
-    
-    // 関連の追加
-    blogPosts.forEach(post => {
-        if (post.relatedIds && post.relatedIds.length > 0) {
-            post.relatedIds.forEach(relId => {
-                mermaidCode += `    post${post.id} --- post${relId}\n`;
-            });
-        }
-    });
-    
-    // クリックイベントの追加
-    blogPosts.forEach(post => {
-        mermaidCode += `    click post${post.id} "${post.url}"\n`;
+        const thumbnailHtml = post.thumbnail 
+            ? `<img src="${post.thumbnail}" alt="${post.title}" loading="lazy">`
+            : `<div class="default-icon">📚</div>`;
+        
+        nodesHtml += `
+            <a href="${post.url}" class="network-node" data-id="${post.id}">
+                <div class="network-node-circle">
+                    ${thumbnailHtml}
+                </div>
+                <div class="network-node-label">${post.title}</div>
+                ${tags ? `<div class="network-node-tags">${tags}</div>` : ''}
+            </a>
+        `;
     });
     
     const html = `
         <div class="mermaid-container">
-            <div class="mermaid">${mermaidCode}</div>
+            <div class="network-connections" id="network-connections"></div>
+            <div class="network-graph" id="network-graph">
+                ${nodesHtml}
+            </div>
         </div>
     `;
     
     container.innerHTML = html;
     
-    // Mermaidのレンダリング
-    try {
-        mermaid.run({
-            querySelector: '#map-view .mermaid'
+    // ノードの位置が確定した後に線を描画
+    setTimeout(() => drawConnections(connectedPosts), 100);
+}
+
+// 関連線を描画
+function drawConnections(posts) {
+    const connectionsContainer = document.getElementById('network-connections');
+    if (!connectionsContainer) return;
+    
+    connectionsContainer.innerHTML = '';
+    
+    // 各ノードの位置を取得
+    const nodePositions = new Map();
+    posts.forEach(post => {
+        const node = document.querySelector(`[data-id="${post.id}"]`);
+        if (node) {
+            const rect = node.getBoundingClientRect();
+            const containerRect = connectionsContainer.getBoundingClientRect();
+            nodePositions.set(post.id, {
+                x: rect.left + rect.width / 2 - containerRect.left,
+                y: rect.top + rect.height / 2 - containerRect.top
+            });
+        }
+    });
+    
+    // 線を描画
+    posts.forEach(post => {
+        if (!post.relatedIds || post.relatedIds.length === 0) return;
+        
+        const fromPos = nodePositions.get(post.id);
+        if (!fromPos) return;
+        
+        post.relatedIds.forEach(relId => {
+            const toPos = nodePositions.get(relId);
+            if (!toPos) return;
+            
+            // 重複を防ぐ（小さいIDから大きいIDへのみ描画）
+            if (post.id >= relId) return;
+            
+            const dx = toPos.x - fromPos.x;
+            const dy = toPos.y - fromPos.y;
+            const length = Math.sqrt(dx * dx + dy * dy);
+            const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+            
+            const line = document.createElement('div');
+            line.className = 'network-line';
+            line.style.left = `${fromPos.x}px`;
+            line.style.top = `${fromPos.y}px`;
+            line.style.width = `${length}px`;
+            line.style.transform = `rotate(${angle}deg)`;
+            
+            connectionsContainer.appendChild(line);
         });
-    } catch (error) {
-        console.error('Mermaid rendering error:', error);
-        container.innerHTML = '<p class="loading">相関図の生成に失敗しました</p>';
-    }
+    });
 }
 
 // ブラウザバック/フォワード対応
