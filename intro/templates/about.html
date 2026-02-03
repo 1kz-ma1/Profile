@@ -1,15 +1,15 @@
-{% load static %}
+﻿{% load static %}
 <!DOCTYPE html>
 <html lang="ja">
 
-<!--<head>の冁E��-->
+<!--<head>の内容-->
 
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="就活用自己紹仁E />
+    <meta name="description" content="就活用自己紹介" />
     <meta name="author" content="木下和磨" />
-    {% block title %}<title>木下和磨の自己紹仁E/title>{% endblock %}
+    {% block title %}<title>木下和磨の自己紹介</title>{% endblock %}
     <link href="{% static 'css/slide.css' %}" rel="stylesheet">
     <link href="{% static 'css/inview.css' %}" rel="stylesheet">
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
@@ -21,23 +21,23 @@
     <div class="wrapper">
     <!--ヘッダー-->
 {% block header %}
-<header class="about-hero-header" style="background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)), url('{% static 'img/きれぁE��銀河.jpg' %}') center/cover no-repeat; padding: 80px 20px 60px; position: relative; min-height: 500px; display: flex; align-items: center; justify-content: center;">
+<header class="about-hero-header" style="background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)), url('{% static 'img/きれいな銀河.jpg' %}') center/cover no-repeat; padding: 80px 20px 60px; position: relative; min-height: 500px; display: flex; align-items: center; justify-content: center;">
     
     <div style="max-width: 1200px; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;">
         
-        <!-- 左側�E�メイン惁E�� -->
+        <!-- 左側：メイン情報 -->
         <div style="text-align: left; padding: 30px; background: rgba(0, 0, 0, 0.4); border-radius: 20px; backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); position: relative;">
             
-            <!-- プロフィール画像（カード右上！E-->
+            <!-- プロフィール画像（カード右上） -->
             <div class="profile-img" role="img" aria-label="木下和磨のプロフィール写真" style="position: absolute; right: 20px; top: 20px; width: 80px; height: 80px; background-image: url('{% static 'img/profile.jpg' %}'); background-size: cover; background-position: center; border-radius: 50%; border: 3px solid rgba(100, 255, 218, 0.6); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6); z-index: 10;"></div>
             
             <p style="font-size: clamp(0.9rem, 1.2vw, 1.1rem); color: #64ffda; font-weight: 600; letter-spacing: 0.1em; margin-bottom: 15px;">■ PROFILE</p>
-            <h1 style="font-size: clamp(2.2rem, 3.5vw, 3.8rem); margin-bottom: 15px; font-weight: 700; color: #ffffff; line-height: 1.2;">木丁E和磨</h1>
-            <p style="font-size: clamp(1rem, 1.5vw, 1.3rem); color: #ccd6f6; margin-bottom: 25px; font-weight: 400; line-height: 1.6;">�E�技術と戦略で未来をデザインする�E�E/p>
+            <h1 style="font-size: clamp(2.2rem, 3.5vw, 3.8rem); margin-bottom: 15px; font-weight: 700; color: #ffffff; line-height: 1.2;">木下和磨</h1>
+            <p style="font-size: clamp(1rem, 1.5vw, 1.3rem); color: #ccd6f6; margin-bottom: 25px; font-weight: 400; line-height: 1.6;">〜技術と戦略で未来をデザインする〜</p>
             
             <div style="margin: 25px 0; padding: 20px; background: rgba(100, 255, 218, 0.05); border-left: 3px solid #64ffda; border-radius: 8px;">
                 <p style="font-size: clamp(0.95rem, 1.3vw, 1.2rem); color: #e8e8e8; margin: 8px 0; line-height: 1.8;">🎓 <a href="https://www.o-hara.ac.jp/senmon/school/tachikawa_it/" target="_blank" rel="noopener noreferrer" style="color: #64ffda; text-decoration: none; border-bottom: 1px solid transparent; transition: border-bottom 0.3s ease;" onmouseover="this.style.borderBottom='1px solid #64ffda';" onmouseout="this.style.borderBottom='1px solid transparent';">東京都立川情報ITクリエイター専門学校</a></p>
-                <p style="font-size: clamp(0.95rem, 1.3vw, 1.2rem); color: #a8b2d1; margin: 8px 0;">📅 2027年卒業予定（現在2年生！E/p>
+                <p style="font-size: clamp(0.95rem, 1.3vw, 1.2rem); color: #a8b2d1; margin: 8px 0;">📅 2027年卒業予定（現在2年生）</p>
             </div>
             
             <!-- SNSリンク -->
@@ -53,18 +53,18 @@
             </div>
         </div>
         
-        <!-- 右側�E�スキル・賁E��惁E�� -->
+        <!-- 右側：スキル・資格情報 -->
         <div style="text-align: left; padding: 30px; background: rgba(0, 0, 0, 0.4); border-radius: 20px; backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1);">
             
-            <!-- 専門刁E�� -->
+            <!-- 専門分野 -->
             <div style="margin-bottom: 30px;">
                 <p style="font-size: clamp(0.85rem, 1.1vw, 1rem); color: #64ffda; font-weight: 600; letter-spacing: 0.1em; margin-bottom: 12px;">■ SPECIALIZATION</p>
                 <p style="font-size: clamp(0.95rem, 1.3vw, 1.2rem); color: #ccd6f6; line-height: 1.7;">💻 Webアプリケーション開発</p>
-                <p style="font-size: clamp(0.95rem, 1.3vw, 1.2rem); color: #ccd6f6; line-height: 1.7;">🤁EAI・機械学習モチE��開発</p>
-                <p style="font-size: clamp(0.95rem, 1.3vw, 1.2rem); color: #ccd6f6; line-height: 1.7;">🛠�E�EシスチE��設計�EアーキチE��チャ</p>
+                <p style="font-size: clamp(0.95rem, 1.3vw, 1.2rem); color: #ccd6f6; line-height: 1.7;">� AI・機械学習モデル開発</p>
+                <p style="font-size: clamp(0.95rem, 1.3vw, 1.2rem); color: #ccd6f6; line-height: 1.7;">🛠️ システム設計・アーキテクチャ</p>
             </div>
             
-            <!-- プログラミング言誁E-->
+            <!-- プログラミング言語 -->
             <div style="margin-bottom: 30px;">
                 <p style="font-size: clamp(0.85rem, 1.1vw, 1rem); color: #64ffda; font-weight: 600; letter-spacing: 0.1em; margin-bottom: 12px;">■ TECH STACK</p>
                 <div style="display: flex; flex-wrap: wrap; gap: 10px;">
@@ -77,49 +77,49 @@
                 </div>
             </div>
             
-            <!-- 賁E�� -->
+            <!-- 資格 -->
             <div>
                 <p style="font-size: clamp(0.85rem, 1.1vw, 1rem); color: #64ffda; font-weight: 600; letter-spacing: 0.1em; margin-bottom: 12px;">■ CERTIFICATIONS</p>
                 <div style="display: flex; flex-direction: column; gap: 10px;">
                     <div style="padding: 12px 16px; background: rgba(100, 255, 218, 0.08); border-left: 3px solid #64ffda; border-radius: 6px;">
-                        <p style="font-size: clamp(0.9rem, 1.2vw, 1.1rem); color: #ccd6f6; font-weight: 500;">🏆 基本惁E��技術老E/p>
+                        <p style="font-size: clamp(0.9rem, 1.2vw, 1.1rem); color: #ccd6f6; font-weight: 500;">🏆 基本情報技術者</p>
                     </div>
                     <div style="padding: 12px 16px; background: rgba(100, 255, 218, 0.08); border-left: 3px solid #64ffda; border-radius: 6px;">
-                        <p style="font-size: clamp(0.9rem, 1.2vw, 1.1rem); color: #ccd6f6; font-weight: 500;">📝 ITパスポ�EチE/p>
+                        <p style="font-size: clamp(0.9rem, 1.2vw, 1.1rem); color: #ccd6f6; font-weight: 500;">📝 ITパスポート</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- ナビゲーション�E�ハンバ�Eガー対応！E-->
+    <!-- ナビゲーション・ハンバーガー対応 -->
     <div id="menubar_hdr" class="display-none" aria-label="menu button" role="button">
         <span></span>
         <span></span>
         <span></span>
     </div>
-    <!-- オーバ�Eレイ�E�ハンバ�Eガー開時に表示�E�E-->
+    <!-- オーバーレイ・ハンバーガー開時に表示 -->
     <div id="overlay" class="overlay display-none" aria-hidden="true"></div>
     <div id="menubar" class="display-none">
         <nav class="nav-links">
             <ul>
-                <li><a href="{% url 'intro:index' %}">トップ�Eージ</a></li>
-                <li><a href="{% url 'intro:about' %}">自己紹仁E/a></li>
-                <li><a href="{% url 'intro:portfolio' %}">作品紹仁E/a></li>
+                <li><a href="{% url 'intro:index' %}">トップページ</a></li>
+                <li><a href="{% url 'intro:about' %}">自己紹介</a></li>
+                <li><a href="{% url 'intro:portfolio' %}">作品紹介</a></li>
                 <li><a href="{% url 'intro:blog' %}">近況報告ブログ</a></li>
-                <li><a href="{% url 'intro:contact' %}">お問ぁE��わせ</a></li>
+                <li><a href="{% url 'intro:contact' %}">お問い合わせ</a></li>
             </ul>
         </nav>
     </div>
 </header>
 {% endblock %}
-    <!--メインコンチE��チE->
+    <!--メインコンテンツ-->
 
 {% block contents %}
 <div style="background: #0a0e27; padding: 60px 20px;">
     <div style="max-width: 1200px; margin: 0 auto;">
         
-        <!-- はじめに�E�ビジョン統合セクション -->
+        <!-- はじめに・ビジョン統合セクション -->
         <section style="margin-bottom: 80px;">
             <div style="text-align: center; margin-bottom: 40px;">
                 <h2 style="font-size: clamp(1.8rem, 2.8vw, 2.5rem); color: #64ffda; font-weight: 600; margin-bottom: 15px;">About Me</h2>
@@ -128,26 +128,26 @@
             
             <div style="background: rgba(17, 34, 64, 0.4); padding: 40px; border-radius: 20px; border: 1px solid rgba(100, 255, 218, 0.2); backdrop-filter: blur(10px);">
                 <p style="color: #ccd6f6; font-size: clamp(1rem, 1.3vw, 1.2rem); line-height: 2; margin-bottom: 25px; text-align: center;">
-                    改めて、木下和磨のポ�Eトフォリオサイトをご覧ぁE��だきありがとぁE��ざいます、Ebr>
-                    ひとつひとつの作品に込めた琁E��を現実にすることを大刁E��し、Ebr>
-                    学び続ける姿勢と妥協を許さなぁE��神で取り絁E��でぁE��す、E
+                    改めて、木下和磨のポートフォリオサイトをご覧いただきありがとうございます。<br>
+                    ひとつひとつの作品に込めた理想を現実にすることを大切にし、<br>
+                    学び続ける姿勢と妥協を許さない精神で取り組んでいます。
                 </p>
                 
                 <div style="border-top: 2px solid rgba(100, 255, 218, 0.2); padding-top: 25px; margin-top: 25px;">
-                    <p style="color: #64ffda; font-size: clamp(0.95rem, 1.2vw, 1.1rem); font-weight: 600; margin-bottom: 15px; text-align: center;">🎯 目持E��姿</p>
+                    <p style="color: #64ffda; font-size: clamp(0.95rem, 1.2vw, 1.1rem); font-weight: 600; margin-bottom: 15px; text-align: center;">🎯 目指す姿</p>
                     <p style="color: #a8b2d1; font-size: clamp(0.95rem, 1.2vw, 1.1rem); line-height: 1.9; text-align: center;">
-                        DX ÁEAI を用ぁE��、仕絁E��そ�Eも�Eを見直し、課題を根本から解決できるエンジニアを目持E��てぁE��す、Ebr>
-                        開発だけでなく、現場の声めE��務�E全体像を理解し、改喁E�E方向性を形にしてぁE��る立場にも挑戦したぁE��老E��てぁE��す、E
+                        DX × AI を用いて、仕組みそのものを見直し、課題を根本から解決できるエンジニアを目指しています。<br>
+                        開発だけでなく、現場の声や業務の全体像を理解し、改善の方向性を形にしていける立場にも挑戦したいと考えています。
                     </p>
                 </div>
             </div>
         </section>
 
-        <!-- 実績ハイライチE-->
+        <!-- 実績ハイライト -->
         <section style="margin-bottom: 80px;">
             <div style="text-align: center; margin-bottom: 40px;">
                 <h2 style="font-size: clamp(1.8rem, 2.8vw, 2.5rem); color: #64ffda; font-weight: 600; margin-bottom: 15px;">Achievements</h2>
-                <p style="color: #8892b0; font-size: clamp(0.95rem, 1.2vw, 1.1rem);">主な実績とハイライチE/p>
+                <p style="color: #8892b0; font-size: clamp(0.95rem, 1.2vw, 1.1rem);">主な実績とハイライト</p>
             </div>
             
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
@@ -155,21 +155,21 @@
                 <div style="background: linear-gradient(135deg, rgba(100, 255, 218, 0.1), rgba(100, 255, 218, 0.05)); padding: 30px; border-radius: 15px; border: 2px solid #64ffda; text-align: center;">
                     <div style="font-size: 3rem; margin-bottom: 15px;">🏅</div>
                     <h3 style="color: #64ffda; font-size: clamp(1.3rem, 1.8vw, 1.6rem); margin-bottom: 12px; font-weight: 600;">Paiza Sランク</h3>
-                    <p style="color: #ccd6f6; font-size: clamp(0.9rem, 1.1vw, 1rem); line-height: 1.7;">スキルチェチE��で最高難度のSランクを取征E/p>
+                    <p style="color: #ccd6f6; font-size: clamp(0.9rem, 1.1vw, 1rem); line-height: 1.7;">スキルチェックで最高難度のSランクを取得</p>
                 </div>
                 
-                <!-- 全国3佁E-->
+                <!-- 全国3位 -->
                 <div style="background: linear-gradient(135deg, rgba(100, 255, 218, 0.1), rgba(100, 255, 218, 0.05)); padding: 30px; border-radius: 15px; border: 2px solid #64ffda; text-align: center;">
-                    <div style="font-size: 3rem; margin-bottom: 15px;">🥁E/div>
-                    <h3 style="color: #64ffda; font-size: clamp(1.3rem, 1.8vw, 1.6rem); margin-bottom: 12px; font-weight: 600;">全国3佁E/h3>
-                    <p style="color: #ccd6f6; font-size: clamp(0.9rem, 1.1vw, 1rem); line-height: 1.7;">大原学園�E惁E��コース全体で3位�E成績を達戁E/p>
+                    <div style="font-size: 3rem; margin-bottom: 15px;">🥉</div>
+                    <h3 style="color: #64ffda; font-size: clamp(1.3rem, 1.8vw, 1.6rem); margin-bottom: 12px; font-weight: 600;">全国3位</h3>
+                    <p style="color: #ccd6f6; font-size: clamp(0.9rem, 1.1vw, 1rem); line-height: 1.7;">大原学園の情報コース全体で3位の成績を達成</p>
                 </div>
                 
                 <!-- Microsoft ハッカソン -->
                 <div style="background: linear-gradient(135deg, rgba(100, 255, 218, 0.1), rgba(100, 255, 218, 0.05)); padding: 30px; border-radius: 15px; border: 2px solid #64ffda; text-align: center;">
                     <div style="font-size: 3rem; margin-bottom: 15px;">💡</div>
                     <h3 style="color: #64ffda; font-size: clamp(1.3rem, 1.8vw, 1.6rem); margin-bottom: 12px; font-weight: 600;">ハッカソン参加</h3>
-                    <p style="color: #ccd6f6; font-size: clamp(0.9rem, 1.1vw, 1rem); line-height: 1.7;">ハッカソン in Microsoft社に参加�E�E024年8月！E/p>
+                    <p style="color: #ccd6f6; font-size: clamp(0.9rem, 1.1vw, 1rem); line-height: 1.7;">ハッカソン in Microsoft社に参加（2024年8月）</p>
                 </div>
             </div>
         </section>
