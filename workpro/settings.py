@@ -234,16 +234,15 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Email settings
+# Brevo (旧Sendinblue) を使用（RailwayなどのPaaS環境で推奨）
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-# PORT 587 (TLS) の方が安定する場合が多い
+EMAIL_HOST = os.environ.get('EMAIL_HOST', 'smtp-relay.brevo.com')
 EMAIL_PORT = int(os.environ.get('EMAIL_PORT', '587'))
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', '')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
-# PORT 587 を使用する場合は TLS を有効化
-EMAIL_USE_TLS = EMAIL_PORT == 587
-EMAIL_USE_SSL = EMAIL_PORT == 465
-# タイムアウト設定を追加（Railway等のクラウド環境で有効）
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', '')  # Brevoのログインメールアドレス
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')  # Brevo SMTPキー
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
 EMAIL_TIMEOUT = 30
 
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+# 送信元メールアドレス
+DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', 'kazuma012023@gmail.com')
