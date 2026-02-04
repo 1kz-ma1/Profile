@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.conf import settings
 from .models import BlogPost, Category, SubCategory, Section, ContactFormSubmission, PortfolioItem
+from django import forms
 import os
 
 @admin.register(Category)
@@ -184,8 +185,30 @@ class ContactFormSubmissionAdmin(admin.ModelAdmin):
         return False
 
 
+class PortfolioItemAdminForm(forms.ModelForm):
+    """作品紹介フォーム - サムネイル画像をドロップダウンで選択"""
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # imgフォルダ内の画像ファイル一覧を取得
+        img_dir = os.path.join(settings.BASE_DIR, 'intro', 'static', 'img')
+        if os.path.exists(img_dir):
+            image_files = [f for f in os.listdir(img_dir) if f.lower().endswith(('.jpg', '.jpeg', '.png', '.gif'))]
+            choices = [('', '--- 画像を選択 ---')] + [(f, f) for f in sorted(image_files)]
+            self.fields['thumbnail'] = forms.ChoiceField(
+                choices=choices,
+                required=False,
+                label='サムネイル画像',
+                help_text='static/img/ フォルダ内の画像を選択'
+            )
+    
+    class Meta:
+        model = PortfolioItem
+        fields = '__all__'
+
+
 @admin.register(PortfolioItem)
 class PortfolioItemAdmin(admin.ModelAdmin):
+    form = PortfolioItemAdminForm
     list_display = ('title', 'is_published', 'display_order', 'created_at')
     list_filter = ('is_published', 'created_at')
     search_fields = ('title', 'description', 'technologies')

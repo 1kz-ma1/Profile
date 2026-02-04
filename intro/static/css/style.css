@@ -969,7 +969,7 @@ textarea {
 
 /* aboutページ: ヘッダー背景画像 */
 .about-hero-header {
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)), url('../img/きれいな銀河.jpg') center/cover no-repeat;
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)), url('../img/galaxy.jpg') center/cover no-repeat;
     padding: 80px 20px 60px;
     position: relative;
     min-height: 500px;

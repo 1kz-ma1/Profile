@@ -43,7 +43,7 @@
 
 /*２枚目画像*/
 .slide2 {
-	background: url('../img/きれいな銀河.jpg') no-repeat center center / cover;	/*２枚目の背景画像の読み込み*/
+	background: url('../img/galaxy.jpg') no-repeat center center / cover;	/*２枚目の背景画像の読み込み*/
 }
 
 /*３枚目画像*/
@@ -58,7 +58,7 @@
 
 /*５枚目画像*/
 .slide5 {
-	background: url('../img/100年後の東京.jpg') no-repeat center center / cover;	/*５枚目の背景画像の読み込み*/
+	background: url('../img/future_tokyo.jpg') no-repeat center center / cover;	/*５枚目の背景画像の読み込み*/
 }
 
 .slide-font {

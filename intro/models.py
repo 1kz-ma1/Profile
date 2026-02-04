@@ -186,7 +186,7 @@ class PortfolioItem(models.Model):
     """作品紹介アイテム"""
     title = models.CharField(max_length=200, verbose_name="作品タイトル")
     description = models.TextField(verbose_name="説明")
-    thumbnail = models.CharField(max_length=255, blank=True, default='', verbose_name="サムネイル画像パス", help_text="staticfiles/img/ 内のファイル名を指定（例: 100年後の東京.jpg）")
+    thumbnail = models.CharField(max_length=255, blank=True, default='', verbose_name="サムネイル画像パス", help_text="staticfiles/img/ 内のファイル名を指定（例: future_tokyo.jpg）")
     demo_url = models.URLField(blank=True, verbose_name="デモURL", help_text="作品のデモページURL")
     github_url = models.URLField(blank=True, verbose_name="GitHubリポジトリURL")
     technologies = models.CharField(max_length=500, verbose_name="使用技術", help_text="カンマ区切りで入力（例: Python, Django, PostgreSQL）")
