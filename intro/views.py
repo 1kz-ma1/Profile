@@ -1,5 +1,6 @@
 # intro/views.py
 import logging
+import os
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.cache import cache_page
@@ -7,7 +8,7 @@ from django.core.paginator import Paginator
 from django.core.mail import send_mail
 from django.conf import settings
 from django.http import JsonResponse
-from .models import BlogPost, Category, SubCategory, Section
+from .models import BlogPost, Category, SubCategory, Section, ContactFormSubmission
 from .cache_utils import cache_if_anonymous
 
 logger = logging.getLogger(__name__)
@@ -126,73 +127,43 @@ def contact(request):
     if request.method == "POST":
         # フォーム値を取得
         name = request.POST.get("name", "")
-        design = request.POST.get("design", "")
-        portfolio = request.POST.get("portfolio", "")
-        dx_ai = request.POST.get("dx_ai", "")
-        navigation = request.POST.get("navigation", "")
-        information = request.POST.get("information", "")
-        overall = request.POST.get("overall", "")
+        design = request.POST.get("design", 0)
+        portfolio = request.POST.get("portfolio", 0)
+        dx_ai = request.POST.get("dx_ai", 0)
+        navigation = request.POST.get("navigation", 0)
+        information = request.POST.get("information", 0)
+        overall = request.POST.get("overall", 0)
         message = request.POST.get("message", "")
         
-        # メール本文を作成
-        email_body = f"""
-お問い合わせフォームからの送信です。
-
-【お名前】
-{name}
-
-【サイトの見やすさ・デザイン評価】
-{design}点
-
-【作品紹介の作品についての評価】
-{portfolio}点
-
-【DX×AIが変える、10年後の日本　の評価】
-{dx_ai}点
-
-【ナビゲーションの使いやすさ】
-{navigation}点
-
-【情報の分かりやすさ】
-{information}点
-
-【全体的な満足度】
-{overall}点
-
-【ご意見・ご感想】
-{message}
-
----
-このメールはポートフォリオサイトのお問い合わせフォームから自動送信されました。
-"""
-        
         try:
-            # 環境変数の確認
-            if not settings.EMAIL_HOST_USER or not settings.EMAIL_HOST_PASSWORD:
-                logger.error("EMAIL_HOST_USER または EMAIL_HOST_PASSWORD が設定されていません")
-                return render(request, "contact.html", {'error': 'メール設定が不完全です。管理者にお問い合わせください。'})
+            # IPアドレスとユーザーエージェントを取得
+            ip_address = request.META.get('HTTP_X_FORWARDED_FOR', request.META.get('REMOTE_ADDR', ''))
+            if ip_address:
+                ip_address = ip_address.split(',')[0].strip()
+            user_agent = request.META.get('HTTP_USER_AGENT', '')
             
-            # メール送信
-            send_mail(
-                subject=f'ポートフォリオサイトへのお問い合わせ - {name}様より',
-                message=email_body,
-                from_email=settings.DEFAULT_FROM_EMAIL,
-                recipient_list=[settings.EMAIL_HOST_USER],
-                fail_silently=False,
+            # データベースに保存
+            submission = ContactFormSubmission.objects.create(
+                name=name,
+                design=int(design) if design else 0,
+                portfolio=int(portfolio) if portfolio else 0,
+                dx_ai=int(dx_ai) if dx_ai else 0,
+                navigation=int(navigation) if navigation else 0,
+                information=int(information) if information else 0,
+                overall=int(overall) if overall else 0,
+                message=message,
+                ip_address=ip_address,
+                user_agent=user_agent
             )
-            logger.info(f"メール送信成功: {name}様からのお問い合わせ")
+            
+            logger.info(f"お問い合わせ受信: {name}様 (ID: {submission.id}, 平均評価: {submission.get_average_score():.1f}点)")
             return redirect("intro:thanks")
+            
         except Exception as e:
-            # エラーログを記録（本番環境ではログファイルに記録）
+            # エラーログを記録
             import traceback
-            logger.error(f"メール送信エラー: {type(e).__name__}: {str(e)}")
+            logger.error(f"お問い合わせ保存エラー: {type(e).__name__}: {str(e)}")
             logger.error(f"詳細トレースバック:\n{traceback.format_exc()}")
-            logger.error(f"EMAIL_HOST_USER: {'設定あり' if settings.EMAIL_HOST_USER else '未設定'}")
-            logger.error(f"EMAIL_HOST_PASSWORD: {'設定あり' if settings.EMAIL_HOST_PASSWORD else '未設定'}")
-            logger.error(f"EMAIL_HOST: {settings.EMAIL_HOST}")
-            logger.error(f"EMAIL_PORT: {settings.EMAIL_PORT}")
-            logger.error(f"EMAIL_USE_TLS: {settings.EMAIL_USE_TLS}")
-            logger.error(f"EMAIL_USE_SSL: {settings.EMAIL_USE_SSL}")
-            return render(request, "contact.html", {'error': f'メール送信に失敗しました: {str(e)[:100]}'})
+            return render(request, "contact.html", {'error': 'お問い合わせの送信に失敗しました。もう一度お試しください。'})
     
     return render(request, "contact.html")

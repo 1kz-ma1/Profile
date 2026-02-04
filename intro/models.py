@@ -152,3 +152,31 @@ class BlogPost(models.Model):
             return f"chapter_{self.chapter_number:05d}"
         # 未分類は最後
         return "zzz_未分類"
+
+
+class ContactFormSubmission(models.Model):
+    """お問い合わせフォーム送信データ"""
+    name = models.CharField(max_length=100, verbose_name="お名前")
+    design = models.IntegerField(verbose_name="サイトの見やすさ・デザイン", help_text="1-5")
+    portfolio = models.IntegerField(verbose_name="作品紹介の評価", help_text="1-5")
+    dx_ai = models.IntegerField(verbose_name="DX×AI作品の評価", help_text="1-5")
+    navigation = models.IntegerField(verbose_name="ナビゲーションの使いやすさ", help_text="1-5")
+    information = models.IntegerField(verbose_name="情報の分かりやすさ", help_text="1-5")
+    overall = models.IntegerField(verbose_name="全体的な満足度", help_text="1-5")
+    message = models.TextField(blank=True, verbose_name="ご意見・ご感想")
+    submitted_at = models.DateTimeField(auto_now_add=True, verbose_name="送信日時")
+    ip_address = models.GenericIPAddressField(null=True, blank=True, verbose_name="IPアドレス")
+    user_agent = models.TextField(blank=True, verbose_name="ユーザーエージェント")
+    
+    class Meta:
+        verbose_name = "お問い合わせ"
+        verbose_name_plural = "お問い合わせ一覧"
+        ordering = ['-submitted_at']
+    
+    def __str__(self):
+        return f"{self.name}様 ({self.submitted_at.strftime('%Y/%m/%d %H:%M')})"
+    
+    def get_average_score(self):
+        """平均評価点を計算"""
+        scores = [self.design, self.portfolio, self.dx_ai, self.navigation, self.information, self.overall]
+        return sum(scores) / len(scores)

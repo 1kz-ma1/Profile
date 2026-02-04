@@ -7,3 +7,4 @@ psycopg2-binary==2.9.9
 python-decouple==3.8
 python-dotenv==1.2.1
 cloudinary>=1.30.0
+resend>=0.7.0

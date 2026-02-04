@@ -567,10 +567,10 @@ form {
     }
     
     .profile-img {
-        width: 80px !important;
-        height: 80px !important;
-        left: 20px !important;
-        top: 20px !important;
+        width: 60px !important;
+        height: 60px !important;
+        right: 15px !important;
+        top: 15px !important;
     }
 }
 

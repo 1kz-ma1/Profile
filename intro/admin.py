@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.conf import settings
-from .models import BlogPost, Category, SubCategory, Section
+from .models import BlogPost, Category, SubCategory, Section, ContactFormSubmission
 import os
 
 @admin.register(Category)
@@ -148,3 +148,37 @@ class BlogPostAdmin(admin.ModelAdmin):
             )
         
         return super().formfield_for_dbfield(db_field, request, **kwargs)
+
+
+@admin.register(ContactFormSubmission)
+class ContactFormSubmissionAdmin(admin.ModelAdmin):
+    list_display = ('name', 'submitted_at', 'get_average_score_display', 'design', 'portfolio', 'dx_ai', 'navigation', 'information', 'overall')
+    list_filter = ('submitted_at', 'design', 'overall')
+    search_fields = ('name', 'message', 'ip_address')
+    readonly_fields = ('name', 'design', 'portfolio', 'dx_ai', 'navigation', 'information', 'overall', 'message', 'submitted_at', 'ip_address', 'user_agent', 'get_average_score_display')
+    ordering = ('-submitted_at',)
+    
+    fieldsets = (
+        ('送信者情報', {
+            'fields': ('name', 'submitted_at', 'ip_address', 'user_agent')
+        }),
+        ('評価内容', {
+            'fields': ('design', 'portfolio', 'dx_ai', 'navigation', 'information', 'overall', 'get_average_score_display')
+        }),
+        ('ご意見・ご感想', {
+            'fields': ('message',)
+        }),
+    )
+    
+    def get_average_score_display(self, obj):
+        """平均評価点を表示"""
+        return f"{obj.get_average_score():.1f}点"
+    get_average_score_display.short_description = '平均評価'
+    
+    def has_add_permission(self, request):
+        """管理画面からの新規追加を無効化"""
+        return False
+    
+    def has_change_permission(self, request, obj=None):
+        """管理画面からの編集を無効化（閲覧のみ）"""
+        return False
