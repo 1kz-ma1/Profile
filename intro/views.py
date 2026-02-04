@@ -167,6 +167,11 @@ def contact(request):
 """
         
         try:
+            # 環境変数の確認
+            if not settings.EMAIL_HOST_USER or not settings.EMAIL_HOST_PASSWORD:
+                logger.error("EMAIL_HOST_USER または EMAIL_HOST_PASSWORD が設定されていません")
+                return render(request, "contact.html", {'error': 'メール設定が不完全です。管理者にお問い合わせください。'})
+            
             # メール送信
             send_mail(
                 subject=f'ポートフォリオサイトへのお問い合わせ - {name}様より',
@@ -175,14 +180,19 @@ def contact(request):
                 recipient_list=[settings.EMAIL_HOST_USER],
                 fail_silently=False,
             )
+            logger.info(f"メール送信成功: {name}様からのお問い合わせ")
             return redirect("intro:thanks")
         except Exception as e:
             # エラーログを記録（本番環境ではログファイルに記録）
+            import traceback
             logger.error(f"メール送信エラー: {type(e).__name__}: {str(e)}")
-            logger.error(f"EMAIL_HOST_USER: {settings.EMAIL_HOST_USER}")
+            logger.error(f"詳細トレースバック:\n{traceback.format_exc()}")
+            logger.error(f"EMAIL_HOST_USER: {'設定あり' if settings.EMAIL_HOST_USER else '未設定'}")
+            logger.error(f"EMAIL_HOST_PASSWORD: {'設定あり' if settings.EMAIL_HOST_PASSWORD else '未設定'}")
             logger.error(f"EMAIL_HOST: {settings.EMAIL_HOST}")
             logger.error(f"EMAIL_PORT: {settings.EMAIL_PORT}")
+            logger.error(f"EMAIL_USE_TLS: {settings.EMAIL_USE_TLS}")
             logger.error(f"EMAIL_USE_SSL: {settings.EMAIL_USE_SSL}")
-            return render(request, "contact.html", {'error': 'メール送信に失敗しました。後ほどお試しください。'})
+            return render(request, "contact.html", {'error': f'メール送信に失敗しました: {str(e)[:100]}'})
     
     return render(request, "contact.html")

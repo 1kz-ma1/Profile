@@ -236,10 +236,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Email settings
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 465
+# PORT 587 (TLS) の方が安定する場合が多い
+EMAIL_PORT = int(os.environ.get('EMAIL_PORT', '587'))
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', '')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
-EMAIL_USE_TLS = False
-EMAIL_USE_SSL = True
+# PORT 587 を使用する場合は TLS を有効化
+EMAIL_USE_TLS = EMAIL_PORT == 587
+EMAIL_USE_SSL = EMAIL_PORT == 465
+# タイムアウト設定を追加（Railway等のクラウド環境で有効）
+EMAIL_TIMEOUT = 30
 
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
