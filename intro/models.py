@@ -180,3 +180,29 @@ class ContactFormSubmission(models.Model):
         """平均評価点を計算"""
         scores = [self.design, self.portfolio, self.dx_ai, self.navigation, self.information, self.overall]
         return sum(scores) / len(scores)
+
+
+class PortfolioItem(models.Model):
+    """作品紹介アイテム"""
+    title = models.CharField(max_length=200, verbose_name="作品タイトル")
+    description = models.TextField(verbose_name="説明")
+    thumbnail = models.ImageField(upload_to='portfolio_images/', verbose_name="サムネイル画像")
+    demo_url = models.URLField(blank=True, verbose_name="デモURL", help_text="作品のデモページURL")
+    github_url = models.URLField(blank=True, verbose_name="GitHubリポジトリURL")
+    technologies = models.CharField(max_length=500, verbose_name="使用技術", help_text="カンマ区切りで入力（例: Python, Django, PostgreSQL）")
+    display_order = models.IntegerField(default=0, verbose_name="表示順", help_text="数値が小さいほど上に表示")
+    is_published = models.BooleanField(default=True, verbose_name="公開")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="作成日時")
+    updated_at = models.DateTimeField(auto_now=True, verbose_name="更新日時")
+    
+    class Meta:
+        verbose_name = "作品"
+        verbose_name_plural = "作品"
+        ordering = ['display_order', '-created_at']
+    
+    def __str__(self):
+        return self.title
+    
+    def get_tech_list(self):
+        """技術タグをリスト形式で取得"""
+        return [tech.strip() for tech in self.technologies.split(',') if tech.strip()]

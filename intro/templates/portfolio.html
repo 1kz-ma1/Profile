@@ -206,31 +206,37 @@
     </div>
     
     <div class="portfolio-grid">
-        <!-- DX AIモデル -->
-        <article class="portfolio-card">
-            <div class="portfolio-thumbnail has-image">
-                <img src="{% static 'img/100年後の東京.jpg' %}" alt="100年後の東京 - DX AI Model">
-            </div>
-            <div class="portfolio-content">
-                <h3 class="portfolio-title">DX AI Model</h3>
-                <p class="portfolio-description">
-                    DX（デジタルトランスフォーメーション）分野における最新の知見とAI活用事例を体系的に整理。<br>
-                    データサイエンス、機械学習、業務効率化のベストプラクティスを視覚的に表現しました。
-                </p>
-                <div class="portfolio-tech">
-                    <span class="tech-tag">AI/ML</span>
-                    <span class="tech-tag">Data Science</span>
-                    <span class="tech-tag">DX</span>
-                    <span class="tech-tag">GitHub Pages</span>
+        {% if items %}
+            {% for item in items %}
+            <article class="portfolio-card">
+                <div class="portfolio-thumbnail has-image">
+                    <img src="{{ item.thumbnail.url }}" alt="{{ item.title }}">
                 </div>
-                <a href="https://1kz-ma1.github.io/DX_AI_model/" target="_blank" rel="noopener noreferrer" class="portfolio-link">
-                    体験する →
-                </a>
-            </div>
-        </article>
-        
-        <!-- 将来的な作品追加用のプレースホルダー -->
-        <!-- 追加の作品はここに同じ構造で追加可能 -->
+                <div class="portfolio-content">
+                    <h3 class="portfolio-title">{{ item.title }}</h3>
+                    <p class="portfolio-description">
+                        {{ item.description|linebreaks }}
+                    </p>
+                    <div class="portfolio-tech">
+                        {% for tech in item.get_tech_list %}
+                        <span class="tech-tag">{{ tech }}</span>
+                        {% endfor %}
+                    </div>
+                    {% if item.demo_url %}
+                    <a href="{{ item.demo_url }}" target="_blank" rel="noopener noreferrer" class="portfolio-link">
+                        体験する →
+                    </a>
+                    {% elif item.github_url %}
+                    <a href="{{ item.github_url }}" target="_blank" rel="noopener noreferrer" class="portfolio-link">
+                        GitHub →
+                    </a>
+                    {% endif %}
+                </div>
+            </article>
+            {% endfor %}
+        {% else %}
+            <p style="color: #bbb; text-align: center; grid-column: 1 / -1;">現在公開中の作品はありません。</p>
+        {% endif %}
     </div>
 </section>
 

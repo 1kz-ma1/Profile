@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.conf import settings
-from .models import BlogPost, Category, SubCategory, Section, ContactFormSubmission
+from .models import BlogPost, Category, SubCategory, Section, ContactFormSubmission, PortfolioItem
 import os
 
 @admin.register(Category)
@@ -182,3 +182,24 @@ class ContactFormSubmissionAdmin(admin.ModelAdmin):
     def has_change_permission(self, request, obj=None):
         """管理画面からの編集を無効化（閲覧のみ）"""
         return False
+
+
+@admin.register(PortfolioItem)
+class PortfolioItemAdmin(admin.ModelAdmin):
+    list_display = ('title', 'is_published', 'display_order', 'created_at')
+    list_filter = ('is_published', 'created_at')
+    search_fields = ('title', 'description', 'technologies')
+    list_editable = ('is_published', 'display_order')
+    ordering = ('display_order', '-created_at')
+    
+    fieldsets = (
+        ('基本情報', {
+            'fields': ('title', 'description', 'thumbnail')
+        }),
+        ('リンク', {
+            'fields': ('demo_url', 'github_url')
+        }),
+        ('技術・設定', {
+            'fields': ('technologies', 'display_order', 'is_published')
+        }),
+    )

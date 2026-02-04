@@ -8,7 +8,7 @@ from django.core.paginator import Paginator
 from django.core.mail import send_mail
 from django.conf import settings
 from django.http import JsonResponse
-from .models import BlogPost, Category, SubCategory, Section, ContactFormSubmission
+from .models import BlogPost, Category, SubCategory, Section, ContactFormSubmission, PortfolioItem
 from .cache_utils import cache_if_anonymous
 
 logger = logging.getLogger(__name__)
@@ -119,7 +119,9 @@ def like_post(request, pk):
         'liked': liked,
     })
 
-def portfolio(request): return render(request, "portfolio.html")
+def portfolio(request):
+    items = PortfolioItem.objects.filter(is_published=True)
+    return render(request, "portfolio.html", {'items': items})
 def thanks(request): return render(request, "thanks.html")
 
 @csrf_protect
