@@ -85,14 +85,31 @@
 
 {% block contents %}
     <!--サイトナビゲーション-->
-<section id="site-navigation" style="margin-top: calc(100vh + 80px); padding: 80px 20px; background: rgba(17, 34, 64, 0.2);">
+<section id="site-navigation" style="margin-top: calc(100vh + 80px); margin-bottom: 60px; padding: 80px 20px; background: rgba(17, 34, 64, 0.2);">
+    <style>
+        .site-nav-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+        @media (max-width: 768px) {
+            .site-nav-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            #site-navigation {
+                padding: 40px 15px !important;
+                margin-bottom: 30px !important;
+            }
+        }
+    </style>
     <div style="max-width: 1000px; margin: 0 auto; width: 100%;">
         <div style="text-align: center; margin-bottom: 50px;">
             <h2 style="font-size: clamp(2rem, 3vw, 2.8rem); color: #5eb3ff; font-weight: 600; margin-bottom: 15px;">サイト案内</h2>
             <p style="color: #8892b0; font-size: clamp(0.95rem, 1.2vw, 1.1rem);">Site Navigation</p>
         </div>
         
-        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px;">
+        <div class="site-nav-grid">
             <!-- 自己紹介カード -->
             <a href="{% url 'intro:about' %}" style="text-decoration: none; display: block; height: 100%; transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)';" onmouseout="this.style.transform='translateY(0)';">
                 <div style="background: linear-gradient(rgba(10, 14, 39, 0.7), rgba(10, 14, 39, 0.85)), url('{% static 'img/galaxy.jpg' %}') center/cover; border-radius: 20px; overflow: hidden; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3); height: 300px; display: flex; flex-direction: column; justify-content: flex-end; padding: 30px; border: 2px solid rgba(94, 179, 255, 0.2); backdrop-filter: blur(10px);">
