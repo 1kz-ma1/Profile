@@ -21,6 +21,10 @@ def index(request):
 def about(request): 
     return render(request, "about.html")
 
+@cache_page(60 * 60)  # 1時間キャッシュ
+def privacy(request): 
+    return render(request, "privacy.html")
+
 def blog(request):
     # フィルター処理
     posts = BlogPost.objects.filter(is_published=True).prefetch_related('related_posts')

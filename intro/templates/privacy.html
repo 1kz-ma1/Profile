@@ -1,0 +1,175 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="プライバシーポリシー" />
+    <meta name="author" content="木下和磨" />
+    <title>プライバシーポリシー | 木下和磨</title>
+
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+</head>
+
+<body style="background: linear-gradient(rgba(10, 14, 39, 0.85), rgba(10, 14, 39, 0.92)), url('{% static 'img/galaxy.jpg' %}') center/cover no-repeat fixed;">
+<div class="wrapper">
+    <!--ヘッダー-->
+    <div id="menubar_hdr" class="display-none" aria-label="menu button" role="button">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <div id="overlay" class="overlay display-none" aria-hidden="true"></div>
+    <div id="menubar" class="display-none">
+        <nav class="nav-links">
+            <ul>
+                <li><a href="{% url "intro:index" %}">トップページ</a></li>
+                <li><a href="{% url "intro:about" %}">自己紹介</a></li>
+                <li><a href="{% url "intro:portfolio" %}">作品紹介</a></li>
+                <li><a href="{% url "intro:blog" %}">近況報告ブログ</a></li>
+                <li><a href="{% url "intro:contact" %}">お問い合わせ</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!--メインコンテンツ-->
+    <main style="padding: 100px 20px 80px; min-height: 100vh;">
+        <div style="max-width: 900px; margin: 0 auto;">
+            
+            <!-- ヘッダー -->
+            <div style="text-align: center; margin-bottom: 60px;">
+                <h1 style="font-size: clamp(2rem, 3vw, 2.8rem); color: #5eb3ff; font-weight: 600; margin-bottom: 15px;">プライバシーポリシー</h1>
+                <p style="color: #8892b0; font-size: clamp(0.95rem, 1.2vw, 1.1rem);">Privacy Policy</p>
+            </div>
+
+            <!-- コンテンツカード -->
+            <div style="background: rgba(17, 34, 64, 0.6); padding: 40px; border-radius: 15px; backdrop-filter: blur(10px); border: 1px solid rgba(94, 179, 255, 0.2);">
+                
+                <!-- 基本方針 -->
+                <section style="margin-bottom: 40px;">
+                    <h2 style="color: #5eb3ff; font-size: clamp(1.3rem, 2vw, 1.6rem); font-weight: 600; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid rgba(94, 179, 255, 0.3);">基本方針</h2>
+                    <p style="color: #ccd6f6; font-size: clamp(0.95rem, 1.1vw, 1.05rem); line-height: 1.8; margin: 0;">
+                        当サイト（以下「本サイト」）では、ご利用者様の個人情報保護の重要性を認識し、適切な取り扱いと保護に努めております。本プライバシーポリシーは、本サイトにおける個人情報の取り扱いについて定めるものです。
+                    </p>
+                </section>
+
+                <!-- 収集する情報 -->
+                <section style="margin-bottom: 40px;">
+                    <h2 style="color: #5eb3ff; font-size: clamp(1.3rem, 2vw, 1.6rem); font-weight: 600; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid rgba(94, 179, 255, 0.3);">収集する情報</h2>
+                    <p style="color: #ccd6f6; font-size: clamp(0.95rem, 1.1vw, 1.05rem); line-height: 1.8; margin-bottom: 15px;">本サイトでは、以下の情報を収集する場合があります：</p>
+                    <ul style="color: #ccd6f6; font-size: clamp(0.95rem, 1.1vw, 1.05rem); line-height: 1.8; padding-left: 25px;">
+                        <li style="margin-bottom: 10px;"><strong style="color: #5eb3ff;">お問い合わせフォームで入力された情報</strong><br>お名前、評価内容、ご意見・ご感想など</li>
+                        <li style="margin-bottom: 10px;"><strong style="color: #5eb3ff;">アクセス解析情報</strong><br>IPアドレス、ブラウザ情報、アクセス日時、閲覧ページなど</li>
+                    </ul>
+                </section>
+
+                <!-- 利用目的 -->
+                <section style="margin-bottom: 40px;">
+                    <h2 style="color: #5eb3ff; font-size: clamp(1.3rem, 2vw, 1.6rem); font-weight: 600; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid rgba(94, 179, 255, 0.3);">利用目的</h2>
+                    <p style="color: #ccd6f6; font-size: clamp(0.95rem, 1.1vw, 1.05rem); line-height: 1.8; margin-bottom: 15px;">収集した情報は、以下の目的で利用いたします：</p>
+                    <ul style="color: #ccd6f6; font-size: clamp(0.95rem, 1.1vw, 1.05rem); line-height: 1.8; padding-left: 25px;">
+                        <li style="margin-bottom: 10px;">本サイトの改善および品質向上</li>
+                        <li style="margin-bottom: 10px;">お問い合わせへの対応</li>
+                        <li style="margin-bottom: 10px;">サイト利用状況の分析</li>
+                    </ul>
+                </section>
+
+                <!-- 第三者提供 -->
+                <section style="margin-bottom: 40px;">
+                    <h2 style="color: #5eb3ff; font-size: clamp(1.3rem, 2vw, 1.6rem); font-weight: 600; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid rgba(94, 179, 255, 0.3);">第三者への提供</h2>
+                    <p style="color: #ccd6f6; font-size: clamp(0.95rem, 1.1vw, 1.05rem); line-height: 1.8; margin: 0;">
+                        本サイトは、法令に基づく場合を除き、ご本人の同意なく個人情報を第三者に提供することはありません。
+                    </p>
+                </section>
+
+                <!-- Cookie -->
+                <section style="margin-bottom: 40px;">
+                    <h2 style="color: #5eb3ff; font-size: clamp(1.3rem, 2vw, 1.6rem); font-weight: 600; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid rgba(94, 179, 255, 0.3);">Cookieの使用</h2>
+                    <p style="color: #ccd6f6; font-size: clamp(0.95rem, 1.1vw, 1.05rem); line-height: 1.8; margin: 0;">
+                        本サイトでは、サービス向上のためにCookieを使用する場合があります。Cookieの使用を望まない場合は、ブラウザの設定でCookieを無効にすることができますが、一部機能が制限される可能性があります。
+                    </p>
+                </section>
+
+                <!-- セキュリティ -->
+                <section style="margin-bottom: 40px;">
+                    <h2 style="color: #5eb3ff; font-size: clamp(1.3rem, 2vw, 1.6rem); font-weight: 600; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid rgba(94, 179, 255, 0.3);">セキュリティ</h2>
+                    <p style="color: #ccd6f6; font-size: clamp(0.95rem, 1.1vw, 1.05rem); line-height: 1.8; margin: 0;">
+                        個人情報の漏洩、紛失、改ざん等を防止するため、適切なセキュリティ対策を実施しております。
+                    </p>
+                </section>
+
+                <!-- 改定 -->
+                <section style="margin-bottom: 40px;">
+                    <h2 style="color: #5eb3ff; font-size: clamp(1.3rem, 2vw, 1.6rem); font-weight: 600; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid rgba(94, 179, 255, 0.3);">プライバシーポリシーの改定</h2>
+                    <p style="color: #ccd6f6; font-size: clamp(0.95rem, 1.1vw, 1.05rem); line-height: 1.8; margin: 0;">
+                        本プライバシーポリシーは、必要に応じて改定する場合があります。改定後のプライバシーポリシーは、本ページに掲載した時点から効力を生じるものとします。
+                    </p>
+                </section>
+
+                <!-- お問い合わせ -->
+                <section>
+                    <h2 style="color: #5eb3ff; font-size: clamp(1.3rem, 2vw, 1.6rem); font-weight: 600; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid rgba(94, 179, 255, 0.3);">お問い合わせ</h2>
+                    <p style="color: #ccd6f6; font-size: clamp(0.95rem, 1.1vw, 1.05rem); line-height: 1.8; margin: 0;">
+                        本プライバシーポリシーに関するお問い合わせは、<a href="{% url 'intro:contact' %}" style="color: #5eb3ff; text-decoration: underline;">お問い合わせフォーム</a>よりご連絡ください。
+                    </p>
+                </section>
+
+                <!-- 制定日 -->
+                <div style="text-align: right; margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(94, 179, 255, 0.2);">
+                    <p style="color: #8892b0; font-size: 0.95rem; margin: 0;">制定日：2026年2月4日</p>
+                </div>
+
+            </div>
+
+            <!-- 戻るボタン -->
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="{% url 'intro:index' %}" style="display: inline-block; padding: 12px 40px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #fff; text-decoration: none; border-radius: 30px; font-weight: 600; transition: all 0.3s; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(102, 126, 234, 0.6)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(102, 126, 234, 0.4)';">
+                    トップページへ戻る
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- フッター -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <p>© 2025 Kazuma Kinoshita. All Rights Reserved.</p>
+
+            <!-- Instagram SVGアイコン -->
+            <a href="https://www.instagram.com/_kz_ma_/?next=%2F">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="50" height="50" aria-hidden="true" focusable="false" role="img">
+            <defs>
+                <linearGradient id="igGradient" x1="0%" y1="100%" x2="100%" y2="0%">
+                    <stop offset="0%"   stop-color="#F58529"/>
+                    <stop offset="30%"  stop-color="#DD2A7B"/>
+                    <stop offset="60%"  stop-color="#8134AF"/>
+                    <stop offset="100%" stop-color="#515BD4"/>
+                </linearGradient>
+            </defs>
+            <rect x="64" y="64" width="384" height="384" rx="96" ry="96" fill="url(#igGradient)"/>
+            <circle cx="256" cy="256" r="92" fill="#fff"/>
+            <circle cx="256" cy="256" r="64" fill="url(#igGradient)"/>
+            <circle cx="360" cy="152" r="24" fill="#fff"/>
+            </svg>
+            </a>
+
+            <!-- GitHub SVGアイコン -->
+            <a href="https://github.com/1kz-ma1/profile" target="_blank" rel="noopener noreferrer">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="42" height="42" role="img" aria-hidden="true">
+                <path fill="currentColor" fill-rule="evenodd" d="M12 .5A11.5 11.5 0 0 0 .5 12c0 5.08 3.292 9.384 7.865 10.9.575.106.785-.246.785-.55 0-.27-.01-.985-.015-1.934-3.2.696-3.875-1.542-3.875-1.542-.523-1.328-1.277-1.681-1.277-1.681-1.043-.713.079-.699.079-.699 1.152.081 1.76 1.184 1.76 1.184 1.025 1.759 2.69 1.25 3.345.954.104-.758.401-1.25.73-1.538-2.555-.29-5.242-1.278-5.242-5.687 0-1.257.45-2.285 1.188-3.09-.12-.29-.515-1.46.113-3.04 0 0 .967-.31 3.17 1.18.92-.256 1.907-.383 2.887-.388.98.005 1.967.132 2.888.388 2.202-1.49 3.167-1.18 3.167-1.18.63 1.58.235 2.75.115 3.04.739.805 1.186 1.833 1.186 3.09 0 4.42-2.694 5.393-5.257 5.677.413.356.78 1.062.78 2.14 0 1.545-.014 2.788-.014 3.168 0 .306.207.662.793.548A11.502 11.502 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5Z"/>
+            </svg>
+            </a>
+        </div>
+    </footer>
+
+</div>
+
+<!-- jQuery の読み込み -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- メインスクリプト -->
+<script src="{% static 'js/main.js' %}"></script>
+
+</body>
+</html>
