@@ -938,3 +938,58 @@ textarea {
     position: relative;
     box-sizing: border-box;
 }
+
+/* portfolioページ: ヘッダー背景画像 */
+.portfolio-header {
+    opacity: 0.9;
+    background-image: url('../img/intro-header.jpg');
+}
+
+/* blogページ: ヘッダー背景画像 */
+.blog-header {
+    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('../img/blog-header.jpg') center/cover no-repeat;
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+/* indexページ: 最新情報セクション背景 */
+.latest-info {
+    background-image: url('../img/about-header.jpg');
+}
+
+/* thanksページ: ヘッダー背景画像 */
+.thank-img {
+    background-image: url('../img/thanks.jpg');
+}
+
+/* aboutページ: ヘッダー背景画像 */
+.about-hero-header {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)), url('../img/きれいな銀河.jpg') center/cover no-repeat;
+    padding: 80px 20px 60px;
+    position: relative;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* aboutページ: プロフィール画像 */
+.profile-img {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    width: 80px;
+    height: 80px;
+    background-image: url('../img/profile.jpg');
+    background-size: cover;
+    background-position: center;
+    border-radius: 50%;
+    border: 3px solid rgba(94, 179, 255, 0.6);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+    z-index: 10;
+}
