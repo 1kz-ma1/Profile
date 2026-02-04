@@ -85,48 +85,63 @@
 
 {% block contents %}
     <!--最新情報-->
-<section id="news" class="latest-info">
-    <div id="sort-controls" style="text-align:center; margin:10px;">
-    <div class="latest-info-header">
-        <h2>～更新情報～</h2>
-    <button id="sort-toggle" class="news-button">日付：新着順</button>
-    </div>
-    </div>
-    <ul class="news-list">
-    <li>
-        <span class="news-category">「作品紹介ページ公開」</span>
-        <p class="news-title">＜2026年2月2日＞DX AI Modelサイトを作品紹介ページに追加しました。</p>
-    </li>
-    <li>
-        <span class="news-category">「ブログ機能強化」</span>
-        <p class="news-title">＜2026年2月2日＞セクション管理機能を追加。章構成ビューでの整理が容易になりました。</p>
-    </li>
-    <li>
-        <span class="news-category">「ブログビュー切替実装」</span>
-        <p class="news-title">＜2026年1月＞グリッド・章構成・相関図の3種類のビュー切替機能を実装しました。</p>
-    </li>
-    <li>
-        <span class="news-category">「DXカテゴリ追加」</span>
-        <p class="news-title">＜2026年1月＞メインカテゴリにDXを追加。AI活用、医療DX、行政DXなど6つのサブカテゴリを設定しました。</p>
-    </li>
-    <li>
-        <span class="news-category">「自己紹介ページ完成」</span>
-        <p class="news-title">＜2025年10月21日＞自己紹介ページが完成しました。</p>
-    </li>
-    <li>
-        <span class="news-category">「トップページ完成」</span>
-        <p class="news-title">＜2025年10月20日＞トップページが完成しました。</p>
-    </li>
-    <li>
-        <span class="news-category">「作業開始」</span>
-        <p class="news-title">＜2025年10月19日＞作業を開始しました。</p>
-    </li>
-    </ul>
-<!-- ページネーション -->
-    <div id="pagination">
-        <button id="prev">←</button>
-        <span id="page-numbers"></span>
-        <button id="next">→</button>
+<section id="news" class="latest-info" style="padding: 80px 20px; background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0a0e27 100%);">
+    <div style="max-width: 1200px; margin: 0 auto;">
+        <div style="text-align: center; margin-bottom: 50px;">
+            <h2 style="font-size: clamp(2rem, 3vw, 2.8rem); color: #5eb3ff; font-weight: 600; margin-bottom: 15px;">更新情報</h2>
+            <p style="color: #8892b0; font-size: clamp(0.95rem, 1.2vw, 1.1rem);">What's New</p>
+        </div>
+        
+        <div style="display: grid; gap: 20px;">
+            <!-- 更新項目 -->
+            <div style="background: rgba(17, 34, 64, 0.4); padding: 25px 30px; border-radius: 12px; border-left: 4px solid #5eb3ff; backdrop-filter: blur(10px); transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='translateX(5px)'; this.style.boxShadow='0 8px 25px rgba(94, 179, 255, 0.2)';" onmouseout="this.style.transform='translateX(0)'; this.style.boxShadow='none';">
+                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 10px; flex-wrap: wrap; gap: 10px;">
+                    <span style="background: rgba(94, 179, 255, 0.15); color: #5eb3ff; padding: 6px 16px; border-radius: 20px; font-size: 0.85rem; font-weight: 500;">作品紹介ページ公開</span>
+                    <span style="color: #8892b0; font-size: 0.9rem;">2026年2月2日</span>
+                </div>
+                <p style="color: #ccd6f6; font-size: clamp(0.95rem, 1.1vw, 1.05rem); line-height: 1.7; margin: 0;">DX AI Modelサイトを作品紹介ページに追加しました。</p>
+            </div>
+            
+            <div style="background: rgba(17, 34, 64, 0.4); padding: 25px 30px; border-radius: 12px; border-left: 4px solid #5eb3ff; backdrop-filter: blur(10px); transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='translateX(5px)'; this.style.boxShadow='0 8px 25px rgba(94, 179, 255, 0.2)';" onmouseout="this.style.transform='translateX(0)'; this.style.boxShadow='none';">
+                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 10px; flex-wrap: wrap; gap: 10px;">
+                    <span style="background: rgba(94, 179, 255, 0.15); color: #5eb3ff; padding: 6px 16px; border-radius: 20px; font-size: 0.85rem; font-weight: 500;">ブログ機能強化</span>
+                    <span style="color: #8892b0; font-size: 0.9rem;">2026年2月2日</span>
+                </div>
+                <p style="color: #ccd6f6; font-size: clamp(0.95rem, 1.1vw, 1.05rem); line-height: 1.7; margin: 0;">セクション管理機能を追加。章構成ビューでの整理が容易になりました。</p>
+            </div>
+            
+            <div style="background: rgba(17, 34, 64, 0.4); padding: 25px 30px; border-radius: 12px; border-left: 4px solid #5eb3ff; backdrop-filter: blur(10px); transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='translateX(5px)'; this.style.boxShadow='0 8px 25px rgba(94, 179, 255, 0.2)';" onmouseout="this.style.transform='translateX(0)'; this.style.boxShadow='none';">
+                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 10px; flex-wrap: wrap; gap: 10px;">
+                    <span style="background: rgba(94, 179, 255, 0.15); color: #5eb3ff; padding: 6px 16px; border-radius: 20px; font-size: 0.85rem; font-weight: 500;">ブログビュー切替実装</span>
+                    <span style="color: #8892b0; font-size: 0.9rem;">2026年1月</span>
+                </div>
+                <p style="color: #ccd6f6; font-size: clamp(0.95rem, 1.1vw, 1.05rem); line-height: 1.7; margin: 0;">グリッド・章構成・相関図の3種類のビュー切替機能を実装しました。</p>
+            </div>
+            
+            <div style="background: rgba(17, 34, 64, 0.4); padding: 25px 30px; border-radius: 12px; border-left: 4px solid #5eb3ff; backdrop-filter: blur(10px); transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='translateX(5px)'; this.style.boxShadow='0 8px 25px rgba(94, 179, 255, 0.2)';" onmouseout="this.style.transform='translateX(0)'; this.style.boxShadow='none';">
+                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 10px; flex-wrap: wrap; gap: 10px;">
+                    <span style="background: rgba(94, 179, 255, 0.15); color: #5eb3ff; padding: 6px 16px; border-radius: 20px; font-size: 0.85rem; font-weight: 500;">DXカテゴリ追加</span>
+                    <span style="color: #8892b0; font-size: 0.9rem;">2026年1月</span>
+                </div>
+                <p style="color: #ccd6f6; font-size: clamp(0.95rem, 1.1vw, 1.05rem); line-height: 1.7; margin: 0;">メインカテゴリにDXを追加。AI活用、医療DX、行政DXなど6つのサブカテゴリを設定しました。</p>
+            </div>
+            
+            <div style="background: rgba(17, 34, 64, 0.4); padding: 25px 30px; border-radius: 12px; border-left: 4px solid #5eb3ff; backdrop-filter: blur(10px); transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='translateX(5px)'; this.style.boxShadow='0 8px 25px rgba(94, 179, 255, 0.2)';" onmouseout="this.style.transform='translateX(0)'; this.style.boxShadow='none';">
+                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 10px; flex-wrap: wrap; gap: 10px;">
+                    <span style="background: rgba(94, 179, 255, 0.15); color: #5eb3ff; padding: 6px 16px; border-radius: 20px; font-size: 0.85rem; font-weight: 500;">自己紹介ページ完成</span>
+                    <span style="color: #8892b0; font-size: 0.9rem;">2025年10月21日</span>
+                </div>
+                <p style="color: #ccd6f6; font-size: clamp(0.95rem, 1.1vw, 1.05rem); line-height: 1.7; margin: 0;">自己紹介ページが完成しました。</p>
+            </div>
+            
+            <div style="background: rgba(17, 34, 64, 0.4); padding: 25px 30px; border-radius: 12px; border-left: 4px solid #5eb3ff; backdrop-filter: blur(10px); transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='translateX(5px)'; this.style.boxShadow='0 8px 25px rgba(94, 179, 255, 0.2)';" onmouseout="this.style.transform='translateX(0)'; this.style.boxShadow='none';">
+                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 10px; flex-wrap: wrap; gap: 10px;">
+                    <span style="background: rgba(94, 179, 255, 0.15); color: #5eb3ff; padding: 6px 16px; border-radius: 20px; font-size: 0.85rem; font-weight: 500;">サイト公開</span>
+                    <span style="color: #8892b0; font-size: 0.9rem;">2025年10月20日</span>
+                </div>
+                <p style="color: #ccd6f6; font-size: clamp(0.95rem, 1.1vw, 1.05rem); line-height: 1.7; margin: 0;">トップページが完成し、ポートフォリオサイトを公開しました。</p>
+            </div>
+        </div>
     </div>
 
 </section>
