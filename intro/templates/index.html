@@ -85,7 +85,7 @@
 
 {% block contents %}
     <!--サイトナビゲーション-->
-<section id="site-navigation" style="margin-top: calc(100vh + 80px); margin-bottom: 60px; padding: 80px 20px; background: rgba(17, 34, 64, 0.2);">
+<section id="site-navigation" style="margin-top: calc(100vh + 60px); margin-bottom: 0; padding: 60px 20px; background: rgba(17, 34, 64, 0.2);">
     <style>
         .site-nav-grid {
             display: grid;
@@ -98,12 +98,12 @@
                 gap: 20px;
             }
             #site-navigation {
-                padding: 40px 15px !important;
-                margin-bottom: 30px !important;
+                padding: 40px 10px !important;
+                margin-top: calc(100vh + 40px) !important;
             }
         }
     </style>
-    <div style="max-width: 1000px; margin: 0 auto; width: 100%;">
+    <div style="max-width: 1200px; margin: 0 auto; width: 100%; padding: 0 10px;">
         <div style="text-align: center; margin-bottom: 50px;">
             <h2 style="font-size: clamp(2rem, 3vw, 2.8rem); color: #5eb3ff; font-weight: 600; margin-bottom: 15px;">サイト案内</h2>
             <p style="color: #8892b0; font-size: clamp(0.95rem, 1.2vw, 1.1rem);">Site Navigation</p>
@@ -154,8 +154,15 @@
 </section>
 
     <!--最新情報-->
-<section id="news" class="latest-info" style="padding: 80px 20px; background: rgba(17, 34, 64, 0.3); backdrop-filter: blur(10px);">
-    <div style="max-width: 1200px; margin: 0 auto;">
+<section id="news" class="latest-info" style="padding: 60px 20px; background: rgba(17, 34, 64, 0.3); backdrop-filter: blur(10px);">
+    <style>
+        @media (max-width: 768px) {
+            #news {
+                padding: 40px 10px !important;
+            }
+        }
+    </style>
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 10px;">
         <div style="text-align: center; margin-bottom: 50px;">
             <h2 style="font-size: clamp(2rem, 3vw, 2.8rem); color: #5eb3ff; font-weight: 600; margin-bottom: 15px;">更新情報</h2>
             <p style="color: #8892b0; font-size: clamp(0.95rem, 1.2vw, 1.1rem);">What's New</p>
