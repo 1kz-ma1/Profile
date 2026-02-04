@@ -13,6 +13,7 @@
 	align-items: center;
 	justify-content: center;
 	background-color: #000000;  /* 黒背景を追加 */
+	z-index: 10;  /* スクロールバーより前面に表示 */
 }
 
 /*スライドショーを囲むそれぞれのブロック*/
