@@ -203,7 +203,7 @@
                 <div class="portfolio-content">
                     <h3 class="portfolio-title">{{ item.title }}</h3>
                     <p class="portfolio-description">
-                        {{ item.description|linebreaks|urlize|safe }}
+                        {{ item.description|urlize|safe }}
                     </p>
                     <div class="portfolio-tech">
                         {% for tech in item.get_tech_list %}
