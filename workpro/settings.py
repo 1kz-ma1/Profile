@@ -237,7 +237,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Brevo (旧Sendinblue) を使用（RailwayなどのPaaS環境で推奨）
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = os.environ.get('EMAIL_HOST', 'smtp-relay.brevo.com')
-EMAIL_PORT = int(os.environ.get('EMAIL_PORT', '587'))
+# ポート2525を使用（Railway等のクラウド環境でポート587がブロックされている場合）
+EMAIL_PORT = int(os.environ.get('EMAIL_PORT', '2525'))
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', '')  # Brevoのログインメールアドレス
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')  # Brevo SMTPキー
 EMAIL_USE_TLS = True
