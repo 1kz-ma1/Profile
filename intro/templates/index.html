@@ -92,15 +92,33 @@
             <p style="color: #8892b0; font-size: clamp(0.95rem, 1.2vw, 1.1rem);">What's New</p>
         </div>
         
-        <div style="display: grid; gap: 20px;">
-            <!-- 更新項目 -->
-            <div style="background: rgba(17, 34, 64, 0.4); padding: 25px 30px; border-radius: 12px; border-left: 4px solid #5eb3ff; backdrop-filter: blur(10px); transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='translateX(5px)'; this.style.boxShadow='0 8px 25px rgba(94, 179, 255, 0.2)';" onmouseout="this.style.transform='translateX(0)'; this.style.boxShadow='none';">
-                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 10px; flex-wrap: wrap; gap: 10px;">
-                    <span style="background: rgba(94, 179, 255, 0.15); color: #5eb3ff; padding: 6px 16px; border-radius: 20px; font-size: 0.85rem; font-weight: 500;">作品紹介ページ公開</span>
-                    <span style="color: #8892b0; font-size: 0.9rem;">2026年2月2日</span>
+        <div style="max-height: 500px; overflow-y: auto; padding-right: 10px;">
+            <style>
+                /* スクロールバーのカスタマイズ */
+                #news-scroll-container::-webkit-scrollbar {
+                    width: 8px;
+                }
+                #news-scroll-container::-webkit-scrollbar-track {
+                    background: rgba(17, 34, 64, 0.3);
+                    border-radius: 10px;
+                }
+                #news-scroll-container::-webkit-scrollbar-thumb {
+                    background: rgba(94, 179, 255, 0.4);
+                    border-radius: 10px;
+                }
+                #news-scroll-container::-webkit-scrollbar-thumb:hover {
+                    background: rgba(94, 179, 255, 0.6);
+                }
+            </style>
+            <div id="news-scroll-container" style="display: grid; gap: 20px;">
+                <!-- 更新項目 -->
+                <div style="background: rgba(17, 34, 64, 0.4); padding: 25px 30px; border-radius: 12px; border-left: 4px solid #5eb3ff; backdrop-filter: blur(10px); transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='translateX(5px)'; this.style.boxShadow='0 8px 25px rgba(94, 179, 255, 0.2)';" onmouseout="this.style.transform='translateX(0)'; this.style.boxShadow='none';">
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 10px; flex-wrap: wrap; gap: 10px;">
+                        <span style="background: rgba(94, 179, 255, 0.15); color: #5eb3ff; padding: 6px 16px; border-radius: 20px; font-size: 0.85rem; font-weight: 500;">作品紹介ページ公開</span>
+                        <span style="color: #8892b0; font-size: 0.9rem;">2026年2月2日</span>
+                    </div>
+                    <p style="color: #ccd6f6; font-size: clamp(0.95rem, 1.1vw, 1.05rem); line-height: 1.7; margin: 0;">DX AI Modelサイトを作品紹介ページに追加しました。</p>
                 </div>
-                <p style="color: #ccd6f6; font-size: clamp(0.95rem, 1.1vw, 1.05rem); line-height: 1.7; margin: 0;">DX AI Modelサイトを作品紹介ページに追加しました。</p>
-            </div>
             
             <div style="background: rgba(17, 34, 64, 0.4); padding: 25px 30px; border-radius: 12px; border-left: 4px solid #5eb3ff; backdrop-filter: blur(10px); transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='translateX(5px)'; this.style.boxShadow='0 8px 25px rgba(94, 179, 255, 0.2)';" onmouseout="this.style.transform='translateX(0)'; this.style.boxShadow='none';">
                 <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 10px; flex-wrap: wrap; gap: 10px;">
@@ -140,6 +158,7 @@
                     <span style="color: #8892b0; font-size: 0.9rem;">2025年10月20日</span>
                 </div>
                 <p style="color: #ccd6f6; font-size: clamp(0.95rem, 1.1vw, 1.05rem); line-height: 1.7; margin: 0;">トップページが完成し、ポートフォリオサイトを公開しました。</p>
+            </div>
             </div>
         </div>
     </div>
