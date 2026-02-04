@@ -30,6 +30,8 @@
 	text-align: center;			/*テキストをセンタリング*/
 	opacity: 0;
 	transition: opacity 0.8s;	/*ここの1s（＝1秒）を変更すると、フェードのスピードを変更できます。*/
+	padding: 0 20px; /* 左右に余白を追加 */
+	box-sizing: border-box; /* パディングを含めた幅計算 */
 }
 
 .slide0 {
@@ -38,7 +40,7 @@
 
 /*１枚目画像*/
 .slide1 {
-	background: url('../img/白強め青リボン.jpg') no-repeat center center / cover;	/*１枚目の背景画像の読み込み*/
+	background: url('../img/white_blue_ribbon.jpg') no-repeat center center / cover;	/*１枚目の背景画像の読み込み*/
 }
 
 /*２枚目画像*/
@@ -48,12 +50,12 @@
 
 /*３枚目画像*/
 .slide3 {
-	background: url('../img/きれいな砂漠の夜空.jpg') no-repeat center center / cover;	/*３枚目の背景画像の読み込み*/
+	background: url('../img/desert_night_sky.jpg') no-repeat center center / cover;	/*３枚目の背景画像の読み込み*/
 }
 
 /*４枚目画像*/
 .slide4 {
-	background: url('../img/森の夜景.jpg') no-repeat center center / cover;	/*４枚目の背景画像の読み込み*/
+	background: url('../img/forest_night.jpg') no-repeat center center / cover;	/*４枚目の背景画像の読み込み*/
 }
 
 /*５枚目画像*/
@@ -66,29 +68,36 @@
 	font-weight: 1000;
 	text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
 	color: #ffffff;
-
 }
 
 .slide-font h1 {
-	font-size: clamp(0.5rem, 3.5vw, 2.4rem);
+	font-size: clamp(1.1rem, 4vw, 2.4rem);
 	margin-top: 15%;
 	background-color: rgba(44, 50, 102, 0.366);
+	padding: 10px 15px;
+	line-height: 1.4;
 }
 
 .slide-font p {
-	font-size: clamp(0.8rem, 1.7vw, 2rem);
+	font-size: clamp(0.85rem, 2.2vw, 1.3rem);
 	margin-top: clamp(13%, 14%, 15%);
 	background-color: rgba(23, 23, 30, 0.308);
+	padding: 8px 12px;
+	line-height: 1.6;
 }
 
 /* スマホサイズでのテキスト位置調整 */
 @media (max-width: 599px) {
 	.slide-font h1 {
 		margin-top: 30%;  /* スマホでは下に配置 */
+		font-size: clamp(1rem, 4.5vw, 1.4rem);
+		padding: 8px 10px;
 	}
 	
 	.slide-font p {
 		margin-top: 8%;  /* 見出しとの間隔を調整 */
+		font-size: clamp(0.75rem, 3vw, 0.95rem);
+		padding: 6px 10px;
 	}
 }
 
