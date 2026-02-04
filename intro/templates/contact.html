@@ -52,102 +52,235 @@
     <!--メインコンテンツ-->
     <form method="post" action="{% url 'intro:contact' %}">
     <div style="background: linear-gradient(rgba(10, 14, 39, 0.85), rgba(10, 14, 39, 0.92)), url('{% static 'img/contact.jpg' %}') center/cover no-repeat fixed; padding: 60px 20px; min-height: 100vh;">
-    <div class="cont">
-        <p style="text-align: center; font-size: clamp(1rem, 1.3vw, 1.2rem); color: #2c3e50; padding: 20px; margin: 0 auto 30px; max-width: 800px; background: rgba(255,255,255,0.9); border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">よろしければ、当サイトのご感想をお聞かせください（所要時間：約2分）<br><span style="font-size: 0.95em; color: #5eb3ff;">今後の改善の参考にさせていただきます</span></p>
-    <!-- フォームテンプレート -->
-    <div class="cont-slide active" id="slide1">
-        <label>お名前:</label>
-        <input type="text" name="name">
-        <button type="button" onclick="contNextSlide()">次へ</button>
-    </div>
-
-    <div class="cont-slide" id="slide2">
-        <p>サイトの見やすさ、デザインはいかがでしたか？(1/5)</p>
-        <div class="rating">
-            <label><input type="radio" name="design" value="1">最悪 |</label>
-            <label><input type="radio" name="design" value="2">悪い |</label>
-            <label><input type="radio" name="design" value="3">普通 |</label>
-            <label><input type="radio" name="design" value="4">良い |</label>
-            <label><input type="radio" name="design" value="5">最高</label>
+    <div style="max-width: 800px; margin: 0 auto;">
+        
+        <!-- ヘッダー -->
+        <div style="text-align: center; margin-bottom: 40px;">
+            <h2 style="font-size: clamp(1.8rem, 3vw, 2.5rem); color: #5eb3ff; font-weight: 600; margin-bottom: 15px;">サイトのご感想</h2>
+            <p style="color: #ccd6f6; font-size: clamp(0.95rem, 1.2vw, 1.1rem);">今後の改善の参考にさせていただきます（所要時間：約2分）</p>
         </div>
-        <button type="button" onclick="contPrevSlide()">戻る</button>
-        <button type="button" onclick="contNextSlide()">次へ</button>
-    </div>
 
-    <div class="cont-slide" id="slide3">
-        <p>作品紹介の作品は楽しめましたか？(2/5)</p>
-        <div class="rating">
-            <label><input type="radio" name="design" value="1">最悪 |</label>
-            <label><input type="radio" name="design" value="2">悪い |</label>
-            <label><input type="radio" name="design" value="3">普通 |</label>
-            <label><input type="radio" name="design" value="4">良い |</label>
-            <label><input type="radio" name="design" value="5">最高</label>
+        {% csrf_token %}
+        
+        <!-- お名前 -->
+        <div style="background: rgba(17, 34, 64, 0.6); padding: 25px; border-radius: 15px; margin-bottom: 25px; backdrop-filter: blur(10px); border: 1px solid rgba(94, 179, 255, 0.2);">
+            <label style="display: block; color: #5eb3ff; font-size: 1.05rem; font-weight: 600; margin-bottom: 12px;">お名前</label>
+            <input type="text" name="name" required style="width: 100%; padding: 12px 15px; font-size: 1rem; border: 2px solid rgba(94, 179, 255, 0.3); border-radius: 8px; background: rgba(255, 255, 255, 0.05); color: #fff; transition: all 0.3s;" onfocus="this.style.borderColor='#5eb3ff'; this.style.background='rgba(255, 255, 255, 0.1)';" onblur="this.style.borderColor='rgba(94, 179, 255, 0.3)'; this.style.background='rgba(255, 255, 255, 0.05)';">
         </div>
-        <button type="button" onclick="contPrevSlide()">戻る</button>
-        <button type="button" onclick="contNextSlide()">次へ</button>
-    </div>
 
-    <div class="cont-slide" id="slide4">
-    <p>作品紹介の「DX×AIが変える、10年後の日本」はいかがでしたか？(3/6)</p>
-    <div class="rating">
-            <label><input type="radio" name="dx_ai" value="1">最悪 |</label>
-            <label><input type="radio" name="dx_ai" value="2">悪い |</label>
-            <label><input type="radio" name="dx_ai" value="3">普通 |</label>
-            <label><input type="radio" name="dx_ai" value="4">良い |</label>
-            <label><input type="radio" name="dx_ai" value="5">最高</label>
-    </div>
-    <button type="button" onclick="contPrevSlide()">戻る</button>
-    <button type="button" onclick="contNextSlide()">次へ</button>
-    </div>
+        <!-- 評価項目 -->
+        <div style="background: rgba(17, 34, 64, 0.6); padding: 25px; border-radius: 15px; margin-bottom: 25px; backdrop-filter: blur(10px); border: 1px solid rgba(94, 179, 255, 0.2);">
+            <h3 style="color: #5eb3ff; font-size: 1.15rem; font-weight: 600; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 2px solid rgba(94, 179, 255, 0.3);">評価をお聞かせください</h3>
+            
+            <!-- デザイン -->
+            <div style="margin-bottom: 25px;">
+                <label style="display: block; color: #ccd6f6; font-size: 1rem; margin-bottom: 12px;">サイトの見やすさ・デザイン</label>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <label style="flex: 1; min-width: 60px; text-align: center; padding: 10px 8px; background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(94, 179, 255, 0.2); border-radius: 8px; color: #8892b0; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='rgba(94, 179, 255, 0.1)'; this.style.borderColor='#5eb3ff';" onmouseout="if(!this.querySelector('input').checked) {this.style.background='rgba(255, 255, 255, 0.05)'; this.style.borderColor='rgba(94, 179, 255, 0.2)';}">
+                        <input type="radio" name="design" value="1" style="display: none;" onchange="this.parentElement.style.background='rgba(94, 179, 255, 0.2)'; this.parentElement.style.borderColor='#5eb3ff'; this.parentElement.style.color='#5eb3ff';">
+                        <div>😞</div>
+                        <div style="font-size: 0.85rem; margin-top: 4px;">悪い</div>
+                    </label>
+                    <label style="flex: 1; min-width: 60px; text-align: center; padding: 10px 8px; background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(94, 179, 255, 0.2); border-radius: 8px; color: #8892b0; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='rgba(94, 179, 255, 0.1)'; this.style.borderColor='#5eb3ff';" onmouseout="if(!this.querySelector('input').checked) {this.style.background='rgba(255, 255, 255, 0.05)'; this.style.borderColor='rgba(94, 179, 255, 0.2)';}">
+                        <input type="radio" name="design" value="2" style="display: none;" onchange="this.parentElement.style.background='rgba(94, 179, 255, 0.2)'; this.parentElement.style.borderColor='#5eb3ff'; this.parentElement.style.color='#5eb3ff';">
+                        <div>😐</div>
+                        <div style="font-size: 0.85rem; margin-top: 4px;">普通</div>
+                    </label>
+                    <label style="flex: 1; min-width: 60px; text-align: center; padding: 10px 8px; background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(94, 179, 255, 0.2); border-radius: 8px; color: #8892b0; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='rgba(94, 179, 255, 0.1)'; this.style.borderColor='#5eb3ff';" onmouseout="if(!this.querySelector('input').checked) {this.style.background='rgba(255, 255, 255, 0.05)'; this.style.borderColor='rgba(94, 179, 255, 0.2)';}">
+                        <input type="radio" name="design" value="3" style="display: none;" onchange="this.parentElement.style.background='rgba(94, 179, 255, 0.2)'; this.parentElement.style.borderColor='#5eb3ff'; this.parentElement.style.color='#5eb3ff';">
+                        <div>🙂</div>
+                        <div style="font-size: 0.85rem; margin-top: 4px;">良い</div>
+                    </label>
+                    <label style="flex: 1; min-width: 60px; text-align: center; padding: 10px 8px; background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(94, 179, 255, 0.2); border-radius: 8px; color: #8892b0; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='rgba(94, 179, 255, 0.1)'; this.style.borderColor='#5eb3ff';" onmouseout="if(!this.querySelector('input').checked) {this.style.background='rgba(255, 255, 255, 0.05)'; this.style.borderColor='rgba(94, 179, 255, 0.2)';}">
+                        <input type="radio" name="design" value="4" style="display: none;" onchange="this.parentElement.style.background='rgba(94, 179, 255, 0.2)'; this.parentElement.style.borderColor='#5eb3ff'; this.parentElement.style.color='#5eb3ff';">
+                        <div>😊</div>
+                        <div style="font-size: 0.85rem; margin-top: 4px;">とても良い</div>
+                    </label>
+                    <label style="flex: 1; min-width: 60px; text-align: center; padding: 10px 8px; background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(94, 179, 255, 0.2); border-radius: 8px; color: #8892b0; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='rgba(94, 179, 255, 0.1)'; this.style.borderColor='#5eb3ff';" onmouseout="if(!this.querySelector('input').checked) {this.style.background='rgba(255, 255, 255, 0.05)'; this.style.borderColor='rgba(94, 179, 255, 0.2)';}">
+                        <input type="radio" name="design" value="5" style="display: none;" onchange="this.parentElement.style.background='rgba(94, 179, 255, 0.2)'; this.parentElement.style.borderColor='#5eb3ff'; this.parentElement.style.color='#5eb3ff';">
+                        <div>🤩</div>
+                        <div style="font-size: 0.85rem; margin-top: 4px;">最高</div>
+                    </label>
+                </div>
+            </div>
 
-    <div class="cont-slide" id="slide5">
-    <p>ナビゲーション（ページ移動ボタン）は使いやすかったですか？(4/6)</p>
-    <div class="rating">
-            <label><input type="radio" name="navigation" value="1">最悪 |</label>
-            <label><input type="radio" name="navigation" value="2">悪い |</label>
-            <label><input type="radio" name="navigation" value="3">普通 |</label>
-            <label><input type="radio" name="navigation" value="4">良い |</label>
-            <label><input type="radio" name="navigation" value="5">最高</label>
-    </div>
-    <button type="button" onclick="contPrevSlide()">戻る</button>
-    <button type="button" onclick="contNextSlide()">次へ</button>
-    </div>
+            <!-- 作品紹介 -->
+            <div style="margin-bottom: 25px;">
+                <label style="display: block; color: #ccd6f6; font-size: 1rem; margin-bottom: 12px;">作品紹介ページ</label>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <label style="flex: 1; min-width: 60px; text-align: center; padding: 10px 8px; background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(94, 179, 255, 0.2); border-radius: 8px; color: #8892b0; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='rgba(94, 179, 255, 0.1)'; this.style.borderColor='#5eb3ff';" onmouseout="if(!this.querySelector('input').checked) {this.style.background='rgba(255, 255, 255, 0.05)'; this.style.borderColor='rgba(94, 179, 255, 0.2)';}">
+                        <input type="radio" name="portfolio" value="1" style="display: none;" onchange="this.parentElement.style.background='rgba(94, 179, 255, 0.2)'; this.parentElement.style.borderColor='#5eb3ff'; this.parentElement.style.color='#5eb3ff';">
+                        <div>😞</div>
+                        <div style="font-size: 0.85rem; margin-top: 4px;">悪い</div>
+                    </label>
+                    <label style="flex: 1; min-width: 60px; text-align: center; padding: 10px 8px; background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(94, 179, 255, 0.2); border-radius: 8px; color: #8892b0; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='rgba(94, 179, 255, 0.1)'; this.style.borderColor='#5eb3ff';" onmouseout="if(!this.querySelector('input').checked) {this.style.background='rgba(255, 255, 255, 0.05)'; this.style.borderColor='rgba(94, 179, 255, 0.2)';}">
+                        <input type="radio" name="portfolio" value="2" style="display: none;" onchange="this.parentElement.style.background='rgba(94, 179, 255, 0.2)'; this.parentElement.style.borderColor='#5eb3ff'; this.parentElement.style.color='#5eb3ff';">
+                        <div>😐</div>
+                        <div style="font-size: 0.85rem; margin-top: 4px;">普通</div>
+                    </label>
+                    <label style="flex: 1; min-width: 60px; text-align: center; padding: 10px 8px; background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(94, 179, 255, 0.2); border-radius: 8px; color: #8892b0; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='rgba(94, 179, 255, 0.1)'; this.style.borderColor='#5eb3ff';" onmouseout="if(!this.querySelector('input').checked) {this.style.background='rgba(255, 255, 255, 0.05)'; this.style.borderColor='rgba(94, 179, 255, 0.2)';}">
+                        <input type="radio" name="portfolio" value="3" style="display: none;" onchange="this.parentElement.style.background='rgba(94, 179, 255, 0.2)'; this.parentElement.style.borderColor='#5eb3ff'; this.parentElement.style.color='#5eb3ff';">
+                        <div>🙂</div>
+                        <div style="font-size: 0.85rem; margin-top: 4px;">良い</div>
+                    </label>
+                    <label style="flex: 1; min-width: 60px; text-align: center; padding: 10px 8px; background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(94, 179, 255, 0.2); border-radius: 8px; color: #8892b0; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='rgba(94, 179, 255, 0.1)'; this.style.borderColor='#5eb3ff';" onmouseout="if(!this.querySelector('input').checked) {this.style.background='rgba(255, 255, 255, 0.05)'; this.style.borderColor='rgba(94, 179, 255, 0.2)';}">
+                        <input type="radio" name="portfolio" value="4" style="display: none;" onchange="this.parentElement.style.background='rgba(94, 179, 255, 0.2)'; this.parentElement.style.borderColor='#5eb3ff'; this.parentElement.style.color='#5eb3ff';">
+                        <div>😊</div>
+                        <div style="font-size: 0.85rem; margin-top: 4px;">とても良い</div>
+                    </label>
+                    <label style="flex: 1; min-width: 60px; text-align: center; padding: 10px 8px; background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(94, 179, 255, 0.2); border-radius: 8px; color: #8892b0; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='rgba(94, 179, 255, 0.1)'; this.style.borderColor='#5eb3ff';" onmouseout="if(!this.querySelector('input').checked) {this.style.background='rgba(255, 255, 255, 0.05)'; this.style.borderColor='rgba(94, 179, 255, 0.2)';}">
+                        <input type="radio" name="portfolio" value="5" style="display: none;" onchange="this.parentElement.style.background='rgba(94, 179, 255, 0.2)'; this.parentElement.style.borderColor='#5eb3ff'; this.parentElement.style.color='#5eb3ff';">
+                        <div>🤩</div>
+                        <div style="font-size: 0.85rem; margin-top: 4px;">最高</div>
+                    </label>
+                </div>
+            </div>
 
-    <div class="cont-slide" id="slide6">
-    <p>情報は分かりやすかったですか？(5/6)</p>
-    <div class="rating">
-            <label><input type="radio" name="information" value="1">最悪 |</label>
-            <label><input type="radio" name="information" value="2">悪い |</label>
-            <label><input type="radio" name="information" value="3">普通 |</label>
-            <label><input type="radio" name="information" value="4">良い |</label>
-            <label><input type="radio" name="information" value="5">最高</label>
-    </div>
-    <button type="button" onclick="contPrevSlide()">戻る</button>
-    <button type="button" onclick="contNextSlide()">次へ</button>
-    </div>
+            <!-- DX×AI作品 -->
+            <div style="margin-bottom: 25px;">
+                <label style="display: block; color: #ccd6f6; font-size: 1rem; margin-bottom: 12px;">DX×AI作品</label>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <label style="flex: 1; min-width: 60px; text-align: center; padding: 10px 8px; background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(94, 179, 255, 0.2); border-radius: 8px; color: #8892b0; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='rgba(94, 179, 255, 0.1)'; this.style.borderColor='#5eb3ff';" onmouseout="if(!this.querySelector('input').checked) {this.style.background='rgba(255, 255, 255, 0.05)'; this.style.borderColor='rgba(94, 179, 255, 0.2)';}">
+                        <input type="radio" name="dx_ai" value="1" style="display: none;" onchange="this.parentElement.style.background='rgba(94, 179, 255, 0.2)'; this.parentElement.style.borderColor='#5eb3ff'; this.parentElement.style.color='#5eb3ff';">
+                        <div>😞</div>
+                        <div style="font-size: 0.85rem; margin-top: 4px;">悪い</div>
+                    </label>
+                    <label style="flex: 1; min-width: 60px; text-align: center; padding: 10px 8px; background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(94, 179, 255, 0.2); border-radius: 8px; color: #8892b0; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='rgba(94, 179, 255, 0.1)'; this.style.borderColor='#5eb3ff';" onmouseout="if(!this.querySelector('input').checked) {this.style.background='rgba(255, 255, 255, 0.05)'; this.style.borderColor='rgba(94, 179, 255, 0.2)';}">
+                        <input type="radio" name="dx_ai" value="2" style="display: none;" onchange="this.parentElement.style.background='rgba(94, 179, 255, 0.2)'; this.parentElement.style.borderColor='#5eb3ff'; this.parentElement.style.color='#5eb3ff';">
+                        <div>😐</div>
+                        <div style="font-size: 0.85rem; margin-top: 4px;">普通</div>
+                    </label>
+                    <label style="flex: 1; min-width: 60px; text-align: center; padding: 10px 8px; background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(94, 179, 255, 0.2); border-radius: 8px; color: #8892b0; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='rgba(94, 179, 255, 0.1)'; this.style.borderColor='#5eb3ff';" onmouseout="if(!this.querySelector('input').checked) {this.style.background='rgba(255, 255, 255, 0.05)'; this.style.borderColor='rgba(94, 179, 255, 0.2)';}">
+                        <input type="radio" name="dx_ai" value="3" style="display: none;" onchange="this.parentElement.style.background='rgba(94, 179, 255, 0.2)'; this.parentElement.style.borderColor='#5eb3ff'; this.parentElement.style.color='#5eb3ff';">
+                        <div>🙂</div>
+                        <div style="font-size: 0.85rem; margin-top: 4px;">良い</div>
+                    </label>
+                    <label style="flex: 1; min-width: 60px; text-align: center; padding: 10px 8px; background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(94, 179, 255, 0.2); border-radius: 8px; color: #8892b0; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='rgba(94, 179, 255, 0.1)'; this.style.borderColor='#5eb3ff';" onmouseout="if(!this.querySelector('input').checked) {this.style.background='rgba(255, 255, 255, 0.05)'; this.style.borderColor='rgba(94, 179, 255, 0.2)';}">
+                        <input type="radio" name="dx_ai" value="4" style="display: none;" onchange="this.parentElement.style.background='rgba(94, 179, 255, 0.2)'; this.parentElement.style.borderColor='#5eb3ff'; this.parentElement.style.color='#5eb3ff';">
+                        <div>😊</div>
+                        <div style="font-size: 0.85rem; margin-top: 4px;">とても良い</div>
+                    </label>
+                    <label style="flex: 1; min-width: 60px; text-align: center; padding: 10px 8px; background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(94, 179, 255, 0.2); border-radius: 8px; color: #8892b0; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='rgba(94, 179, 255, 0.1)'; this.style.borderColor='#5eb3ff';" onmouseout="if(!this.querySelector('input').checked) {this.style.background='rgba(255, 255, 255, 0.05)'; this.style.borderColor='rgba(94, 179, 255, 0.2)';}">
+                        <input type="radio" name="dx_ai" value="5" style="display: none;" onchange="this.parentElement.style.background='rgba(94, 179, 255, 0.2)'; this.parentElement.style.borderColor='#5eb3ff'; this.parentElement.style.color='#5eb3ff';">
+                        <div>🤩</div>
+                        <div style="font-size: 0.85rem; margin-top: 4px;">最高</div>
+                    </label>
+                </div>
+            </div>
 
-    <div class="cont-slide" id="slide7">
-    <p>全体的な満足度を教えてください。(6/6)</p>
-    <div class="rating">
-        <label><input type="radio" name="overall" value="1">大変不満</label>
-        <label><input type="radio" name="overall" value="2">不満</label>
-        <label><input type="radio" name="overall" value="3">やや不満</label>
-        <label><input type="radio" name="overall" value="4">普通</label>
-        <label><input type="radio" name="overall" value="5">やや満足</label>
-        <label><input type="radio" name="overall" value="6">満足</label>
-        <label><input type="radio" name="overall" value="7">大変満足</label>
-    </div>
-    <button type="button" onclick="contPrevSlide()">戻る</button>
-    <button type="button" onclick="contNextSlide()">次へ</button>
-    </div>
+            <!-- ナビゲーション -->
+            <div style="margin-bottom: 25px;">
+                <label style="display: block; color: #ccd6f6; font-size: 1rem; margin-bottom: 12px;">ナビゲーション・使いやすさ</label>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <label style="flex: 1; min-width: 60px; text-align: center; padding: 10px 8px; background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(94, 179, 255, 0.2); border-radius: 8px; color: #8892b0; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='rgba(94, 179, 255, 0.1)'; this.style.borderColor='#5eb3ff';" onmouseout="if(!this.querySelector('input').checked) {this.style.background='rgba(255, 255, 255, 0.05)'; this.style.borderColor='rgba(94, 179, 255, 0.2)';}">
+                        <input type="radio" name="navigation" value="1" style="display: none;" onchange="this.parentElement.style.background='rgba(94, 179, 255, 0.2)'; this.parentElement.style.borderColor='#5eb3ff'; this.parentElement.style.color='#5eb3ff';">
+                        <div>😞</div>
+                        <div style="font-size: 0.85rem; margin-top: 4px;">悪い</div>
+                    </label>
+                    <label style="flex: 1; min-width: 60px; text-align: center; padding: 10px 8px; background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(94, 179, 255, 0.2); border-radius: 8px; color: #8892b0; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='rgba(94, 179, 255, 0.1)'; this.style.borderColor='#5eb3ff';" onmouseout="if(!this.querySelector('input').checked) {this.style.background='rgba(255, 255, 255, 0.05)'; this.style.borderColor='rgba(94, 179, 255, 0.2)';}">
+                        <input type="radio" name="navigation" value="2" style="display: none;" onchange="this.parentElement.style.background='rgba(94, 179, 255, 0.2)'; this.parentElement.style.borderColor='#5eb3ff'; this.parentElement.style.color='#5eb3ff';">
+                        <div>😐</div>
+                        <div style="font-size: 0.85rem; margin-top: 4px;">普通</div>
+                    </label>
+                    <label style="flex: 1; min-width: 60px; text-align: center; padding: 10px 8px; background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(94, 179, 255, 0.2); border-radius: 8px; color: #8892b0; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='rgba(94, 179, 255, 0.1)'; this.style.borderColor='#5eb3ff';" onmouseout="if(!this.querySelector('input').checked) {this.style.background='rgba(255, 255, 255, 0.05)'; this.style.borderColor='rgba(94, 179, 255, 0.2)';}">
+                        <input type="radio" name="navigation" value="3" style="display: none;" onchange="this.parentElement.style.background='rgba(94, 179, 255, 0.2)'; this.parentElement.style.borderColor='#5eb3ff'; this.parentElement.style.color='#5eb3ff';">
+                        <div>🙂</div>
+                        <div style="font-size: 0.85rem; margin-top: 4px;">良い</div>
+                    </label>
+                    <label style="flex: 1; min-width: 60px; text-align: center; padding: 10px 8px; background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(94, 179, 255, 0.2); border-radius: 8px; color: #8892b0; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='rgba(94, 179, 255, 0.1)'; this.style.borderColor='#5eb3ff';" onmouseout="if(!this.querySelector('input').checked) {this.style.background='rgba(255, 255, 255, 0.05)'; this.style.borderColor='rgba(94, 179, 255, 0.2)';}">
+                        <input type="radio" name="navigation" value="4" style="display: none;" onchange="this.parentElement.style.background='rgba(94, 179, 255, 0.2)'; this.parentElement.style.borderColor='#5eb3ff'; this.parentElement.style.color='#5eb3ff';">
+                        <div>😊</div>
+                        <div style="font-size: 0.85rem; margin-top: 4px;">とても良い</div>
+                    </label>
+                    <label style="flex: 1; min-width: 60px; text-align: center; padding: 10px 8px; background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(94, 179, 255, 0.2); border-radius: 8px; color: #8892b0; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='rgba(94, 179, 255, 0.1)'; this.style.borderColor='#5eb3ff';" onmouseout="if(!this.querySelector('input').checked) {this.style.background='rgba(255, 255, 255, 0.05)'; this.style.borderColor='rgba(94, 179, 255, 0.2)';}">
+                        <input type="radio" name="navigation" value="5" style="display: none;" onchange="this.parentElement.style.background='rgba(94, 179, 255, 0.2)'; this.parentElement.style.borderColor='#5eb3ff'; this.parentElement.style.color='#5eb3ff';">
+                        <div>🤩</div>
+                        <div style="font-size: 0.85rem; margin-top: 4px;">最高</div>
+                    </label>
+                </div>
+            </div>
 
-    
+            <!-- 情報のわかりやすさ -->
+            <div style="margin-bottom: 25px;">
+                <label style="display: block; color: #ccd6f6; font-size: 1rem; margin-bottom: 12px;">情報のわかりやすさ</label>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <label style="flex: 1; min-width: 60px; text-align: center; padding: 10px 8px; background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(94, 179, 255, 0.2); border-radius: 8px; color: #8892b0; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='rgba(94, 179, 255, 0.1)'; this.style.borderColor='#5eb3ff';" onmouseout="if(!this.querySelector('input').checked) {this.style.background='rgba(255, 255, 255, 0.05)'; this.style.borderColor='rgba(94, 179, 255, 0.2)';}">
+                        <input type="radio" name="information" value="1" style="display: none;" onchange="this.parentElement.style.background='rgba(94, 179, 255, 0.2)'; this.parentElement.style.borderColor='#5eb3ff'; this.parentElement.style.color='#5eb3ff';">
+                        <div>😞</div>
+                        <div style="font-size: 0.85rem; margin-top: 4px;">悪い</div>
+                    </label>
+                    <label style="flex: 1; min-width: 60px; text-align: center; padding: 10px 8px; background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(94, 179, 255, 0.2); border-radius: 8px; color: #8892b0; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='rgba(94, 179, 255, 0.1)'; this.style.borderColor='#5eb3ff';" onmouseout="if(!this.querySelector('input').checked) {this.style.background='rgba(255, 255, 255, 0.05)'; this.style.borderColor='rgba(94, 179, 255, 0.2)';}">
+                        <input type="radio" name="information" value="2" style="display: none;" onchange="this.parentElement.style.background='rgba(94, 179, 255, 0.2)'; this.parentElement.style.borderColor='#5eb3ff'; this.parentElement.style.color='#5eb3ff';">
+                        <div>😐</div>
+                        <div style="font-size: 0.85rem; margin-top: 4px;">普通</div>
+                    </label>
+                    <label style="flex: 1; min-width: 60px; text-align: center; padding: 10px 8px; background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(94, 179, 255, 0.2); border-radius: 8px; color: #8892b0; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='rgba(94, 179, 255, 0.1)'; this.style.borderColor='#5eb3ff';" onmouseout="if(!this.querySelector('input').checked) {this.style.background='rgba(255, 255, 255, 0.05)'; this.style.borderColor='rgba(94, 179, 255, 0.2)';}">
+                        <input type="radio" name="information" value="3" style="display: none;" onchange="this.parentElement.style.background='rgba(94, 179, 255, 0.2)'; this.parentElement.style.borderColor='#5eb3ff'; this.parentElement.style.color='#5eb3ff';">
+                        <div>🙂</div>
+                        <div style="font-size: 0.85rem; margin-top: 4px;">良い</div>
+                    </label>
+                    <label style="flex: 1; min-width: 60px; text-align: center; padding: 10px 8px; background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(94, 179, 255, 0.2); border-radius: 8px; color: #8892b0; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='rgba(94, 179, 255, 0.1)'; this.style.borderColor='#5eb3ff';" onmouseout="if(!this.querySelector('input').checked) {this.style.background='rgba(255, 255, 255, 0.05)'; this.style.borderColor='rgba(94, 179, 255, 0.2)';}">
+                        <input type="radio" name="information" value="4" style="display: none;" onchange="this.parentElement.style.background='rgba(94, 179, 255, 0.2)'; this.parentElement.style.borderColor='#5eb3ff'; this.parentElement.style.color='#5eb3ff';">
+                        <div>😊</div>
+                        <div style="font-size: 0.85rem; margin-top: 4px;">とても良い</div>
+                    </label>
+                    <label style="flex: 1; min-width: 60px; text-align: center; padding: 10px 8px; background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(94, 179, 255, 0.2); border-radius: 8px; color: #8892b0; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='rgba(94, 179, 255, 0.1)'; this.style.borderColor='#5eb3ff';" onmouseout="if(!this.querySelector('input').checked) {this.style.background='rgba(255, 255, 255, 0.05)'; this.style.borderColor='rgba(94, 179, 255, 0.2)';}">
+                        <input type="radio" name="information" value="5" style="display: none;" onchange="this.parentElement.style.background='rgba(94, 179, 255, 0.2)'; this.parentElement.style.borderColor='#5eb3ff'; this.parentElement.style.color='#5eb3ff';">
+                        <div>🤩</div>
+                        <div style="font-size: 0.85rem; margin-top: 4px;">最高</div>
+                    </label>
+                </div>
+            </div>
 
-    <div class="cont-slide free" id="slide8">
-        <p>～ご意見・ご感想～</p>
-            {% csrf_token %}
-            <textarea name="message" placeholder="ご自由にお書きください" required></textarea>
-        <button type="submit">送信</button>
+            <!-- 総合満足度 -->
+            <div>
+                <label style="display: block; color: #ccd6f6; font-size: 1rem; margin-bottom: 12px;">総合的な満足度</label>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(75px, 1fr)); gap: 10px;">
+                    <label style="text-align: center; padding: 12px 10px; background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(94, 179, 255, 0.2); border-radius: 8px; color: #8892b0; cursor: pointer; transition: all 0.3s; font-size: 0.9rem;" onmouseover="this.style.background='rgba(94, 179, 255, 0.1)'; this.style.borderColor='#5eb3ff';" onmouseout="if(!this.querySelector('input').checked) {this.style.background='rgba(255, 255, 255, 0.05)'; this.style.borderColor='rgba(94, 179, 255, 0.2)';}">
+                        <input type="radio" name="overall" value="1" style="display: none;" onchange="this.parentElement.style.background='rgba(94, 179, 255, 0.2)'; this.parentElement.style.borderColor='#5eb3ff'; this.parentElement.style.color='#5eb3ff';">
+                        大変不満
+                    </label>
+                    <label style="text-align: center; padding: 12px 10px; background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(94, 179, 255, 0.2); border-radius: 8px; color: #8892b0; cursor: pointer; transition: all 0.3s; font-size: 0.9rem;" onmouseover="this.style.background='rgba(94, 179, 255, 0.1)'; this.style.borderColor='#5eb3ff';" onmouseout="if(!this.querySelector('input').checked) {this.style.background='rgba(255, 255, 255, 0.05)'; this.style.borderColor='rgba(94, 179, 255, 0.2)';}">
+                        <input type="radio" name="overall" value="2" style="display: none;" onchange="this.parentElement.style.background='rgba(94, 179, 255, 0.2)'; this.parentElement.style.borderColor='#5eb3ff'; this.parentElement.style.color='#5eb3ff';">
+                        不満
+                    </label>
+                    <label style="text-align: center; padding: 12px 10px; background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(94, 179, 255, 0.2); border-radius: 8px; color: #8892b0; cursor: pointer; transition: all 0.3s; font-size: 0.9rem;" onmouseover="this.style.background='rgba(94, 179, 255, 0.1)'; this.style.borderColor='#5eb3ff';" onmouseout="if(!this.querySelector('input').checked) {this.style.background='rgba(255, 255, 255, 0.05)'; this.style.borderColor='rgba(94, 179, 255, 0.2)';}">
+                        <input type="radio" name="overall" value="3" style="display: none;" onchange="this.parentElement.style.background='rgba(94, 179, 255, 0.2)'; this.parentElement.style.borderColor='#5eb3ff'; this.parentElement.style.color='#5eb3ff';">
+                        やや不満
+                    </label>
+                    <label style="text-align: center; padding: 12px 10px; background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(94, 179, 255, 0.2); border-radius: 8px; color: #8892b0; cursor: pointer; transition: all 0.3s; font-size: 0.9rem;" onmouseover="this.style.background='rgba(94, 179, 255, 0.1)'; this.style.borderColor='#5eb3ff';" onmouseout="if(!this.querySelector('input').checked) {this.style.background='rgba(255, 255, 255, 0.05)'; this.style.borderColor='rgba(94, 179, 255, 0.2)';}">
+                        <input type="radio" name="overall" value="4" style="display: none;" onchange="this.parentElement.style.background='rgba(94, 179, 255, 0.2)'; this.parentElement.style.borderColor='#5eb3ff'; this.parentElement.style.color='#5eb3ff';">
+                        普通
+                    </label>
+                    <label style="text-align: center; padding: 12px 10px; background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(94, 179, 255, 0.2); border-radius: 8px; color: #8892b0; cursor: pointer; transition: all 0.3s; font-size: 0.9rem;" onmouseover="this.style.background='rgba(94, 179, 255, 0.1)'; this.style.borderColor='#5eb3ff';" onmouseout="if(!this.querySelector('input').checked) {this.style.background='rgba(255, 255, 255, 0.05)'; this.style.borderColor='rgba(94, 179, 255, 0.2)';}">
+                        <input type="radio" name="overall" value="5" style="display: none;" onchange="this.parentElement.style.background='rgba(94, 179, 255, 0.2)'; this.parentElement.style.borderColor='#5eb3ff'; this.parentElement.style.color='#5eb3ff';">
+                        やや満足
+                    </label>
+                    <label style="text-align: center; padding: 12px 10px; background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(94, 179, 255, 0.2); border-radius: 8px; color: #8892b0; cursor: pointer; transition: all 0.3s; font-size: 0.9rem;" onmouseover="this.style.background='rgba(94, 179, 255, 0.1)'; this.style.borderColor='#5eb3ff';" onmouseout="if(!this.querySelector('input').checked) {this.style.background='rgba(255, 255, 255, 0.05)'; this.style.borderColor='rgba(94, 179, 255, 0.2)';}">
+                        <input type="radio" name="overall" value="6" style="display: none;" onchange="this.parentElement.style.background='rgba(94, 179, 255, 0.2)'; this.parentElement.style.borderColor='#5eb3ff'; this.parentElement.style.color='#5eb3ff';">
+                        満足
+                    </label>
+                    <label style="text-align: center; padding: 12px 10px; background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(94, 179, 255, 0.2); border-radius: 8px; color: #8892b0; cursor: pointer; transition: all 0.3s; font-size: 0.9rem;" onmouseover="this.style.background='rgba(94, 179, 255, 0.1)'; this.style.borderColor='#5eb3ff';" onmouseout="if(!this.querySelector('input').checked) {this.style.background='rgba(255, 255, 255, 0.05)'; this.style.borderColor='rgba(94, 179, 255, 0.2)';}">
+                        <input type="radio" name="overall" value="7" style="display: none;" onchange="this.parentElement.style.background='rgba(94, 179, 255, 0.2)'; this.parentElement.style.borderColor='#5eb3ff'; this.parentElement.style.color='#5eb3ff';">
+                        大変満足
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- 自由記述 -->
+        <div style="background: rgba(17, 34, 64, 0.6); padding: 25px; border-radius: 15px; margin-bottom: 30px; backdrop-filter: blur(10px); border: 1px solid rgba(94, 179, 255, 0.2);">
+            <label style="display: block; color: #5eb3ff; font-size: 1.05rem; font-weight: 600; margin-bottom: 12px;">ご意見・ご感想（任意）</label>
+            <textarea name="message" rows="5" style="width: 100%; padding: 15px; font-size: 1rem; border: 2px solid rgba(94, 179, 255, 0.3); border-radius: 8px; background: rgba(255, 255, 255, 0.05); color: #fff; resize: vertical; font-family: inherit; line-height: 1.6;" placeholder="改善してほしい点や感想など、ご自由にお書きください" onfocus="this.style.borderColor='#5eb3ff'; this.style.background='rgba(255, 255, 255, 0.1)';" onblur="this.style.borderColor='rgba(94, 179, 255, 0.3)'; this.style.background='rgba(255, 255, 255, 0.05)';"></textarea>
+        </div>
+
+        <!-- 送信ボタン -->
+        <div style="text-align: center;">
+            <button type="submit" style="padding: 15px 50px; font-size: 1.1rem; font-weight: 600; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #fff; border: none; border-radius: 30px; cursor: pointer; box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4); transition: all 0.3s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 25px rgba(102, 126, 234, 0.6)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 6px 20px rgba(102, 126, 234, 0.4)';">
+                送信する
+            </button>
+        </div>
+    </div>
     </div>
 </div>
 </div>
