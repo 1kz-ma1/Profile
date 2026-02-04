@@ -63,7 +63,7 @@
         }
         
         .portfolio-card {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            background: linear-gradient(135deg, #2d5a9e 0%, #4a7fc8 50%, #5d9dd5 100%);
             border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
@@ -143,11 +143,16 @@
         }
         
         .portfolio-description {
-            color: #ddd;
+            color: #f0f4f8;
             font-size: 0.95rem;
             line-height: 1.7;
             margin-bottom: 20px;
             flex: 1;
+        }
+        
+        .portfolio-description a {
+            color: #a4d7ff;
+            text-decoration: underline;
         }
         
         .portfolio-tech {
@@ -215,7 +220,7 @@
                 <div class="portfolio-content">
                     <h3 class="portfolio-title">{{ item.title }}</h3>
                     <p class="portfolio-description">
-                        {{ item.description|linebreaks|urlize|safe }}
+                        {{ item.description|linebreaks|urlize }}
                     </p>
                     <div class="portfolio-tech">
                         {% for tech in item.get_tech_list %}
