@@ -210,7 +210,7 @@
             {% for item in items %}
             <article class="portfolio-card">
                 <div class="portfolio-thumbnail has-image">
-                    <img src="{{ item.thumbnail.url }}" alt="{{ item.title }}">
+                    <img src="{% static 'img/' %}{{ item.thumbnail }}" alt="{{ item.title }}">
                 </div>
                 <div class="portfolio-content">
                     <h3 class="portfolio-title">{{ item.title }}</h3>
