@@ -74,7 +74,7 @@
 .slide-font h1 {
 	font-size: clamp(1.1rem, 4vw, 2.4rem);
 	margin-top: 15%;
-	background-color: rgba(20, 30, 70, 0.75);
+	background-color: rgba(0, 0, 0, 0.65);
 	padding: 12px 20px;
 	line-height: 1.3;
 	margin-left: -20px;
@@ -86,7 +86,7 @@
 .slide-font p {
 	font-size: clamp(0.85rem, 2.2vw, 1.3rem);
 	margin-top: clamp(13%, 14%, 15%);
-	background-color: rgba(10, 15, 30, 0.7);
+	background-color: rgba(0, 0, 0, 0.6);
 	padding: 10px 20px;
 	line-height: 1.7;
 	margin-left: -20px;
