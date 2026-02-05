@@ -318,12 +318,19 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const siteNav = document.getElementById('site-navigation');
-    const mainImg = document.getElementById('mainimg');
+    const newsSection = document.getElementById('news');
     
-    if (!siteNav || !mainImg) return;
+    if (!siteNav || !newsSection) return;
+    
+    // プレースホルダーを作成
+    const placeholder = document.createElement('div');
+    placeholder.id = 'nav-placeholder';
+    placeholder.style.display = 'none';
+    siteNav.parentNode.insertBefore(placeholder, siteNav);
     
     // サイトナビゲーションの元の位置を取得
-    const navOriginalTop = siteNav.offsetTop;
+    let navOriginalTop = siteNav.offsetTop;
+    let isSticky = false;
     
     // スクロールイベント
     let ticking = false;
@@ -332,11 +339,24 @@ document.addEventListener('DOMContentLoaded', function() {
             window.requestAnimationFrame(function() {
                 const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
                 
-                // スライドショー（mainimg）を超えたら固定
-                if (scrollTop > navOriginalTop - 10) {
-                    siteNav.classList.add('sticky');
+                // newsセクションの手前でstickyを解除
+                const newsTop = newsSection.offsetTop;
+                
+                if (scrollTop > navOriginalTop - 10 && scrollTop < newsTop - siteNav.offsetHeight - 20) {
+                    if (!isSticky) {
+                        // sticky状態に
+                        placeholder.style.display = 'block';
+                        placeholder.style.height = siteNav.offsetHeight + 'px';
+                        siteNav.classList.add('sticky');
+                        isSticky = true;
+                    }
                 } else {
-                    siteNav.classList.remove('sticky');
+                    if (isSticky) {
+                        // sticky解除
+                        placeholder.style.display = 'none';
+                        siteNav.classList.remove('sticky');
+                        isSticky = false;
+                    }
                 }
                 
                 ticking = false;
