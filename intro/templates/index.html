@@ -92,31 +92,6 @@
             gap: 30px;
         }
         
-        /* スクロール追従のスタイル */
-        #site-navigation.sticky {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            width: 100%;
-            margin-top: 0;
-            padding: 20px 20px 40px 20px;
-            z-index: 100;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-            animation: slideDown 0.3s ease-out;
-        }
-        
-        @keyframes slideDown {
-            from {
-                transform: translateY(-100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-        
         @media (max-width: 768px) {
             .site-nav-grid {
                 grid-template-columns: 1fr;
@@ -125,9 +100,6 @@
             #site-navigation {
                 padding: 40px 10px !important;
                 margin-top: calc(100vh + 40px) !important;
-            }
-            #site-navigation.sticky {
-                padding: 15px 10px 30px 10px !important;
             }
         }
     </style>
@@ -313,59 +285,6 @@
 <!-- ローカルの inview 設定とメインスクリプト（assets 配下） -->
 <script src="{% static 'js/jquery.inview_set.js' %} "></script>
 <script src="{% static 'js/main.js' %}"></script>
-
-<!-- サイトナビゲーション追従スクリプト -->
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const siteNav = document.getElementById('site-navigation');
-    const newsSection = document.getElementById('news');
-    
-    if (!siteNav || !newsSection) return;
-    
-    // プレースホルダーを作成
-    const placeholder = document.createElement('div');
-    placeholder.id = 'nav-placeholder';
-    placeholder.style.display = 'none';
-    siteNav.parentNode.insertBefore(placeholder, siteNav);
-    
-    // サイトナビゲーションの元の位置を取得
-    let navOriginalTop = siteNav.offsetTop;
-    let isSticky = false;
-    
-    // スクロールイベント
-    let ticking = false;
-    window.addEventListener('scroll', function() {
-        if (!ticking) {
-            window.requestAnimationFrame(function() {
-                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                
-                // newsセクションの手前でstickyを解除
-                const newsTop = newsSection.offsetTop;
-                
-                if (scrollTop > navOriginalTop - 10 && scrollTop < newsTop - siteNav.offsetHeight - 20) {
-                    if (!isSticky) {
-                        // sticky状態に
-                        placeholder.style.display = 'block';
-                        placeholder.style.height = siteNav.offsetHeight + 'px';
-                        siteNav.classList.add('sticky');
-                        isSticky = true;
-                    }
-                } else {
-                    if (isSticky) {
-                        // sticky解除
-                        placeholder.style.display = 'none';
-                        siteNav.classList.remove('sticky');
-                        isSticky = false;
-                    }
-                }
-                
-                ticking = false;
-            });
-            ticking = true;
-        }
-    });
-});
-</script>
 </div>
 </body>
 
