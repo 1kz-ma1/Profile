@@ -990,13 +990,13 @@ textarea {
     position: absolute;
     right: 20px;
     top: 20px;
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
     background-image: url('../img/prof.jpg');
     background-size: cover;
     background-position: center;
     border-radius: 50%;
-    border: 3px solid rgba(94, 179, 255, 0.6);
+    border: 3px solid rgba(94, 179, 255, 0.4);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
     z-index: 10;
 }
