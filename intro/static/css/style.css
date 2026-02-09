@@ -459,7 +459,7 @@ footer, .footer {
 .latest-info {
     width: 100%;
     position: relative;
-    margin-top: calc(clamp(300px, 50vw, 820px) + 1cm);  /* スライドショーの高さ + 1cm余白 */
+    margin-top: calc(clamp(400px, 40vw, 600px) + 1cm);  /* スライドショーの高さ + 1cm余白 */
 }
 
 .latest-info h2 {
