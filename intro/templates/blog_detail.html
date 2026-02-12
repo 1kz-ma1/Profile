@@ -89,12 +89,12 @@
                     <span style="font-size: 1.5rem;">👍</span>
                     <div>
                         <p id="likes-count" style="margin: 0; color: #667eea; font-weight: bold; font-size: 1.1rem;">{{ post.likes_count }}</p>
-                        <p style="margin: 0; color: #666; font-size: 0.9rem;">人が良いと思いました</p>
+                        <p style="margin: 0; color: #666; font-size: 0.9rem;">おすすめ度</p>
                     </div>
                 </div>
                 <button id="like-btn" style="padding: 10px 20px; background: #667eea; color: #fff; border: none; border-radius: 20px; cursor: pointer; font-weight: bold; transition: background 0.3s; font-size: 0.95rem;" 
                         onclick="likeBlogPost({{ post.id }})">
-                    良いね!
+                    おすすめ！
                 </button>
             </div>
             
@@ -195,16 +195,16 @@ function likeBlogPost(postId) {
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            // 良いね数を更新
+            // おすすめ数を更新
             document.getElementById('likes-count').textContent = data.likes_count;
-            
+
             // ボタンの状態を更新
             if (data.liked) {
                 btn.style.background = '#667eea';
-                btn.textContent = '良いね取り消す';
+                btn.textContent = 'おすすめを取り消す';
             } else {
                 btn.style.background = '#ccc';
-                btn.textContent = '良いね!';
+                btn.textContent = 'おすすめする';
             }
         }
     })
