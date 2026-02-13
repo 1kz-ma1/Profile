@@ -361,9 +361,9 @@
             <span class="icon" aria-hidden="true">☰</span>
             <span>章構成</span>
         </button>
-        <button class="view-btn" data-view="map" role="tab" aria-selected="false" aria-controls="map-view">
-            <span class="icon" aria-hidden="true">∞</span>
-            <span>相関図</span>
+        <button class="view-btn" data-view="ranking" role="tab" aria-selected="false" aria-controls="map-view">
+            <span class="icon" aria-hidden="true">★</span>
+            <span>ランキング</span>
         </button>
     </div>
 
@@ -606,8 +606,9 @@ const blogPosts = [
 
 // 状態管理
 let currentView = 'grid';
-let chaptersRendered = false;
-let mapRendered = false;
+    let chaptersRendered = false;
+    let rankingRendered = false;
+    let mapRendered = false;
 
 // 初期化
 document.addEventListener('DOMContentLoaded', function() {
@@ -664,7 +665,8 @@ function switchView(view, updateHistory = true) {
     // ビューの表示/非表示
     document.getElementById('grid-view').style.display = view === 'grid' ? 'block' : 'none';
     document.getElementById('chapters-view').style.display = view === 'chapters' ? 'block' : 'none';
-    document.getElementById('map-view').style.display = view === 'map' ? 'block' : 'none';
+    // map-view is reused for ranking display (降順ランキング)
+    document.getElementById('map-view').style.display = view === 'map' || view === 'ranking' ? 'block' : 'none';
     
     // フィルターバーの表示/非表示
     document.getElementById('filter-bar').style.display = view === 'grid' ? 'block' : 'none';
@@ -673,7 +675,11 @@ function switchView(view, updateHistory = true) {
     if (view === 'chapters' && !chaptersRendered) {
         renderChaptersView();
         chaptersRendered = true;
+    } else if (view === 'ranking' && !rankingRendered) {
+        renderRankingView();
+        rankingRendered = true;
     } else if (view === 'map' && !mapRendered) {
+        // backward-compat: only render the original map view if explicitly requested
         renderMapView();
         mapRendered = true;
     }
@@ -814,6 +820,54 @@ function renderMapView() {
     
     // ノードの位置が確定した後に線を描画
     setTimeout(() => drawConnections(connectedPosts), 100);
+}
+
+// ランキング表示のレンダリング（likesCount 降順）
+function renderRankingView() {
+    const container = document.getElementById('map-view');
+
+    if (!blogPosts || blogPosts.length === 0) {
+        container.innerHTML = '<p class="loading">記事がありません</p>';
+        return;
+    }
+
+    // likesCount 降順にソート（コピーして破壊しない）
+    const posts = blogPosts.slice().sort((a, b) => (b.likesCount || 0) - (a.likesCount || 0));
+
+    let html = '<div class="chapters-view" style="display:block;">';
+    html += '<h2 class="chapter-title">ランキング（人気順）</h2>';
+    html += '<div class="chapter-posts">';
+
+    posts.forEach((post, idx) => {
+        const rank = idx + 1;
+        const tags = post.fieldTags.map(tag => `<span class="tag">${tag}</span>`).join('');
+        // 上位3位の装飾
+        let badgeStyle = '';
+        let badgeEmoji = '';
+        if (rank === 1) { badgeStyle = 'border: 4px solid #FFD700; box-shadow: 0 6px 18px rgba(255,215,0,0.25);'; badgeEmoji = '🥇'; }
+        if (rank === 2) { badgeStyle = 'border: 4px solid #C0C0C0; box-shadow: 0 6px 18px rgba(192,192,192,0.2);'; badgeEmoji = '🥈'; }
+        if (rank === 3) { badgeStyle = 'border: 4px solid #CD7F32; box-shadow: 0 6px 18px rgba(205,127,50,0.18);'; badgeEmoji = '🥉'; }
+
+        const thumbnailHtml = post.thumbnail ? `<img src="${post.thumbnail}" alt="${post.title}" loading="lazy">` : `<span style="font-size:1.5rem;">📖</span>`;
+
+        html += `
+            <a href="${post.url}" class="chapter-post-item" style="${badgeStyle}">
+                <div class="chapter-post-number">${badgeEmoji ? `<div style=\"font-size:1.2rem;\">${badgeEmoji}</div>` : thumbnailHtml}</div>
+                <div class="chapter-post-content">
+                    <h3 class="chapter-post-title">${rank}. ${post.title}</h3>
+                    <div class="chapter-post-meta">
+                        <time datetime="${post.date}">${post.date}</time>
+                        <span>${post.category}</span>
+                        ${tags ? `<div class="chapter-post-tags">${tags}</div>` : ''}
+                        <span style="margin-left:8px; font-weight:700; color:#667eea;">👍 ${post.likesCount || 0}</span>
+                    </div>
+                </div>
+            </a>
+        `;
+    });
+
+    html += '</div></div>';
+    container.innerHTML = html;
 }
 
 // 関連線を描画
