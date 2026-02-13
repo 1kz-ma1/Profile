@@ -751,7 +751,7 @@ function renderChaptersView() {
                 : `<span style="font-size: 1.5rem;">📖</span>`;
             
             html += `
-                <a href="${post.url}" class="chapter-post-item">
+                <a href="${post.url}" class="chapter-post-item" style="position:relative;">
                     <div class="chapter-post-number">${thumbnailHtml}</div>
                     <div class="chapter-post-content">
                         <h3 class="chapter-post-title">${post.title}</h3>
@@ -761,6 +761,7 @@ function renderChaptersView() {
                             ${tags ? `<div class="chapter-post-tags">${tags}</div>` : ''}
                         </div>
                     </div>
+                    ${post.readTime ? `<div style="position:absolute; right:16px; bottom:12px; color:#666; font-size:0.85rem;">読了: ${post.readTime}分</div>` : ''}
                 </a>
             `;
         });
@@ -854,7 +855,7 @@ function renderRankingView() {
         const thumbnailHtml = post.thumbnail ? `<img src="${post.thumbnail}" alt="${post.title}" loading="lazy">` : `<span style="font-size:1.5rem;">📖</span>`;
 
         html += `
-            <a href="${post.url}" class="chapter-post-item" style="${badgeStyle}">
+            <a href="${post.url}" class="chapter-post-item" style="position:relative; ${badgeStyle}">
                 <div class="chapter-post-number">${badgeEmoji ? `<div style=\"font-size:1.2rem;\">${badgeEmoji}</div>` : thumbnailHtml}</div>
                 <div class="chapter-post-content">
                     <h3 class="chapter-post-title">${rank}. ${post.title}</h3>
@@ -865,6 +866,7 @@ function renderRankingView() {
                         <span style="margin-left:8px; font-weight:700; color:#667eea;">👍 ${post.likesCount || 0}</span>
                     </div>
                 </div>
+                ${post.readTime ? `<div style="position:absolute; right:16px; bottom:12px; color:#666; font-size:0.85rem;">読了: ${post.readTime}分</div>` : ''}
             </a>
         `;
     });
