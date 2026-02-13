@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils import timezone
 from django.core.files.storage import default_storage
+from django.utils.html import strip_tags
+import math
 
 class Category(models.Model):
     """メインカテゴリ"""
@@ -152,6 +154,21 @@ class BlogPost(models.Model):
             return f"chapter_{self.chapter_number:05d}"
         # 未分類は最後
         return "zzz_未分類"
+
+    def get_read_time(self):
+        """Estimate read time in minutes based on content length.
+
+        Uses stripped text length and assumes ~500 characters per minute.
+        Returns an integer minute value (minimum 1).
+        """
+        try:
+            text = strip_tags(self.content or '')
+            # remove whitespace to better estimate Japanese text length
+            chars = len(text.replace('\n', '').replace('\r', '').replace(' ', ''))
+            minutes = max(1, math.ceil(chars / 500))
+            return minutes
+        except Exception:
+            return 1
 
 
 class ContactFormSubmission(models.Model):

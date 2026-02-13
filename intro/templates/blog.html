@@ -425,6 +425,7 @@
                             <time datetime="{{ post.post_date|date:'Y-m-d' }}" style="color: #666; font-size: 0.9rem;">
                                 {{ post.post_date|date:"Y/m/d" }}
                             </time>
+                            <span style="color:#999; font-size:0.85rem; margin-left:8px;">読了: {{ post.get_read_time }}分</span>
                         </div>
                         
                         <h3 style="color: #333; font-size: 1.3rem; margin-bottom: 10px; line-height: 1.4;">
@@ -472,6 +473,7 @@
                             <time datetime="{{ post.post_date|date:'Y-m-d' }}" style="color: #666; font-size: 0.9rem;">
                                 {{ post.post_date|date:"Y/m/d" }}
                             </time>
+                            <span style="color:#999; font-size:0.85rem; margin-left:8px;">読了: {{ post.get_read_time }}分</span>
                         </div>
                         
                         <h3 style="color: #333; font-size: 1.3rem; margin-bottom: 10px; line-height: 1.4;">
@@ -599,6 +601,7 @@ const blogPosts = [
         fieldTags: "{{ post.field_tags|escapejs }}".split(',').map(t => t.trim()).filter(t => t),
         relatedIds: [{% for rel in post.related_posts.all %}{{ rel.pk }}{% if not forloop.last %},{% endif %}{% endfor %}],
         likesCount: {{ post.likes_count }},
+        readTime: {{ post.get_read_time }},
         excerpt: "{{ post.excerpt|default:post.content|truncatechars:100|escapejs }}"
     }{% if not forloop.last %},{% endif %}
     {% endfor %}
