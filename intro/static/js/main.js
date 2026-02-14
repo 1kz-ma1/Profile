@@ -372,6 +372,21 @@ function resetAutoSlide() {
 const sliderRoot = document.getElementById('mainimg');
 if (sliderRoot) {  // スライドショーが存在する場合のみ実行
 const swipeTarget = sliderRoot;
+// 矢印ボタンのイベント追加
+const leftArrow = sliderRoot.querySelector('.slide-arrow-left');
+const rightArrow = sliderRoot.querySelector('.slide-arrow-right');
+if (leftArrow) {
+    leftArrow.addEventListener('click', function() {
+        prevSlide();
+        resetAutoSlide();
+    });
+}
+if (rightArrow) {
+    rightArrow.addEventListener('click', function() {
+        nextSlide();
+        resetAutoSlide();
+    });
+}
 let startX = 0, startY = 0, dragging = false, startTime = 0, pointerId = null;
 const SWIPE_THRESHOLD = 40;  // 最低移動量(px)
 const SWIPE_MAX_TIME  = 700; // 最大判定時間(ms)
