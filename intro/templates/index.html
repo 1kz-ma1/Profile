@@ -46,7 +46,7 @@
 
     <!--見出し-->
 <main>
-<div id="mainimg" aria-live="polite" class="slide-font">
+<div id="mainimg" aria-live="polite" class="slide-font" tabindex="0">
 
     <div class="slide slide0">
     <h1>Welcome to My portfolio</h1>
@@ -78,6 +78,24 @@
     <h1>限界を超える覚悟。</h1>
     <p>壁を越えた先に、可能性がある。<br>挑戦し続けることで未来を切り拓きます。</p>
     </div>
+    <!-- ナビゲーションをスライドの一つとして追加 -->
+    <div class="slide nav-slide">
+        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:30px;box-sizing:border-box;">
+            <h2 style="color:#5eb3ff;margin-bottom:10px;font-size:2rem;">メニュー</h2>
+            <nav style="display:flex;gap:14px;flex-wrap:wrap;justify-content:center;">
+                <a href="{% url 'intro:index' %}" style="color:#ccd6f6;text-decoration:none;padding:10px 18px;background:rgba(10,14,39,0.4);border-radius:10px;">トップ</a>
+                <a href="{% url 'intro:about' %}" style="color:#ccd6f6;text-decoration:none;padding:10px 18px;background:rgba(10,14,39,0.4);border-radius:10px;">自己紹介</a>
+                <a href="{% url 'intro:portfolio' %}" style="color:#ccd6f6;text-decoration:none;padding:10px 18px;background:rgba(10,14,39,0.4);border-radius:10px;">作品紹介</a>
+                <a href="{% url 'intro:blog' %}" style="color:#ccd6f6;text-decoration:none;padding:10px 18px;background:rgba(10,14,39,0.4);border-radius:10px;">ブログ</a>
+                <a href="{% url 'intro:contact' %}" style="color:#ccd6f6;text-decoration:none;padding:10px 18px;background:rgba(10,14,39,0.4);border-radius:10px;">お問い合わせ</a>
+            </nav>
+            <p style="color:#8892b0;margin-top:18px;font-size:0.95rem;">このスライド上のリンクで各ページへ移動できます。</p>
+        </div>
+    </div>
+
+    <!-- スライダー左右矢印ボタン -->
+    <button id="slider-prev" aria-label="前のスライド" style="position:absolute;left:14px;top:50%;transform:translateY(-50%);z-index:40;background:rgba(0,0,0,0.35);border:0;color:#fff;padding:12px;border-radius:6px;cursor:pointer;">◀</button>
+    <button id="slider-next" aria-label="次のスライド" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);z-index:40;background:rgba(0,0,0,0.35);border:0;color:#fff;padding:12px;border-radius:6px;cursor:pointer;">▶</button>
 </div>
 </main>
 

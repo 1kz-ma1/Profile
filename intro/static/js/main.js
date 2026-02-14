@@ -347,6 +347,15 @@ function showSlide(index) {
     slide.style.opacity = i === index ? '1' : '0';
     slide.classList.toggle('active', i === index);
   });
+    // ナビスライドが表示されているときは自動スライドを停止
+    const active = slides[index];
+    if (active && active.classList.contains('nav-slide')) {
+        clearInterval(slideInterval);
+        slideInterval = null;
+    } else {
+        // 自動スライドが動いていなければ再開
+        if (!slideInterval) startAutoSlide();
+    }
 }
 
 function nextSlide() {
@@ -447,6 +456,11 @@ sliderRoot.addEventListener('keydown', (e) => {
 // 初期表示（この順序が安全）
 showSlide(currentIndex);
 startAutoSlide();
+// 矢印ボタンのハンドラ
+const sliderPrevBtn = document.getElementById('slider-prev');
+const sliderNextBtn = document.getElementById('slider-next');
+if (sliderPrevBtn) sliderPrevBtn.addEventListener('click', () => { prevSlide(); resetAutoSlide(); });
+if (sliderNextBtn) sliderNextBtn.addEventListener('click', () => { nextSlide(); resetAutoSlide(); });
 }  // if (sliderRoot) の閉じ括弧
 
 
