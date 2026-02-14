@@ -1,76 +1,8 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="ja">
+{% block contents %}
 
-<!--<head>の内容-->
+    <!-- サイトナビゲーションはヒーロースライド内に移動しました -->
 
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="就活用自己紹介サイト" />
-    <meta name="author" content="木下和磨" />
-    {% block title %}<title>木下和磨のトップページ</title>{% endblock %}
-
-    <link href="{% static 'css/slide.css' %}" rel="stylesheet">
-    <link href="{% static 'css/inview.css' %}" rel="stylesheet">
-    <link href="{% static 'css/style.css' %}" rel="stylesheet">
-</head>
-
-
-
-<body id="index" style="background: linear-gradient(rgba(10, 14, 39, 0.85), rgba(10, 14, 39, 0.92)), url('{% static 'img/galaxy.jpg' %}') center/cover no-repeat fixed;">
-<div class="wrapper">
-    <!--ヘッダー-->
-{% block header %}
-    <!-- ナビゲーション（ハンバーガー対応） -->
-    <div id="menubar_hdr" class="display-none" aria-label="menu button" role="button">
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
-    <!-- オーバーレイ（ハンバーガー開時に表示） -->
-    <div id="overlay" class="overlay display-none" aria-hidden="true"></div>
-    <div id="menubar" class="display-none">
-        <nav class="nav-links">
-            <ul>
-                <li><a href="{% url "intro:index" %}">トップページ</a></li>
-                <li><a href="{% url "intro:about" %}">自己紹介</a></li>
-                <li><a href="{% url "intro:portfolio" %}">作品紹介</a></li>
-                <li><a href="{% url "intro:blog" %}">近況報告ブログ</a></li>
-                <li><a href="{% url "intro:contact" %}">お問い合わせ</a></li>
-            </ul>
-        </nav>
-    </div>
-
-{% endblock %}
-
-    <!--見出し-->
-<main>
-<div id="mainimg" aria-live="polite" class="slide-font" tabindex="0">
-
-    <div class="slide slide0">
-    <h1>Welcome to My portfolio</h1>
-    <p>～木下和磨の自己紹介サイトへようこそ～</p>
-    </div>
-
-    <div class="slide slide1">
-    <h1>ご訪問いただきありがとうございます。</h1>
-    <p>当サイトでは経歴やスキル、<br>サンプル作品も含めてご紹介しております。<br>
-        ぜひご覧ください！</p>
-    </div>
-
-    <div class="slide slide2">
-    <h1>細部にこだわり、成長を絶やさない。</h1>
-    <p>小さな改善が、大きな成果を生む。<br>現状に満足せず、常に改善を続けます。</p>
-    </div>
-
-    <div class="slide slide3">
-    <h1>理想を描き、現実にする。</h1>
-    <p>どんな作品も、輝ける。<br>独創的なアイデアと、それを形にする技術力をお見せします。</p>
-    </div>
-
-    <div class="slide slide4">
-    <h1>常に前を向く。</h1>
+    <!--最新情報-->
     <p>どんな困難も、経験値にする。<br>自分の成長に繋がる経験を大切にします。</p>
     </div>
 
@@ -78,24 +10,61 @@
     <h1>限界を超える覚悟。</h1>
     <p>壁を越えた先に、可能性がある。<br>挑戦し続けることで未来を切り拓きます。</p>
     </div>
-    <!-- ナビゲーションをスライドの一つとして追加 -->
-    <div class="slide nav-slide">
-        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:30px;box-sizing:border-box;">
-            <h2 style="color:#5eb3ff;margin-bottom:10px;font-size:2rem;">メニュー</h2>
-            <nav style="display:flex;gap:14px;flex-wrap:wrap;justify-content:center;">
-                <a href="{% url 'intro:index' %}" style="color:#ccd6f6;text-decoration:none;padding:10px 18px;background:rgba(10,14,39,0.4);border-radius:10px;">トップ</a>
-                <a href="{% url 'intro:about' %}" style="color:#ccd6f6;text-decoration:none;padding:10px 18px;background:rgba(10,14,39,0.4);border-radius:10px;">自己紹介</a>
-                <a href="{% url 'intro:portfolio' %}" style="color:#ccd6f6;text-decoration:none;padding:10px 18px;background:rgba(10,14,39,0.4);border-radius:10px;">作品紹介</a>
-                <a href="{% url 'intro:blog' %}" style="color:#ccd6f6;text-decoration:none;padding:10px 18px;background:rgba(10,14,39,0.4);border-radius:10px;">ブログ</a>
-                <a href="{% url 'intro:contact' %}" style="color:#ccd6f6;text-decoration:none;padding:10px 18px;background:rgba(10,14,39,0.4);border-radius:10px;">お問い合わせ</a>
-            </nav>
-            <p style="color:#8892b0;margin-top:18px;font-size:0.95rem;">このスライド上のリンクで各ページへ移動できます。</p>
+
+    <!-- サイトナビゲーションをスライドとして追加 -->
+    <div class="slide slide-nav" data-nav="true" aria-label="サイトナビゲーションスライド">
+        <div style="width:100%; max-width:1200px; margin: 0 auto; padding: 60px 20px;">
+            <div style="text-align:center; margin-bottom:30px;">
+                <h2 style="font-size: clamp(2rem, 3vw, 2.8rem); color: #5eb3ff; font-weight: 600; margin-bottom: 8px;">サイト案内</h2>
+                <p style="color: #8892b0;">Site Navigation</p>
+            </div>
+            <div class="site-nav-grid" style="display:grid; grid-template-columns:repeat(2,1fr); gap:30px;">
+                <!-- 自己紹介カード -->
+                <a href="{% url 'intro:about' %}" style="text-decoration: none; display: block; height: 100%; transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)';" onmouseout="this.style.transform='translateY(0)';">
+                    <div style="background: linear-gradient(rgba(10, 14, 39, 0.7), rgba(10, 14, 39, 0.85)), url('{% static 'img/galaxy.jpg' %}') center/cover; border-radius: 20px; overflow: hidden; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3); height: 300px; display: flex; flex-direction: column; justify-content: flex-end; padding: 30px; border: 2px solid rgba(94, 179, 255, 0.2); backdrop-filter: blur(10px);">
+                        <div style="background: rgba(17, 34, 64, 0.7); padding: 20px; border-radius: 12px; backdrop-filter: blur(5px);">
+                            <h3 style="color: #5eb3ff; font-size: clamp(1.3rem, 2vw, 1.6rem); font-weight: 600; margin-bottom: 12px;">自己紹介</h3>
+                            <p style="color: #ccd6f6; font-size: clamp(0.9rem, 1vw, 1rem); line-height: 1.6; margin: 0;">経歴、スキル、資格、趣味などを詳しくご紹介します。</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- 作品紹介カード -->
+                <a href="{% url 'intro:portfolio' %}" style="text-decoration: none; display: block; height: 100%; transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)';" onmouseout="this.style.transform='translateY(0)';">
+                    <div style="background: linear-gradient(rgba(10, 14, 39, 0.7), rgba(10, 14, 39, 0.85)), url('{% static 'img/intro-header.jpg' %}') center/cover; border-radius: 20px; overflow: hidden; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3); height: 300px; display: flex; flex-direction: column; justify-content: flex-end; padding: 30px; border: 2px solid rgba(94, 179, 255, 0.2); backdrop-filter: blur(10px);">
+                        <div style="background: rgba(17, 34, 64, 0.7); padding: 20px; border-radius: 12px; backdrop-filter: blur(5px);">
+                            <h3 style="color: #5eb3ff; font-size: clamp(1.3rem, 2vw, 1.6rem); font-weight: 600; margin-bottom: 12px;">作品紹介</h3>
+                            <p style="color: #ccd6f6; font-size: clamp(0.9rem, 1vw, 1rem); line-height: 1.6; margin: 0;">制作したWebアプリやDX×AI作品をご覧いただけます。</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- ブログカード -->
+                <a href="{% url 'intro:blog' %}" style="text-decoration: none; display: block; height: 100%; transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)';" onmouseout="this.style.transform='translateY(0)';">
+                    <div style="background: linear-gradient(rgba(10, 14, 39, 0.7), rgba(10, 14, 39, 0.85)), url('{% static 'img/blog-header.jpg' %}') center/cover; border-radius: 20px; overflow: hidden; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3); height: 300px; display: flex; flex-direction: column; justify-content: flex-end; padding: 30px; border: 2px solid rgba(94, 179, 255, 0.2); backdrop-filter: blur(10px);">
+                        <div style="background: rgba(17, 34, 64, 0.7); padding: 20px; border-radius: 12px; backdrop-filter: blur(5px);">
+                            <h3 style="color: #5eb3ff; font-size: clamp(1.3rem, 2vw, 1.6rem); font-weight: 600; margin-bottom: 12px;">近況報告ブログ</h3>
+                            <p style="color: #ccd6f6; font-size: clamp(0.9rem, 1vw, 1rem); line-height: 1.6; margin: 0;">日々の学習や活動、技術記事などを発信しています。</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- お問い合わせカード -->
+                <a href="{% url 'intro:contact' %}" style="text-decoration: none; display: block; height: 100%; transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)';" onmouseout="this.style.transform='translateY(0)';">
+                    <div style="background: linear-gradient(rgba(10, 14, 39, 0.7), rgba(10, 14, 39, 0.85)), url('{% static 'img/contact.jpg' %}') center/cover; border-radius: 20px; overflow: hidden; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3); height: 300px; display: flex; flex-direction: column; justify-content: flex-end; padding: 30px; border: 2px solid rgba(94, 179, 255, 0.2); backdrop-filter: blur(10px);">
+                        <div style="background: rgba(17, 34, 64, 0.7); padding: 20px; border-radius: 12px; backdrop-filter: blur(5px);">
+                            <h3 style="color: #5eb3ff; font-size: clamp(1.3rem, 2vw, 1.6rem); font-weight: 600; margin-bottom: 12px;">お問い合わせ</h3>
+                            <p style="color: #ccd6f6; font-size: clamp(0.9rem, 1vw, 1rem); line-height: 1.6; margin: 0;">サイトへのご感想やご意見をお聞かせください。</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
         </div>
     </div>
 
-    <!-- スライダー左右矢印ボタン -->
-    <button id="slider-prev" aria-label="前のスライド" style="position:absolute;left:14px;top:50%;transform:translateY(-50%);z-index:40;background:rgba(0,0,0,0.35);border:0;color:#fff;padding:12px;border-radius:6px;cursor:pointer;">◀</button>
-    <button id="slider-next" aria-label="次のスライド" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);z-index:40;background:rgba(0,0,0,0.35);border:0;color:#fff;padding:12px;border-radius:6px;cursor:pointer;">▶</button>
+    <!-- スライダー用の左右矢印ボタン -->
+    <button id="slide-prev" aria-label="前へ" style="position:absolute; left:12px; top:50%; transform:translateY(-50%); z-index:60; background:rgba(7,20,40,0.45); border:none; color:#fff; padding:12px 14px; border-radius:8px; cursor:pointer;">◀</button>
+    <button id="slide-next" aria-label="次へ" style="position:absolute; right:12px; top:50%; transform:translateY(-50%); z-index:60; background:rgba(7,20,40,0.45); border:none; color:#fff; padding:12px 14px; border-radius:8px; cursor:pointer;">▶</button>
 </div>
 </main>
 

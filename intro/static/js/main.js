@@ -347,15 +347,6 @@ function showSlide(index) {
     slide.style.opacity = i === index ? '1' : '0';
     slide.classList.toggle('active', i === index);
   });
-    // ナビスライドが表示されているときは自動スライドを停止
-    const active = slides[index];
-    if (active && active.classList.contains('nav-slide')) {
-        clearInterval(slideInterval);
-        slideInterval = null;
-    } else {
-        // 自動スライドが動いていなければ再開
-        if (!slideInterval) startAutoSlide();
-    }
 }
 
 function nextSlide() {
@@ -369,12 +360,20 @@ function prevSlide() {
 }
 
 function startAutoSlide() {
+    // 自動スライドはナビスライド表示時には動作させない
+    try {
+        const currentSlide = slides[currentIndex];
+        if (currentSlide && currentSlide.dataset && currentSlide.dataset.nav === 'true') {
+            return; // ナビ表示中は自動スライドを開始しない
+        }
+    } catch (e) {}
     slideInterval = setInterval(nextSlide, 5000);
 }
 
 function resetAutoSlide() {
   clearInterval(slideInterval);
-  startAutoSlide();
+    // 自動スライドをリセット（ただしナビ表示中は再開しない）
+    startAutoSlide();
 }
 
 // ===== スワイプ操作（左右のみ） =====
@@ -456,11 +455,37 @@ sliderRoot.addEventListener('keydown', (e) => {
 // 初期表示（この順序が安全）
 showSlide(currentIndex);
 startAutoSlide();
-// 矢印ボタンのハンドラ
-const sliderPrevBtn = document.getElementById('slider-prev');
-const sliderNextBtn = document.getElementById('slider-next');
-if (sliderPrevBtn) sliderPrevBtn.addEventListener('click', () => { prevSlide(); resetAutoSlide(); });
-if (sliderNextBtn) sliderNextBtn.addEventListener('click', () => { nextSlide(); resetAutoSlide(); });
+
+// 矢印ボタンのイベント（pointerdown と click の両方を監視して確実に反応させる）
+const prevBtn = document.getElementById('slide-prev');
+const nextBtn = document.getElementById('slide-next');
+if (prevBtn) {
+    const goPrev = (e) => { e && e.preventDefault && e.preventDefault(); prevSlide(); resetAutoSlide(); };
+    prevBtn.addEventListener('pointerdown', goPrev, { passive: true });
+    prevBtn.addEventListener('click', goPrev);
+}
+if (nextBtn) {
+    const goNext = (e) => { e && e.preventDefault && e.preventDefault(); nextSlide(); resetAutoSlide(); };
+    nextBtn.addEventListener('pointerdown', goNext, { passive: true });
+    nextBtn.addEventListener('click', goNext);
+}
+
+// スライドが切り替わるたびに、自動スライドの停止/再開を判定
+const originalShowSlide = showSlide;
+showSlide = function(index) {
+    originalShowSlide(index);
+    // ナビスライドだけは自動スライドを停止する
+    try {
+        const s = slides[index];
+        if (s && s.dataset && s.dataset.nav === 'true') {
+            clearInterval(slideInterval);
+        } else {
+            // 一度クリアしてから再開（重複防止）
+            clearInterval(slideInterval);
+            startAutoSlide();
+        }
+    } catch (e) {}
+};
 }  // if (sliderRoot) の閉じ括弧
 
 
