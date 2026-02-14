@@ -360,7 +360,7 @@ function prevSlide() {
 }
 
 function startAutoSlide() {
-  slideInterval = setInterval(nextSlide, 3500);
+    slideInterval = setInterval(nextSlide, 5000);
 }
 
 function resetAutoSlide() {
