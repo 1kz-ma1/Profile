@@ -7,9 +7,9 @@
 <head>
     <meta charset="utf-8" />
     <!-- スクロール誘導矢印 -->
-    <div id="scroll-arrow" style="display:none; position:fixed; left:50%; bottom:24px; transform:translateX(-50%); z-index:9999; pointer-events:none;">
-        <div style="width:48px; height:48px; background:rgba(0,0,0,0.15); border-radius:50%; box-shadow:0 4px 16px rgba(0,0,0,0.2); display:flex; align-items:center; justify-content:center;">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+    <div id="scroll-arrow" style="display:none; position:fixed; left:0; right:0; bottom:0; width:100vw; height:120px; z-index:9999; pointer-events:none;">
+        <div style="width:100vw; height:100%; background:linear-gradient(to top, rgba(0,0,0,0.35) 70%, rgba(0,0,0,0.0) 100%); display:flex; align-items:flex-end; justify-content:center;">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:12px; filter:drop-shadow(0 2px 8px rgba(0,0,0,0.4));"><polyline points="6 9 12 15 18 9"/></svg>
         </div>
     </div>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
