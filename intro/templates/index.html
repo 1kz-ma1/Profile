@@ -6,7 +6,30 @@
 
 <head>
     <meta charset="utf-8" />
+    <!-- スクロール誘導矢印 -->
+    <div id="scroll-arrow" style="display:none; position:fixed; left:50%; bottom:24px; transform:translateX(-50%); z-index:9999; pointer-events:none;">
+        <div style="width:48px; height:48px; background:rgba(0,0,0,0.15); border-radius:50%; box-shadow:0 4px 16px rgba(0,0,0,0.2); display:flex; align-items:center; justify-content:center;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+    </div>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+</html>
+<script>
+// 5秒間操作がなければ矢印表示、操作で非表示＆リセット
+let arrowTimeout;
+const arrow = document.getElementById('scroll-arrow');
+const showArrow = () => { arrow.style.display = 'block'; };
+const hideArrow = () => { arrow.style.display = 'none'; };
+const resetArrowTimer = () => {
+    hideArrow();
+    if (arrowTimeout) clearTimeout(arrowTimeout);
+    arrowTimeout = setTimeout(showArrow, 5000);
+};
+['mousemove','keydown','scroll','touchstart','click'].forEach(evt => {
+    window.addEventListener(evt, resetArrowTimer, {passive:true});
+});
+resetArrowTimer();
+</script>
     <meta name="description" content="就活用自己紹介サイト" />
     <meta name="author" content="木下和磨" />
     {% block title %}<title>木下和磨のトップページ</title>{% endblock %}
