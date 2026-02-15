@@ -26,15 +26,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 </html>
 <script>
-// 5秒間操作がなければ矢印表示、操作で非表示＆リセット
+// 5秒間操作がなければ矢印を1回だけ表示、その後は再表示しない
 let arrowTimeout;
+let arrowShown = false;
 const arrow = document.getElementById('scroll-arrow');
-const showArrow = () => { arrow.style.display = 'block'; };
+const showArrowOnce = () => {
+    if (!arrowShown) {
+        arrow.style.display = 'block';
+        arrowShown = true;
+    }
+};
 const hideArrow = () => { arrow.style.display = 'none'; };
 const resetArrowTimer = () => {
+    if (arrowShown) return; // 1回表示したら以降は何もしない
     hideArrow();
     if (arrowTimeout) clearTimeout(arrowTimeout);
-    arrowTimeout = setTimeout(showArrow, 5000);
+    arrowTimeout = setTimeout(showArrowOnce, 5000);
 };
 ['mousemove','keydown','scroll','touchstart','click'].forEach(evt => {
     window.addEventListener(evt, resetArrowTimer, {passive:true});
