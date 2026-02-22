@@ -6,48 +6,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <!-- スクロール誘導矢印 -->
-    <div id="scroll-arrow" style="display:none; position:fixed; left:0; right:0; bottom:0; width:100vw; height:120px; z-index:9999; pointer-events:none;">
-        <div style="width:100vw; height:100%; background:linear-gradient(to top, rgba(0,0,0,0.35) 70%, rgba(0,0,0,0.0) 100%); display:flex; align-items:flex-end; justify-content:center;">
-            <svg class="bounce-arrow" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:12px; filter:drop-shadow(0 2px 8px rgba(0,0,0,0.4));"><polyline points="6 9 12 15 18 9"/></svg>
-        </body>
-        <style>
-        .bounce-arrow {
-            animation: bounce 1.2s infinite;
-        }
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            30% { transform: translateY(10px); }
-            60% { transform: translateY(0); }
-        }
-        </style>
-        </div>
-    </div>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-</html>
-<script>
-// 5秒間操作がなければ矢印を1回だけ表示、その後は再表示しない
-let arrowTimeout;
-let arrowShown = false;
-const arrow = document.getElementById('scroll-arrow');
-const showArrowOnce = () => {
-    if (!arrowShown) {
-        arrow.style.display = 'block';
-        arrowShown = true;
-    }
-};
-const hideArrow = () => { arrow.style.display = 'none'; };
-const resetArrowTimer = () => {
-    if (arrowShown) return; // 1回表示したら以降は何もしない
-    hideArrow();
-    if (arrowTimeout) clearTimeout(arrowTimeout);
-    arrowTimeout = setTimeout(showArrowOnce, 5000);
-};
-['mousemove','keydown','scroll','touchstart','click'].forEach(evt => {
-    window.addEventListener(evt, resetArrowTimer, {passive:true});
-});
-resetArrowTimer();
-</script>
     <meta name="description" content="就活用自己紹介サイト" />
     <meta name="author" content="木下和磨" />
     {% block title %}<title>木下和磨のトップページ</title>{% endblock %}
@@ -60,6 +19,45 @@ resetArrowTimer();
 
 
 <body id="index" style="background: linear-gradient(rgba(10, 14, 39, 0.85), rgba(10, 14, 39, 0.92)), url('{% static 'img/galaxy.jpg' %}') center/cover no-repeat fixed;">
+    <!-- スクロール誘導矢印（body直下に移動） -->
+    <div id="scroll-arrow" style="display:none; position:fixed; left:0; right:0; bottom:0; width:100vw; height:120px; z-index:9999; pointer-events:none;">
+        <div style="width:100vw; height:100%; background:linear-gradient(to top, rgba(0,0,0,0.35) 70%, rgba(0,0,0,0.0) 100%); display:flex; align-items:flex-end; justify-content:center;">
+            <svg class="bounce-arrow" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:12px; filter:drop-shadow(0 2px 8px rgba(0,0,0,0.4));"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+    </div>
+    <style>
+    .bounce-arrow {
+        animation: bounce 1.2s infinite;
+    }
+    @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        30% { transform: translateY(10px); }
+        60% { transform: translateY(0); }
+    }
+    </style>
+    <script>
+    // 5秒間操作がなければ矢印を1回だけ表示、その後は再表示しない
+    let arrowTimeout;
+    let arrowShown = false;
+    const arrow = document.getElementById('scroll-arrow');
+    const showArrowOnce = () => {
+        if (!arrowShown && arrow) {
+            arrow.style.display = 'block';
+            arrowShown = true;
+        }
+    };
+    const hideArrow = () => { if (arrow) arrow.style.display = 'none'; };
+    const resetArrowTimer = () => {
+        if (arrowShown) return; // 1回表示したら以降は何もしない
+        hideArrow();
+        if (arrowTimeout) clearTimeout(arrowTimeout);
+        arrowTimeout = setTimeout(showArrowOnce, 5000);
+    };
+    ['mousemove','keydown','scroll','touchstart','click'].forEach(evt => {
+        window.addEventListener(evt, resetArrowTimer, {passive:true});
+    });
+    resetArrowTimer();
+    </script>
 <div class="wrapper">
     <!--ヘッダー-->
 {% block header %}
