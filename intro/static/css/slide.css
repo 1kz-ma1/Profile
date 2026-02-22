@@ -23,7 +23,7 @@
 
 /*３枚の画像の共通設定*/
 .slide {
-	width: 100%;height: clamp(500px, 60vw, 1000px);
+	width: 100%;height: clamp(500px, 65vw, 1000px);
 	margin: 0 auto;
 	position: absolute; right:0;
 	align-items: center;
