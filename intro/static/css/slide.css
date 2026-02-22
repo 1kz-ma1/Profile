@@ -30,8 +30,7 @@
 	justify-content: center;	/*テキストブロックを中央に*/
 	text-align: center;			/*テキストをセンタリング*/
 	opacity: 0;
-	transition: opacity 0.8s;	/*ここの1s（＝1秒）を変更すると、フェードのスピードを変更できます。*/
-	padding: 0 20px; /* 左右に余白を追加 */
+	transition: opacity 1s;	/*ここの1s（＝1秒）を変更すると、フェードのスピードを変更できます。*/
 	box-sizing: border-box; /* パディングを含めた幅計算 */
 }
 
