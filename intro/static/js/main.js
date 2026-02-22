@@ -415,7 +415,17 @@ if (window.PointerEvent) {
 
   const endPointer = (e) => {
     onSwipeEnd(e.clientX ?? startX, e.clientY ?? startY); // ← 終了時の座標を使うと判定が素直
-    swipeTarget.releasePointerCapture?.(pointerId);
+    // 安全にリリースする: イベントの pointerId が使える場合はそれを優先し、
+    // 要素がその pointer をキャプチャしているか確認してから呼ぶ
+    const endId = (e && typeof e.pointerId === 'number') ? e.pointerId : pointerId;
+    if (endId != null && swipeTarget.hasPointerCapture?.(endId)) {
+        try {
+            swipeTarget.releasePointerCapture?.(endId);
+        } catch (err) {
+            // releasePointerCapture が例外を投げても無視する
+            console.debug('releasePointerCapture failed:', err);
+        }
+    }
     pointerId = null;
   };
   swipeTarget.addEventListener('pointerup', endPointer, { passive: true });
