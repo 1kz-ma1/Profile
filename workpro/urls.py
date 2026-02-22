@@ -6,7 +6,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('intro.urls')), 
+    path('', include(('intro.urls', 'intro'), namespace='intro')),
 ]
 
 # Serve media files in both development and production (Railway ephemeral filesystem)
