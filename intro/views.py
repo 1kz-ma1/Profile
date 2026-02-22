@@ -15,7 +15,12 @@ logger = logging.getLogger(__name__)
 
 @cache_page(60 * 60)  # 1時間キャッシュ
 def index(request): 
-    return render(request, "index.html")
+    # トップページでも作品の一部を表示する（公開中の作品を最大6件）
+    items = PortfolioItem.objects.filter(is_published=True).order_by('display_order', '-created_at')[:6]
+    context = {
+        'items': items,
+    }
+    return render(request, "index.html", context)
 
 @cache_page(60 * 60)  # 1時間キャッシュ
 def about(request): 
