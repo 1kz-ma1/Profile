@@ -166,15 +166,19 @@ nav {
 }
 
 .nav-links a:hover {
-    background-color: rgba(0, 0, 0, 0.75);
+    background-color: rgba(255, 255, 255, 0.08);
     transform: translateY(-2px);
+    transition: background-color 220ms ease, transform 180ms ease;
 }
 
 /* 現在閲覧中のページのナビを薄く表示して視認性を向上 */
 .nav-links a.active,
 .nav-links a[aria-current="page"] {
-    opacity: 0.75;
-    background-color: rgba(0, 0, 0, 0.45);
+    /* Active state should match hover appearance */
+    background-color: rgba(255, 255, 255, 0.08) !important;
+    transform: translateY(-2px);
+    transition: background-color 220ms ease, transform 180ms ease;
+    opacity: 1; /* keep full legibility */
 }
 
 .header {
