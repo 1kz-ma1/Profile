@@ -129,7 +129,7 @@ resetArrowTimer();
 
 {% block contents %}
 <!-- 自己紹介ページ誘導セクション -->
-    <section style="margin-bottom: 80px;">
+    <section style="margin-top: calc(100vh + 20px); margin-bottom: 80px;">
         <div style="text-align: center; margin-bottom: 40px;">
             <h2 style="font-size: clamp(1.8rem, 2.8vw, 2.5rem); color: #5eb3ff; font-weight: 600; margin-bottom: 15px;">About Me</h2>
             <p style="color: #8892b0; font-size: clamp(0.95rem, 1.2vw, 1.1rem);">技術と戦略で課題を解決する</p>
@@ -156,40 +156,8 @@ resetArrowTimer();
         </div>
     </section>
 
-            <!-- 作品紹介カード -->
-            <a href="{% url 'intro:portfolio' %}" style="text-decoration: none; display: block; height: 100%; transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)';" onmouseout="this.style.transform='translateY(0)';">
-                <div style="background: linear-gradient(rgba(10, 14, 39, 0.7), rgba(10, 14, 39, 0.85)), url('{% static 'img/intro-header.jpg' %}') center/cover; border-radius: 20px; overflow: hidden; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3); height: 300px; display: flex; flex-direction: column; justify-content: flex-end; padding: 30px; border: 2px solid rgba(94, 179, 255, 0.2); backdrop-filter: blur(10px);">
-                    <div style="background: rgba(17, 34, 64, 0.7); padding: 20px; border-radius: 12px; backdrop-filter: blur(5px);">
-                        <h3 style="color: #5eb3ff; font-size: clamp(1.3rem, 2vw, 1.6rem); font-weight: 600; margin-bottom: 12px;">作品紹介</h3>
-                        <p style="color: #ccd6f6; font-size: clamp(0.9rem, 1vw, 1rem); line-height: 1.6; margin: 0;">制作したWebアプリやDX×AI作品をご覧いただけます。</p>
-                    </div>
-                </div>
-            </a>
 
-            <!-- ブログカード -->
-            <a href="{% url 'intro:blog' %}" style="text-decoration: none; display: block; height: 100%; transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)';" onmouseout="this.style.transform='translateY(0)';">
-                <div style="background: linear-gradient(rgba(10, 14, 39, 0.7), rgba(10, 14, 39, 0.85)), url('{% static 'img/blog-header.jpg' %}') center/cover; border-radius: 20px; overflow: hidden; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3); height: 300px; display: flex; flex-direction: column; justify-content: flex-end; padding: 30px; border: 2px solid rgba(94, 179, 255, 0.2); backdrop-filter: blur(10px);">
-                    <div style="background: rgba(17, 34, 64, 0.7); padding: 20px; border-radius: 12px; backdrop-filter: blur(5px);">
-                        <h3 style="color: #5eb3ff; font-size: clamp(1.3rem, 2vw, 1.6rem); font-weight: 600; margin-bottom: 12px;">近況報告ブログ</h3>
-                        <p style="color: #ccd6f6; font-size: clamp(0.9rem, 1vw, 1rem); line-height: 1.6; margin: 0;">日々の学習や活動、技術記事などを発信しています。</p>
-                    </div>
-                </div>
-            </a>
-
-            <!-- お問い合わせカード -->
-            <a href="{% url 'intro:contact' %}" style="text-decoration: none; display: block; height: 100%; transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)';" onmouseout="this.style.transform='translateY(0)';">
-                <div style="background: linear-gradient(rgba(10, 14, 39, 0.7), rgba(10, 14, 39, 0.85)), url('{% static 'img/contact.jpg' %}') center/cover; border-radius: 20px; overflow: hidden; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3); height: 300px; display: flex; flex-direction: column; justify-content: flex-end; padding: 30px; border: 2px solid rgba(94, 179, 255, 0.2); backdrop-filter: blur(10px);">
-                    <div style="background: rgba(17, 34, 64, 0.7); padding: 20px; border-radius: 12px; backdrop-filter: blur(5px);">
-                        <h3 style="color: #5eb3ff; font-size: clamp(1.3rem, 2vw, 1.6rem); font-weight: 600; margin-bottom: 12px;">お問い合わせ</h3>
-                        <p style="color: #ccd6f6; font-size: clamp(0.9rem, 1vw, 1rem); line-height: 1.6; margin: 0;">サイトへのご感想やご意見をお聞かせください。</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-    </div>
-</section>
-
-<section id="portfolio" style="background: linear-gradient(rgba(10, 14, 39, 0.85), rgba(10, 14, 39, 0.92)), url('{% static 'img/galaxy.jpg' %}') center/cover no-repeat fixed; padding: 80px 20px; min-height: 100vh;">
+    <section id="portfolio" style="background: linear-gradient(rgba(10, 14, 39, 0.85), rgba(10, 14, 39, 0.92)), url('{% static 'img/galaxy.jpg' %}') center/cover no-repeat fixed; padding: 80px 20px; min-height: 100vh;">
     <style="max-width: 1200px; margin: 0 auto;">
     <div style="text-align: center; margin-bottom: 50px;">
         <h2 style="font-size: clamp(2rem, 3vw, 2.8rem); color: #5eb3ff; font-weight: 600; margin-bottom: 15px;">トピックス</h2>
