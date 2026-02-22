@@ -170,6 +170,13 @@ nav {
     transform: translateY(-2px);
 }
 
+/* 現在閲覧中のページのナビを薄く表示して視認性を向上 */
+.nav-links a.active,
+.nav-links a[aria-current="page"] {
+    opacity: 0.75;
+    background-color: rgba(0, 0, 0, 0.45);
+}
+
 .header {
     font-size : clamp(1.4rem, 2.2rem, 2.7rem);
     text-align: center;
