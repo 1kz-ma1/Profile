@@ -30,11 +30,16 @@
     <div id="menubar" class="display-none">
         <nav class="nav-links">
             <ul>
-                <li><a href="{% url 'intro:index' %}">トップページ</a></li>
-                <li><a href="{% url 'intro:about' %}">自己紹介</a></li>
-                <li><a href="{% url 'intro:portfolio' %}">作品紹介</a></li>
-                <li><a href="{% url 'intro:blog' %}">近況報告ブログ</a></li>
-                <li><a href="{% url 'intro:contact' %}">お問い合わせ</a></li>
+                {% url 'intro:index' as url_index %}
+                {% url 'intro:about' as url_about %}
+                {% url 'intro:portfolio' as url_portfolio %}
+                {% url 'intro:blog' as url_blog %}
+                {% url 'intro:contact' as url_contact %}
+                <li><a href="{{ url_index }}" {% if request.path == url_index %}class="active" aria-current="page"{% endif %}>トップページ</a></li>
+                <li><a href="{{ url_about }}" {% if request.path == url_about %}class="active" aria-current="page"{% endif %}>自己紹介</a></li>
+                <li><a href="{{ url_portfolio }}" {% if request.path == url_portfolio %}class="active" aria-current="page"{% endif %}>作品紹介</a></li>
+                <li><a href="{{ url_blog }}" {% if request.path == url_blog %}class="active" aria-current="page"{% endif %}>近況報告ブログ</a></li>
+                <li><a href="{{ url_contact }}" {% if request.path == url_contact %}class="active" aria-current="page"{% endif %}>お問い合わせ</a></li>
             </ul>
         </nav>
     </div>
