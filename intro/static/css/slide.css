@@ -99,7 +99,6 @@
 		margin-top: 30%;
 		font-size: clamp(0.9rem, 3.8vw, 1.2rem);
 		padding: 10px 0;
-		background-color: rgba(20, 30, 70, 0.85);
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
@@ -111,10 +110,9 @@
 	}
 	
 	.slide-font p {
-		margin-top: 5%;
+		margin-top: 10%;
 		font-size: clamp(0.7rem, 2.5vw, 0.88rem);
 		padding: 8px 0;
-		background-color: rgba(10, 15, 30, 0.8);
 		margin-left: -20px;
 		margin-right: -20px;
 		position: relative;
