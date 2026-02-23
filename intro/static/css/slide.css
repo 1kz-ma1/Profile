@@ -30,7 +30,7 @@
 	text-align: center;			/*テキストをセンタリング*/
 	opacity: 0;
 	transition: opacity 0.8s;	/*ここの1s（＝1秒）を変更すると、フェードのスピードを変更できます。*/
-	padding: 0 40px; /* 左右に余白を追加 */
+	padding: 0 50px; /* 左右に余白を追加 */
 	box-sizing: border-box; /* パディングを含めた幅計算 */
 }
 
