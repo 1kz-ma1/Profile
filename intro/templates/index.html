@@ -127,7 +127,7 @@
 
 {% block contents %}
 <!-- 自己紹介ページ誘導セクション -->
-    <section style="margin-top: calc(168vh + 70px); margin-bottom: 80px;">
+    <section style="margin-top: calc(165vh + 70px); margin-bottom: 80px;">
         <div style="text-align: center; margin-bottom: 40px;">
             <h2 style="font-size: clamp(1.8rem, 2.8vw, 2.5rem); color: #5eb3ff; font-weight: 600; margin-bottom: 15px;">About Me</h2>
             <p style="color: #8892b0; font-size: clamp(0.95rem, 1.2vw, 1.1rem);">技術と戦略で課題を解決する</p>
@@ -147,7 +147,7 @@
                 </p>
                 <!-- 詳しく見るボタン（中央下部） -->
                 <div style="text-align:center; margin-top:22px;">
-                    <a href="{{ url_about }}" class="about-cta" data-debug-url="{{ url_about }}" style="display:inline-block; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #fff; padding: 12px 28px; border-radius: 24px; text-decoration:none; font-weight:700; box-shadow: 0 6px 18px rgba(102,126,234,0.28); transition: transform 0.18s ease;">詳しく見る →</a>
+                    <a href="{{ url_about|default:'/about/' }}" class="about-cta" data-debug-url="{{ url_about|default:'/about/' }}" style="display:inline-block; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #fff; padding: 12px 28px; border-radius: 24px; text-decoration:none; font-weight:700; box-shadow: 0 6px 18px rgba(102,126,234,0.28); transition: transform 0.18s ease;">詳しく見る →</a>
                 </div>
                 <div style="text-align:center; margin-top:8px; color:#bbb; font-size:0.9rem;">DEBUG: url_about = {{ url_about|default:'(missing)' }}</div>
                 <script>
