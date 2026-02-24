@@ -136,8 +136,8 @@
         <div style="background: rgba(17, 34, 64, 0.4); padding: 40px; border-radius: 20px; border: 1px solid rgba(94, 179, 255, 0.2); backdrop-filter: blur(10px);">
             <p style="color: #ccd6f6; font-size: clamp(1rem, 1.3vw, 1.2rem); line-height: 2; margin-bottom: 25px; text-align: center;">
                 木下和磨のポートフォリオサイトをご覧いただきありがとうございます。<br>
-                このサイトは、作品だけでは伝わらない<br>
-                思いや、こだわりが自然に伝わるように設計しました。<br>
+                このサイトは、作品だけでは伝わらない思いや、<br>
+                こだわりが自然に伝わるように設計しました。<br>
             </p>
                 
             <div style="border-top: 2px solid rgba(94, 179, 255, 0.2); padding-top: 25px; margin-top: 25px;">
@@ -149,18 +149,6 @@
                 <div style="text-align:center; margin-top:22px;">
                     <a href="{{ url_about|default:'/about/' }}" class="about-cta" data-debug-url="{{ url_about|default:'/about/' }}" style="display:inline-block; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #fff; padding: 12px 28px; border-radius: 24px; text-decoration:none; font-weight:700; box-shadow: 0 6px 18px rgba(102,126,234,0.28); transition: transform 0.18s ease;">詳しく見る →</a>
                 </div>
-                <script>
-                    (function(){
-                        try {
-                            const el = document.querySelector('.about-cta');
-                            console.log('DEBUG: about-cta getAttribute(href)=', el && el.getAttribute('href'));
-                            console.log('DEBUG: about-cta dataset.debugUrl=', el && el.dataset && el.dataset.debugUrl);
-                            console.log('DEBUG: about-cta absolute href=', el && el.href);
-                            console.log('DEBUG: document.baseURI=', document.baseURI);
-                            console.log('DEBUG: location.href=', location.href);
-                        } catch(e){ console.log('DEBUG: about-cta check failed', e); }
-                    })();
-                </script>
             </div>
         </div>
     </section>
