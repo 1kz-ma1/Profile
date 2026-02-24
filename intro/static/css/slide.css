@@ -98,7 +98,6 @@
 	.slide-font h1 {
 		margin-top: 30%;
 		font-size: clamp(0.9rem, 3.8vw, 1.2rem);
-		padding: 10px 0;
 		margin-left: -15px;
 		margin-right: -20px;
 		left: 50%;
