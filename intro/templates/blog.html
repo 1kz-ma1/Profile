@@ -844,7 +844,7 @@ function renderRankingView() {
     const posts = blogPosts.slice().sort((a, b) => (b.likesCount || 0) - (a.likesCount || 0));
 
     let html = '<div class="chapters-view" style="display:block;">';
-    html += '<h2 class="chapter-title">ランキング（人気順）</h2>';
+    html += '<h2 class="chapter-title">ランキング（おすすめ順）</h2>';
     html += '<div class="chapter-posts">';
 
     posts.forEach((post, idx) => {
