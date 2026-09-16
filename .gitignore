@@ -32,8 +32,9 @@ ENV/
 Thumbs.db
 
 # Environment variables
-.env.env.local
-.env.railway
+.env
+.env.*
+!.env.example
 
 # Node.js (Frontend)
 frontend/node_modules/
